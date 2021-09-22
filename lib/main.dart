@@ -4,6 +4,7 @@ import 'views/mine/mine.dart';
 import 'config/theme.dart';
 import 'route/index.dart';
 import 'views/home/home.dart';
+import 'views/category/category.dart';
 
 void main() {
   return runApp(MyApp());
@@ -15,11 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '掘金',
+      title: '抖音',
       debugShowCheckedModeBanner: false,
       routes: routes,
       onGenerateRoute: onGenerateRoute,
-      theme: themeColor(),
+      theme: themeColor(), // 默认的主题
+      darkTheme: darkTheme(), //黑暗模式的主题
       home: BottomBarPage(),
     );
   }
@@ -40,7 +42,11 @@ class _BottomBarPageState extends State<BottomBarPage> {
   }
 
   int _currentIndex = 0;
-  List bottomBarList = [HomeCotainer(), Mine()];
+  List bottomBarList = [
+    HomeCotainer(),
+    Category(),
+    Mine(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +56,10 @@ class _BottomBarPageState extends State<BottomBarPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: '首页',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: '分类',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

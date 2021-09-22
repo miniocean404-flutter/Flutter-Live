@@ -1,35 +1,41 @@
 // 文章简介Bar
 import 'package:flutter/material.dart';
 
-class Params {
+abstract class Params extends StatelessWidget {
   // 文章内容
-  String title = '函数式编程';
-  String auth = '李不要熬夜 | 5个月前';
-  String content =
-      '讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事';
-  String thumbNum = '300';
-  String messageNum = '6';
-  String type = '前端';
+  final String? title;
+  final String? auth;
+  final String? content;
+  final String? thumbNum;
+  final String? messageNum;
+  final String? type;
+
+  Params({
+    this.title,
+    this.auth,
+    this.content,
+    this.thumbNum,
+    this.messageNum,
+    this.type,
+  });
 }
 
-class ArticleIntroduction extends StatelessWidget with Params {
-  // 文章内容
-  final String title;
-  final String auth;
-  final String content;
-  final String thumbNum;
-  final String messageNum;
-  final String type;
-
+class ArticleIntroduction extends Params {
   ArticleIntroduction({
-    Key? key,
-    required this.title,
-    required this.auth,
-    required this.content,
-    required this.thumbNum,
-    required this.messageNum,
-    required this.type,
-  }) : super(key: key);
+    String? title,
+    String? auth,
+    String? content,
+    String? thumbNum,
+    String? messageNum,
+    String? type,
+  }) : super(
+          title: title,
+          auth: auth,
+          content: content,
+          thumbNum: thumbNum,
+          messageNum: messageNum,
+          type: type,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +56,34 @@ class ArticleIntroduction extends StatelessWidget with Params {
           ),
         ],
       ),
-      child: ContentInfo(),
+      child: ContentInfo<String>(
+        title: this.title,
+        auth: this.auth,
+        content: this.content,
+        child: Bottom<String>(
+          thumbNum: this.thumbNum,
+          messageNum: this.messageNum,
+          type: this.type,
+        ),
+      ),
     );
   }
 }
 
-class ContentInfo extends StatelessWidget with Params {
+class ContentInfo<T> extends Params {
+  final Widget child;
+
+  ContentInfo({
+    String? title,
+    String? auth,
+    String? content,
+    required this.child,
+  }) : super(
+          title: title,
+          auth: auth,
+          content: content,
+        );
+
   @override
   Widget build(BuildContext context) {
     return Flex(
@@ -65,22 +93,22 @@ class ContentInfo extends StatelessWidget with Params {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          title,
+          this.title ?? '',
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).unselectedWidgetColor,
+            color: Colors.black,
           ),
         ),
         Text(
-          auth,
+          this.auth ?? '',
           style: TextStyle(
             fontSize: 12,
             color: Theme.of(context).unselectedWidgetColor,
           ),
         ),
         Text(
-          content,
+          this.content ?? '',
           style: TextStyle(
             fontSize: 12,
             color: Theme.of(context).unselectedWidgetColor,
@@ -88,13 +116,23 @@ class ContentInfo extends StatelessWidget with Params {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        Bottom()
+        this.child,
       ],
     );
   }
 }
 
-class Bottom extends StatelessWidget with Params {
+class Bottom<T> extends Params {
+  Bottom({
+    String? thumbNum,
+    String? messageNum,
+    String? type,
+  }) : super(
+          thumbNum: thumbNum,
+          messageNum: messageNum,
+          type: type,
+        );
+
   @override
   Widget build(BuildContext context) {
     return Flex(
@@ -103,37 +141,38 @@ class Bottom extends StatelessWidget with Params {
       children: [
         // 左边图标
         Container(
-            width: 80,
-            child: Flex(
-              direction: Axis.horizontal,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(
-                  Icons.thumb_up,
-                  size: 16,
+          width: 80,
+          child: Flex(
+            direction: Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(
+                Icons.thumb_up,
+                size: 16,
+                color: Theme.of(context).unselectedWidgetColor,
+              ),
+              Text(
+                thumbNum ?? '',
+                style: TextStyle(
+                  fontSize: 12,
                   color: Theme.of(context).unselectedWidgetColor,
                 ),
-                Text(
-                  thumbNum,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).unselectedWidgetColor,
-                  ),
-                ),
-                Icon(
-                  Icons.messenger,
-                  size: 16,
+              ),
+              Icon(
+                Icons.messenger,
+                size: 16,
+                color: Theme.of(context).unselectedWidgetColor,
+              ),
+              Text(
+                messageNum ?? '',
+                style: TextStyle(
+                  fontSize: 12,
                   color: Theme.of(context).unselectedWidgetColor,
                 ),
-                Text(
-                  messageNum,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).unselectedWidgetColor,
-                  ),
-                ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
         // 右边标签
         Container(
           height: 20,
@@ -142,7 +181,7 @@ class Bottom extends StatelessWidget with Params {
             color: Colors.grey[400],
           ),
           child: Text(
-            type,
+            type ?? '',
             style: TextStyle(
               fontSize: 12,
               color: Theme.of(context).unselectedWidgetColor,

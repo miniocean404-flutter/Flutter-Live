@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/views/router/NameRouter.dart';
 
-var routes = {'/NameRouter': (context) => NameRouter()};
+var routes = {
+  '/NameRouter': (context) => NameRouter(),
+};
 
 var onGenerateRoute = (RouteSettings settings) {
   final String? name = settings.name;
