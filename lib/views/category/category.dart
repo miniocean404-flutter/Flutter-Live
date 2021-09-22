@@ -24,12 +24,19 @@ class Category extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: Text('expand'),
+                child: TextButton(
+                  child: Text('视频播放'),
+                  onPressed: () => {Navigator.pushNamed(context, '/videoPlay')},
+                ),
               ),
               Expanded(
                 flex: 1,
-                child: Text('expand'),
+                child: TextButton(
+                  child: Text('选择图片'),
+                  onPressed: () => {Navigator.pushNamed(context, '/imagePick')},
+                ),
               ),
+              // VideoApp()
             ],
           ),
         ],

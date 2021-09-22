@@ -133,7 +133,7 @@ void barColor({required String color}) {
 
     // 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
     statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.dark,
   );
 
