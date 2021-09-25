@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// * 去除水波纹
+// * 去除按钮水波纹
 class NoSplashFactory extends InteractiveInkFeatureFactory {
   const NoSplashFactory();
 
@@ -47,10 +47,26 @@ class NoSplash extends InteractiveInkFeature {
 }
 
 // * 隐藏滚动水波纹配置
+class HideScrollWaterRipple extends StatelessWidget {
+  final Widget child;
+  const HideScrollWaterRipple(this.child, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollConfiguration(
+      behavior: NoShadowScrollBehavior(),
+      child: this.child,
+    );
+  }
+}
+
 class NoShadowScrollBehavior extends ScrollBehavior {
   @override
   Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
+    BuildContext context,
+    Widget child,
+    AxisDirection axisDirection,
+  ) {
     switch (getPlatform(context)) {
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:

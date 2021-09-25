@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../router/router.dart';
+import 'package:my_app/views/router/router.dart';
+import 'package:my_app/theme/WaterRipple.dart';
 
 const tabBar = [
   Tab(
@@ -72,21 +73,22 @@ class MineBody extends StatelessWidget {
     return TabBarView(
       children: [
         Container(
-            child: Wrap(
-          children: <Widget>[
-            TextButton(
-              child: Text('基本路由'),
-              onPressed: () => {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => RouterPage()))
-              },
-            ),
-            TextButton(
-              child: Text('命名传参路由'),
-              onPressed: () => {Navigator.pushNamed(context, '/NameRouter')},
-            )
-          ],
-        )),
+          child: Wrap(
+            children: <Widget>[
+              TextButton(
+                child: Text('基本路由'),
+                onPressed: () => {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => RouterPage()))
+                },
+              ),
+              TextButton(
+                child: Text('命名传参路由'),
+                onPressed: () => {Navigator.pushNamed(context, '/NameRouter')},
+              )
+            ],
+          ),
+        ),
         Container(child: Text('bar2')),
         Container(child: Text('bar2')),
         Container(child: Text('bar2')),

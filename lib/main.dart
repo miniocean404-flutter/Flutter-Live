@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/theme/WaterRipple.dart';
 
 import 'package:my_app/theme/theme.dart';
 import 'package:my_app/theme/StateBarAndVirtualKey.dart';
@@ -24,7 +25,9 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: onGenerateRoute,
       theme: themeColor(), // 默认的主题
       darkTheme: darkTheme(), //黑暗模式的主题
-      home: BottomBarPage(),
+      home: HideScrollWaterRipple(
+        BottomBarPage(),
+      ),
     );
   }
 }
