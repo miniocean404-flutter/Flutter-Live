@@ -135,7 +135,7 @@ class _PhotoState extends State<Photo> {
                 spacing: 10.0,
                 children: _getImageList(),
               )
-            : Text("暂无内容")
+            : Text("暂无内容"),
       ],
     );
   }

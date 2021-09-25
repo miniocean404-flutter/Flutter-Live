@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'views/mine/mine.dart';
-import 'config/theme.dart';
-import 'route/index.dart';
-import 'views/home/home.dart';
-import 'views/category/category.dart';
+import 'package:my_app/theme/theme.dart';
+import 'package:my_app/theme/StateBarAndVirtualKey.dart';
+
+import 'package:my_app/route/index.dart';
+import 'package:my_app/views/home/home.dart';
+import 'package:my_app/views/category/category.dart';
+import 'package:my_app/views/mine/mine.dart';
 
 void main() {
   return runApp(MyApp());

@@ -1,5 +1,12 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:dio/dio.dart';
+
+void dio() async {
+  var dio = Dio();
+  final response = await dio.get('https://google.com');
+  print(response);
+}
 
 void request(List<String> arguments) async {
   var url =
