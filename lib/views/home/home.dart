@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/business/ArticleIntroduction.dart';
+import 'package:my_app/views/home/TabPage/BrowserJump.dart';
+
+import 'package:my_app/views/home/TabPage/Recommend.dart';
+import 'package:my_app/views/home/TabPage/RouterUse.dart';
+import 'package:my_app/views/home/TabPage/ClickAdd.dart';
+
+import 'package:my_app/views/home/RecommendTitle.dart';
 
 // * 主页的容器
 class HomeCotainer extends StatelessWidget {
@@ -7,83 +13,51 @@ class HomeCotainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: HomeAppbar()._buildAppBar(context),
-      body: HomeBody(),
+    return DefaultTabController(
+      length: 8,
+      child: Scaffold(
+        appBar: HomeAppbar()._buildAppBar(context),
+        body: HomeBody(),
+      ),
     );
   }
 }
 
 // * AppBar
 class HomeAppbar {
+  final tabBar = [
+    Tab(
+      child: Text('推荐'),
+    ),
+    Tab(
+      child: Text('路由'),
+    ),
+    Tab(
+      child: Text('点击添加'),
+    ),
+    Tab(
+      child: Text('打开默认浏览器'),
+    ),
+    Tab(
+      child: Text('路由'),
+    ),
+    Tab(
+      child: Text('界面'),
+    ),
+    Tab(
+      child: Text('界面好看'),
+    ),
+    Tab(
+      child: Text('界面'),
+    ),
+  ];
+
   PreferredSizeWidget _buildAppBar(context) {
     return AppBar(
-      title: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 32,
-            child: Container(
-              padding: EdgeInsets.fromLTRB(15, 5, 0, 5),
-              decoration: BoxDecoration(
-                color: Color(0xFFf5f6f7),
-                borderRadius: BorderRadius.all(Radius.circular(1)),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 5),
-                    child: Icon(
-                      Icons.search,
-                      size: 18,
-                      color: Theme.of(context).unselectedWidgetColor,
-                    ),
-                  ),
-                  Text(
-                    '搜索',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 18,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Icon(
-                    Icons.collections_bookmark_outlined,
-                    color: Theme.of(context).unselectedWidgetColor,
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_today_outlined,
-                        color: Theme.of(context).unselectedWidgetColor,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child: Text(
-                          '签到',
-                          style: TextStyle(
-                            fontSize: 13,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
+      title: RecommendTitle(),
+      bottom: TabBar(
+        isScrollable: true, // 横向滚动
+        tabs: tabBar,
       ),
       centerTitle: true,
       elevation: 0,
@@ -101,139 +75,19 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
-  ScrollController _controller = new ScrollController();
-  late final List introduction;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(() {
-      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-        _loadMoreData();
-      }
-    });
-
-    introduction = List.filled(
-      10,
-      {
-        'title': '函数式编程',
-        'auth': '李不要熬夜 | 6个月前',
-        'content':
-            "讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事",
-        'thumbNum': '300',
-        'messageNum': '6',
-        'type': '前端',
-      },
-      growable: true,
-    );
-  }
-
-  //上拉加载函数
-  Future<Null> _loadMoreData() {
-    // 延迟1s增加数据
-    return Future.delayed(Duration(seconds: 0), () {
-      if (mounted) {
-        setState(() {
-          introduction.add({
-            'title': '我是新加的',
-            'auth': '李不要熬夜 | 6个月前',
-            'content':
-                "讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事讲个故事",
-            'thumbNum': '300',
-            'messageNum': '6',
-            'type': '前端',
-          });
-        });
-      }
-    });
-  }
-
-  // 下拉刷新函数
-  Future<Null> _onRefresh() {
-    return Future.delayed(
-      Duration(seconds: 1),
-      () {
-        setState(() {
-          introduction.removeRange(5, introduction.length);
-        });
-      },
-    );
-  }
-
-  // Image.network(
-  //   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201610%2F23%2F20161023064129_hNPzZ.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634291846&t=49b8ed2cea29e92b1fdc6a58f7934c18',
-  // ),
-  // Container(
-  //   child: ClickAdd(),
-  // )
-
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: _onRefresh, //下拉刷新回调
-      displacement: 40, //指示器显示时距顶部位置
-      color: Colors.blue, //指示器颜色，默认ThemeData.accentColor
-      // backgroundColor: Colors.blue, //指示器背景颜色，默认ThemeData.canvasColor
-      notificationPredicate:
-          defaultScrollNotificationPredicate, //是否应处理滚动通知的检查（是否通知下拉刷新动作）
-      child: ListView.builder(
-        itemCount: introduction.length,
-        controller: _controller,
-        itemBuilder: (BuildContext context, int index) {
-          return ArticleIntroduction(
-            title: this.introduction[index]['title'],
-            auth: this.introduction[index]['auth'],
-            content: this.introduction[index]['content'],
-            thumbNum: this.introduction[index]['thumbNum'],
-            messageNum: this.introduction[index]['messageNum'],
-            type: this.introduction[index]['type'],
-          );
-        },
-      ),
+    return TabBarView(
+      children: [
+        Recommend(),
+        RouterUse(),
+        ClickAdd(),
+        BrowserJump(),
+        Container(child: Text('bar2')),
+        Container(child: Text('bar2')),
+        Container(child: Text('bar 2')),
+        Container(child: Text('bar2')),
+      ],
     );
-  }
-}
-
-// * 点击添加
-class ClickAdd extends StatefulWidget {
-  const ClickAdd({Key? key}) : super(key: key);
-
-  @override
-  _ClickAddState createState() => _ClickAddState();
-}
-
-class _ClickAddState extends State<ClickAdd> {
-  int num = 0;
-
-  Widget _addNum() {
-    return Column(children: <Widget>[
-      ButtonBar(
-        children: <Widget>[
-          ElevatedButton(
-            child: Text('爱你'),
-            onPressed: () => {
-              setState(() => {print('你好')}),
-            },
-            style: ButtonStyle(
-                // backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                ),
-          ),
-        ],
-      ),
-      Text(
-        '$num',
-        style: TextStyle(color: Colors.red, fontSize: 32.0),
-      ),
-      MaterialButton(
-        child: Text('点我'),
-        textTheme: ButtonTextTheme.primary,
-        onPressed: () => {setState(() => this.num++)},
-      ),
-    ]);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(child: this._addNum());
   }
 }

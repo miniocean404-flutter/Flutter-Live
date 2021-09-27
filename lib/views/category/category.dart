@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Category extends StatelessWidget {
   const Category({Key? key}) : super(key: key);
@@ -26,19 +27,31 @@ class Category extends StatelessWidget {
                 flex: 1,
                 child: TextButton(
                   child: Text('视频播放'),
-                  onPressed: () => {Navigator.pushNamed(context, '/videoPlay')},
+                  onPressed: () => {Get.toNamed('/VideoPlay')},
                 ),
               ),
               Expanded(
                 flex: 1,
                 child: TextButton(
                   child: Text('选择图片'),
-                  onPressed: () => {Navigator.pushNamed(context, '/imagePick')},
+                  onPressed: () => {Get.toNamed('/ImagePick')},
                 ),
               ),
+
               // VideoApp()
             ],
           ),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  child: Text('自定义下拉加载更多'),
+                  onPressed: () => {Get.toNamed('/PullLoading')},
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

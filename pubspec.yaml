@@ -35,6 +35,9 @@ dev_dependencies:
   dio: ^4.0.0 # http请求（中国封装）
   video_player: ^2.2.4 # video播放器
   image_picker: ^0.8.4+2 # 选择图片
+  url_launcher: ^6.0.12 # 跳转链接 
+  get: ^4.3.8 # 状态管理、智能依赖注入和路由管理
+  
   flutter_test:
     sdk: flutter
 
@@ -54,7 +57,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/startImg.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -42,7 +42,7 @@ class ArticleIntroduction extends Params {
     return Container(
       width: double.infinity,
       height: 150,
-      margin: EdgeInsets.fromLTRB(0, 10, 0, 5),
+      margin: EdgeInsets.fromLTRB(0, 6, 0, 3),
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -52,7 +52,7 @@ class ArticleIntroduction extends Params {
           BoxShadow(
             spreadRadius: 0.2,
             blurRadius: 1,
-            color: Colors.grey,
+            color: Colors.grey[300] as Color,
           ),
         ],
       ),
