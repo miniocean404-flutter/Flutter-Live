@@ -31,7 +31,11 @@ class RouteConfig {
 
   // 别名映射页面
   static final List<GetPage> getPages = [
-    GetPage(name: Start_Page, page: () => StartPage()),
+    GetPage(
+      name: Start_Page,
+      page: () => StartPage(),
+      transition: Transition.fade,
+    ),
     GetPage(
       name: Bottom_Bar_Page,
       page: () => HideScrollWaterRipple(BottomBarPage()),

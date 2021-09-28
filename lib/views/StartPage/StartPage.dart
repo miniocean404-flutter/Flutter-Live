@@ -44,16 +44,6 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
   }
 
   void anmationExec() {
-    // 延迟xx秒执行
-    // Future.delayed(
-    //   Duration(
-    //     milliseconds: num * 1000,
-    //   ),
-    //   () {
-    //     Get.offNamed('/BottomBarPage');
-    //   },
-    // );
-
     //创建动画控制器
     var _animationController = AnimationController(
       // 1.当创建一个AnimationController时，需要传递一个vsync参数，存在vsync时会防止屏幕外动画（动画的 UI不在当前屏幕时）消耗不必要的资源。
@@ -67,12 +57,22 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
         Tween(begin: 1.0, end: 1.0).animate(_animationController);
 
     _animation.addStatusListener((status) {
-      //这边的添加动画的监听，当动画5秒后的状态是completed完成状态，则执行这边的代码，跳转到登录页，或者其他页面
+      // 添加动画的监听，当动画完成后的状态是completed完成状态，则执行这边的代码，跳转到登录页
       if (status == AnimationStatus.completed) {
         Get.offNamed('/BottomBarPage');
       }
     });
     _animationController.forward();
+
+    // 延迟xx秒执行
+    // Future.delayed(
+    //   Duration(
+    //     milliseconds: num * 1000,
+    //   ),
+    //   () {
+    //     Get.offNamed('/BottomBarPage');
+    //   },
+    // );
   }
 
   @override
@@ -92,11 +92,16 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
           Positioned(
             top: 50.0,
             right: 20.0,
-            child: FloatingActionButton(
-              child: Text('跳过$num'),
-              onPressed: () {
-                Get.offNamed('/BottomBarPage');
-              },
+            child: OutlinedButton(
+              child: Text('${num}s跳过'),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+              onPressed: () => {Get.offNamed('/BottomBarPage')},
             ),
           )
         ],
@@ -104,3 +109,4 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
     );
   }
 }
+// RoundedRectangleBorder()
