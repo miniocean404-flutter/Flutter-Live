@@ -34,12 +34,14 @@ dev_dependencies:
   http: ^0.13.3 # http请求 (官方)
   dio: ^4.0.0 # http请求（中国封装）
   video_player: ^2.2.4 # video播放器
-  image_picker: ^0.8.4+2 # 选择图片
+  image_picker: ^0.8.4+2 # 选择图片 
   url_launcher: ^6.0.12 # 跳转链接 
-  get: ^4.3.8 # 状态管理、智能依赖注入和路由管理
-  
+  fluro: ^2.0.3 # 路由
+  provider: ^6.0.1 # 状态管理
+  animations: ^2.0.1 # 动画
   flutter_test:
     sdk: flutter
+  # get: ^4.3.8 # 状态管理、智能依赖注入和路由管理
 
 flutter_icons:
   android: "ic_launcher"

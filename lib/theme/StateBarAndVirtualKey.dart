@@ -17,6 +17,7 @@ void barColor({required String color}) {
     //图标色
     systemNavigationBarContrastEnforced: false,
 
+    // * 状态栏
     // 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:my_app/route/routers.dart';
 
 class RouterUse extends StatelessWidget {
   const RouterUse({Key? key}) : super(key: key);
@@ -12,11 +11,11 @@ class RouterUse extends StatelessWidget {
         children: <Widget>[
           TextButton(
             child: Text('基本路由'),
-            onPressed: () => {Get.toNamed('/RouterPage')},
+            onPressed: () => {Routers.navigateTo(context, Routers.Router_Page)},
           ),
           TextButton(
             child: Text('命名传参路由'),
-            onPressed: () => {Get.toNamed('/NameRouter')},
+            onPressed: () => {Routers.navigateTo(context, Routers.Name_Router)},
           )
         ],
       ),

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 // 主题
 import 'package:my_app/theme/theme.dart';
 // 路由
-import 'package:my_app/route/RouterConfig.dart';
+import 'package:my_app/route/routers.dart';
+// 状态栏
+import 'package:my_app/theme/StateBarAndVirtualKey.dart';
 
 void main() {
+  barColor(color: 'white');
+  Routers.initRouter();
   return runApp(MyApp());
 }
 
@@ -14,16 +17,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       // 默认配置
       title: '抖音',
       debugShowCheckedModeBanner: false,
       theme: themeColor(), // 默认的主题
       darkTheme: darkTheme(), //黑暗模式的主题
-      // GetX路由配置
-      initialRoute: RouteConfig.Start_Page,
-      getPages: RouteConfig.getPages,
-      defaultTransition: Transition.cupertino, //过渡动画
+      initialRoute: Routers.Start_Page,
+      onGenerateRoute: Routers.router.generator,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:my_app/route/routers.dart';
 
 class NameRouter extends StatelessWidget {
   const NameRouter({Key? key}) : super(key: key);
@@ -15,11 +15,19 @@ class NameRouter extends StatelessWidget {
           children: [
             TextButton(
               child: Text('删除当前页面的栈，并进入下一页面'),
-              onPressed: () => {Get.offNamed('/RouterPage')},
+              onPressed: () => {
+                Routers.navigateTo(context, Routers.Router_Page, replace: true)
+              },
             ),
             TextButton(
               child: Text('清空路由栈,并且返回首页'),
-              onPressed: () => {Get.offAllNamed('/home')},
+              onPressed: () => {
+                Routers.navigateTo(
+                  context,
+                  Routers.Bottom_Bar_Page,
+                  clearStack: true,
+                )
+              },
             ),
           ],
         ),

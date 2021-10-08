@@ -25,43 +25,42 @@ class HomeCotainer extends StatelessWidget {
 
 // * AppBar
 class HomeAppbar {
-  final tabBar = [
-    Tab(
-      child: Text('推荐'),
-    ),
-    Tab(
-      child: Text('路由'),
-    ),
-    Tab(
-      child: Text('点击添加'),
-    ),
-    Tab(
-      child: Text('打开默认浏览器'),
-    ),
-    Tab(
-      child: Text('路由'),
-    ),
-    Tab(
-      child: Text('界面'),
-    ),
-    Tab(
-      child: Text('界面好看'),
-    ),
-    Tab(
-      child: Text('界面'),
-    ),
-  ];
-
   PreferredSizeWidget _buildAppBar(context) {
     return AppBar(
       title: RecommendTitle(),
-      bottom: TabBar(
-        isScrollable: true, // 横向滚动
-        tabs: tabBar,
-      ),
       centerTitle: true,
       elevation: 0,
       // brightness: Brightness.light,
+      bottom: TabBar(
+        isScrollable: true, // 横向滚动
+
+        tabs: [
+          Tab(
+            child: Text('推荐'),
+          ),
+          Tab(
+            child: Text('路由'),
+          ),
+          Tab(
+            child: Text('点击添加'),
+          ),
+          Tab(
+            child: Text('打开默认浏览器'),
+          ),
+          Tab(
+            child: Text('路由'),
+          ),
+          Tab(
+            child: Text('界面'),
+          ),
+          Tab(
+            child: Text('界面好看'),
+          ),
+          Tab(
+            child: Text('界面'),
+          ),
+        ],
+      ),
     );
   }
 }

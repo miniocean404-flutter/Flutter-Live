@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:my_app/route/routers.dart';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 // * 启动页
 class StartPage extends StatefulWidget {
@@ -12,45 +12,31 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
-  var _animationController;
+  late AnimationController _animationController;
   late Timer timer;
   int num = 3;
-
-  @override
-  void initState() {
-    super.initState();
-
-    anmationExec();
-    startTiming();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    cancalTiming();
-    _animationController.dispose();
-  }
 
   void startTiming() {
     timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
       setState(() {
-        num--;
+        this.num--;
       });
     });
   }
 
-  void cancalTiming() {
+  void startJump() {
     timer.cancel();
+    Routers.navigateTo(context, Routers.Bottom_Bar_Page, clearStack: true);
   }
 
   void anmationExec() {
     //创建动画控制器
-    var _animationController = AnimationController(
+    _animationController = AnimationController(
       // 1.当创建一个AnimationController时，需要传递一个vsync参数，存在vsync时会防止屏幕外动画（动画的 UI不在当前屏幕时）消耗不必要的资源。
       // 2.通过将SingleTickerProviderStateMixin添加到类定义中，可以将stateful对象作为vsync的值。如果要使用自定义的State对象作为vsync时，请包含TickerProviderStateMixin
       vsync: this,
       duration: Duration(
-        milliseconds: num * 1000,
+        milliseconds: this.num * 1000,
       ),
     );
     final _animation =
@@ -59,7 +45,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
     _animation.addStatusListener((status) {
       // 添加动画的监听，当动画完成后的状态是completed完成状态，则执行这边的代码，跳转到登录页
       if (status == AnimationStatus.completed) {
-        Get.offNamed('/BottomBarPage');
+        this.startJump();
       }
     });
     _animationController.forward();
@@ -73,6 +59,19 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
     //     Get.offNamed('/BottomBarPage');
     //   },
     // );
+  }
+
+  @override
+  void initState() {
+    this.anmationExec();
+    this.startTiming();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -101,7 +100,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              onPressed: () => {Get.offNamed('/BottomBarPage')},
+              onPressed: () => {this.startJump()},
             ),
           )
         ],

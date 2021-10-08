@@ -8,9 +8,9 @@ class Mine extends StatefulWidget {
 }
 
 class _MineState extends State<Mine> with TickerProviderStateMixin {
-  double extraPicHeight = 0; //初始化要加载到图片上的高度
+  double scrollGap = 0; //初始化要加载到图片上的高度
   late BoxFit fitType; //图片填充类型（刚开始滑动时是以宽度填充，拉开之后以高度填充）
-  late double prev_dy; //前一次手指所在处的y值
+  late double firstPositon; //前一次手指所在处的y值
 
   // 动画
   late AnimationController animationController;
@@ -20,7 +20,7 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
   void initState() {
     // 初始化数据状态
     super.initState();
-    prev_dy = 0;
+    firstPositon = 0;
     fitType = BoxFit.fitWidth;
 
     // 动画
@@ -33,44 +33,46 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
       ..addStatusListener((status) {});
   }
 
+  // * 松手执行反向动画
   void runAnimate() {
-    //设置动画让extraPicHeight的值从当前的值渐渐回到 0
+    //设置动画让scrollGap的值从当前的值渐渐回到 0
     setState(() {
-      anim = Tween(begin: extraPicHeight, end: 0.0).animate(animationController)
+      anim = Tween(begin: scrollGap, end: 0.0).animate(animationController)
         ..addListener(() {
-          if (extraPicHeight >= 45) {
+          if (scrollGap >= 45) {
             //同样改变图片填充类型
             fitType = BoxFit.fitHeight;
           } else {
             fitType = BoxFit.fitWidth;
           }
           setState(() {
-            extraPicHeight = anim.value;
+            scrollGap = anim.value;
             fitType = fitType;
           });
         });
-      prev_dy = 0; //同样归零
+      firstPositon = 0; //同样归零
     });
   }
 
+  // * 下拉计算高度
   void updatePicHeight(changed) {
-    if (prev_dy == 0) {
-      //如果是手指第一次点下时，我们不希望图片大小就直接发生变化，所以进行一个判定。
-      prev_dy = changed;
+    if (firstPositon == 0) {
+      // 如果是手指第一次点下时，我们不希望图片大小就直接发生变化，所以进行一个判定。
+      firstPositon = changed;
     }
 
-    if (extraPicHeight >= 45) {
+    if (scrollGap >= 45) {
       //当我们加载到图片上的高度大于某个值的时候，改变图片的填充方式，让它由以宽度填充变为以高度填充，从而实现了图片视角上的放大。
       fitType = BoxFit.fitHeight;
     } else {
       fitType = BoxFit.fitWidth;
     }
 
-    extraPicHeight += changed - prev_dy; //新的一个y值减去前一次的y值然后累加，作为加载到图片上的高度。
+    scrollGap += changed - firstPositon; // 新的一个y值减去前一次的y值然后累加，作为加载到图片上的高度。
     setState(() {
       //更新数据
-      prev_dy = changed;
-      extraPicHeight = extraPicHeight;
+      firstPositon = changed;
+      scrollGap = scrollGap;
       fitType = fitType;
     });
   }
@@ -92,41 +94,49 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              // leading: IconButton(
-              //   //标题左侧的控件（一般是返回上一个页面的箭头）
-              //   icon: Icon(Icons.arrow_back),
-              //   onPressed: () {
-              //     Navigator.pop(context);
-              //   },
-              // ),
+              // SliverAppBar透明
+              // backgroundColor: Colors.transparent,
+              // elevation: 0,
+              pinned: true, // 代表是否会在顶部保留SliverAppBar
               floating: false, // 代表是否会发生下拉立即出现SliverAppBar
-              pinned: true, // 代表是否会在顶部保留AppBar
               snap:
                   false, //snap必须与floatingtrue联合使用，表示显示SliverAppBar之后，如果没有完全拉伸，是否会完全神展开
-              expandedHeight:
-                  236 + extraPicHeight, //顶部控件所占的高度,跟随因手指滑动所产生的位置变化而变化。
+              expandedHeight: 236 + scrollGap, //顶部控件所占的高度,跟随因手指滑动所产生的位置变化而变化。
               flexibleSpace: FlexibleSpaceBar(
                 title: null, //标题
                 background: SliverTopBar(
-                  extraPicHeight: extraPicHeight,
+                  scrollGap: scrollGap,
                   fitType: fitType,
                 ), //自定义Widget
               ),
             ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _SliverAppBarDelegate(
+                TabBar(
+                  labelColor: Colors.red,
+                  unselectedLabelColor: Colors.grey,
+                  tabs: [
+                    Tab(icon: Icon(Icons.cake), text: '左侧'),
+                    Tab(icon: Icon(Icons.golf_course), text: '右侧'),
+                  ],
+                  controller: TabController(length: 2, vsync: this),
+                ),
+              ),
+            ),
             // MineBody(),
-            SliverList(//列表
-                delegate: SliverChildBuilderDelegate(
-              (context, i) {
-                return Container(
-                  padding: EdgeInsets.all(16),
-                  child: Text(
-                    "This is item $i",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  color: Colors.white70,
-                );
-              },
-            ))
+            SliverList(
+              // 无限创建
+              delegate: SliverChildBuilderDelegate(
+                (context, i) {
+                  return Container(
+                    padding: EdgeInsets.all(16),
+                    child: Text("我是第$i元素"),
+                    color: Colors.white70,
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
@@ -135,12 +145,12 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
 }
 
 class SliverTopBar extends StatelessWidget {
-  final double extraPicHeight; // 传入的加载到图片上的高度
+  final double scrollGap; // 传入的加载到图片上的高度
   final BoxFit fitType; // 传入的填充方式
 
   const SliverTopBar({
     Key? key,
-    required this.extraPicHeight,
+    required this.scrollGap,
     required this.fitType,
   }) : super(key: key);
 
@@ -155,7 +165,7 @@ class SliverTopBar extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Image.network(
                 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531798262708&di=53d278a8427f482c5b836fa0e057f4ea&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F342ac65c103853434cc02dda9f13b07eca80883a.jpg',
-                height: 180 + extraPicHeight,
+                height: 180 + scrollGap,
                 fit: fitType,
               ),
             ),
@@ -180,7 +190,7 @@ class SliverTopBar extends StatelessWidget {
         ),
         Positioned(
           left: 30,
-          top: 130 + extraPicHeight,
+          top: 130 + scrollGap,
           child: Container(
             width: 100,
             height: 100,
@@ -204,5 +214,30 @@ class MineBody extends StatelessWidget {
     return Container(
       child: Text(''),
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }

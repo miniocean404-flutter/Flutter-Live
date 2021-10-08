@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:my_app/route/routers.dart';
+import 'package:fluro/fluro.dart';
 
 class Category extends StatelessWidget {
   const Category({Key? key}) : super(key: key);
@@ -26,18 +27,11 @@ class Category extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: TextButton(
-                  child: Text('视频播放'),
-                  onPressed: () => {Get.toNamed('/VideoPlay')},
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: TextButton(
                   child: Text('选择图片'),
-                  onPressed: () => {Get.toNamed('/ImagePick')},
+                  onPressed: () =>
+                      {Routers.navigateTo(context, Routers.Image_Pick)},
                 ),
               ),
-
               // VideoApp()
             ],
           ),
@@ -47,7 +41,8 @@ class Category extends StatelessWidget {
                 flex: 1,
                 child: TextButton(
                   child: Text('自定义下拉加载更多'),
-                  onPressed: () => {Get.toNamed('/PullLoading')},
+                  onPressed: () =>
+                      {Routers.navigateTo(context, Routers.Pull_Loading)},
                 ),
               ),
             ],

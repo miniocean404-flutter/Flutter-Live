@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 // theme
-import 'package:my_app/theme/StateBarAndVirtualKey.dart';
 // bottombar
 import 'package:my_app/views/home/home.dart';
 import 'package:my_app/views/category/category.dart';
@@ -18,11 +17,10 @@ class _BottomBarPageState extends State<BottomBarPage> {
   @override
   void initState() {
     super.initState();
-    barColor(color: 'white');
   }
 
   int _currentIndex = 0;
-  List bottomBarList = [
+  List<Widget> bottomBarList = [
     HomeCotainer(),
     DyVideo(),
     Category(),
@@ -59,7 +57,10 @@ class _BottomBarPageState extends State<BottomBarPage> {
         },
         currentIndex: _currentIndex,
       ),
-      body: this.bottomBarList[this._currentIndex],
+      body: IndexedStack(
+        index: this._currentIndex,
+        children: bottomBarList,
+      ),
     );
   }
 }

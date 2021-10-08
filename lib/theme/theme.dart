@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import './WaterRipple.dart';
-
-class ColorHue {
-  static final _selectColor = Colors.blue;
-  static final _unselectColor = Colors.grey;
-  static final _backgroundColor = Colors.white;
-  static final _fontWeight = FontWeight.w600;
-}
+import './color.dart';
 
 class ColorSchemeConfig {
   static ColorScheme colorScheme({mode = Brightness.light}) {
     return ColorScheme(
       brightness: mode,
-      primary: ColorHue._backgroundColor,
+      primary: AppColor.backgroundColor,
       // 脚手架上面标题等主要颜色(包括文本按钮的颜色)
       primaryVariant: Colors.black,
       // 黑暗主题的主色调
       secondary: Colors.blue,
       // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
-      secondaryVariant: ColorHue._selectColor,
+      secondaryVariant: AppColor.selectColor,
       //
       surface: Colors.transparent,
       //小部件的背景色 如:card appbar
@@ -31,7 +25,7 @@ class ColorSchemeConfig {
       //  (按钮、AppBar) 在主色调上绘制清晰易读的字体颜色
       onSecondary: Colors.white,
       //在secondary上绘制清晰易读的颜色
-      onSurface: ColorHue._backgroundColor,
+      onSurface: AppColor.backgroundColor,
       onBackground: Colors.blue,
       onError: Colors.red,
     );
@@ -56,23 +50,23 @@ ThemeData themeColor() {
     tabBarTheme: TabBarTheme(
       // indicator:,
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: ColorHue._selectColor,
+      labelColor: AppColor.selectColor,
       labelStyle: TextStyle(
-        fontWeight: ColorHue._fontWeight,
+        fontWeight: AppColor.fontWeight,
       ),
-      unselectedLabelColor: ColorHue._unselectColor,
+      unselectedLabelColor: AppColor.unselectColor,
       labelPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
       unselectedLabelStyle: TextStyle(
-        fontWeight: ColorHue._fontWeight,
+        fontWeight: AppColor.fontWeight,
       ),
     ),
 
     // * 底部按钮主题
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: ColorHue._backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       elevation: 0, //虚线阴影
-      selectedItemColor: ColorHue._selectColor,
-      unselectedItemColor: ColorHue._unselectColor,
+      selectedItemColor: AppColor.selectColor,
+      unselectedItemColor: AppColor.unselectColor,
       // selectedIconTheme:,
       // unselectedIconTheme:,
       // selectedLabelStyle:,
@@ -121,21 +115,21 @@ ThemeData darkTheme() {
     tabBarTheme: TabBarTheme(
       // indicator:,
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: ColorHue._selectColor,
+      labelColor: AppColor.selectColor,
       labelStyle: TextStyle(
-        fontWeight: ColorHue._fontWeight,
+        fontWeight: AppColor.fontWeight,
       ),
-      unselectedLabelColor: ColorHue._unselectColor,
+      unselectedLabelColor: AppColor.unselectColor,
       labelPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
       unselectedLabelStyle: TextStyle(
-        fontWeight: ColorHue._fontWeight,
+        fontWeight: AppColor.fontWeight,
       ),
     ),
     // * 底部按钮主题
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0, //虚线阴影
-      selectedItemColor: ColorHue._selectColor,
-      unselectedItemColor: ColorHue._unselectColor,
+      selectedItemColor: AppColor.selectColor,
+      unselectedItemColor: AppColor.unselectColor,
     ),
   );
 }
