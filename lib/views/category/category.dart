@@ -32,6 +32,14 @@ class Category extends StatelessWidget {
                       {Routers.navigateTo(context, Routers.Image_Pick)},
                 ),
               ),
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  child: Text('文件操作'),
+                  onPressed: () =>
+                      {Routers.navigateTo(context, Routers.File_Operate)},
+                ),
+              ),
               // VideoApp()
             ],
           ),
@@ -45,8 +53,16 @@ class Category extends StatelessWidget {
                       {Routers.navigateTo(context, Routers.Pull_Loading)},
                 ),
               ),
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  child: Text('设备信息'),
+                  onPressed: () =>
+                      {Routers.navigateTo(context, Routers.Device_Info)},
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

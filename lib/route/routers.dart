@@ -25,9 +25,11 @@ class Routers {
   static const String Video_Play = "/VideoPlay";
   static const String Image_Pick = "/ImagePick";
   static const String Pull_Loading = "/PullLoading";
+  static const String File_Operate = "/FileOperate";
   // 路由界面
   static const String Name_Router = "/NameRouter";
   static const String Router_Page = "/RouterPage";
+  static const String Device_Info = "/DeviceInfo";
 
   static void defineRoutes() {
     router.notFoundHandler = Handler(
@@ -47,6 +49,8 @@ class Routers {
     router.define(Pull_Loading, handler: pullLoadingHandler);
     router.define(Name_Router, handler: nameRouterHandler);
     router.define(Router_Page, handler: routerPageHandler);
+    router.define(File_Operate, handler: fileOperateHandler);
+    router.define(Device_Info, handler: deviceInfoHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配
@@ -56,7 +60,7 @@ class Routers {
     Map<String, dynamic>? params,
     bool clearStack = false,
     bool replace = false,
-    TransitionType transition = TransitionType.native,
+    TransitionType transition = TransitionType.cupertino,
   }) {
     String query = "";
     if (params != null) {
@@ -82,7 +86,7 @@ class Routers {
       path,
       clearStack: clearStack,
       replace: replace,
-      // transition: transition,
+      transition: transition,
     );
   }
 }

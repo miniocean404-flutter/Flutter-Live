@@ -1,8 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.my_app">
+   <!-- usesCleartextTraffic、networkSecurityConfig 解决不能直接访问http协议 -->
    <application
         android:label="练习App"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        
+        android:usesCleartextTraffic="true" 
+        android:networkSecurityConfig="@xml/basecommon_network_security_config"
+        >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -52,7 +57,5 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <!-- 解决不能直接访问http协议 -->
-    <applicationandroid:usesCleartextTraffic="true" android:networkSecurityConfig="@xml/basecommon_network_security_config">
-    </applicationandroid:usesCleartextTraffic=>
     <uses-permission android:name="android.permission.INTERNET" />
-</manifest>
+  </manifest>

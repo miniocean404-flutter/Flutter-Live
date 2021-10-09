@@ -15,6 +15,8 @@ import 'package:my_app/views/imagePick/ImagePick.dart';
 import 'package:my_app/views/PullLoading/PullLoading.dart';
 import 'package:my_app/views/router/router.dart';
 import 'package:my_app/views/BottomBarPage/BottomBarPage.dart';
+import 'package:my_app/views/FileOperate/FileOperate.dart';
+import 'package:my_app/views/DeviceInfo/DeviceInfo.dart';
 
 var startPageHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
@@ -69,5 +71,16 @@ var nameRouterHandler = Handler(
 var routerPageHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return RouterPage();
+  },
+);
+
+var fileOperateHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return FileOperate();
+  },
+);
+var deviceInfoHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return DeviceInfo();
   },
 );

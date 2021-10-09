@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:my_app/route/routers.dart';
-
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 // * 启动页
@@ -63,6 +63,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    // SystemChrome.setEnabledSystemUIMode();
     this.anmationExec();
     this.startTiming();
     super.initState();
