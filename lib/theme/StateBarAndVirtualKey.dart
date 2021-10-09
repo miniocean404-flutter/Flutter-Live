@@ -19,6 +19,7 @@ void barColor({required String color}) {
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.dark,
+    systemStatusBarContrastEnforced: false,
   );
 
   // 黑色沉浸式状态栏颜色 黑色文字

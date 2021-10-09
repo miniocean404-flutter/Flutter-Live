@@ -36,17 +36,21 @@ dev_dependencies:
   dio: ^4.0.0 # http请求（中国封装）
   video_player: ^2.2.4 # video播放器
   image_picker: ^0.8.4+2 # 选择图片 
-  url_launcher: ^6.0.12 # 跳转链接 
+  url_launcher: ^6.0.12 # 跳转链接 和 实现原生电话的拨打
   fluro: ^2.0.3 # 路由
   provider: ^6.0.1 # 状态管理
   animations: ^2.0.1 # 动画
   fluttertoast: ^8.0.8 # toast
+  flutter_screenutil: ^5.0.0+2 # 屏幕自适应及适配不同屏幕
+  flutter_swiper: ^1.1.6 # 轮播图插件
+  flutter_easyrefresh: ^2.2.1 # 拉刷新或者上拉加载插件
+  flutter_native_splash: ^1.2.4 # 自动生成原生启动页
   flutter_test: 
     sdk: flutter
   # get: ^4.3.8 # 状态管理、智能依赖注入和路由管理
  
 flutter_icons:
-  android: "ic_launcher"
+  android: "ic_launcher" 
   ios: false
   image_path: "assets/icon/icon.png" 
 # For information on the generic Dart part of this file, see the

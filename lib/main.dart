@@ -7,7 +7,6 @@ import 'package:my_app/route/routers.dart';
 import 'package:my_app/theme/StateBarAndVirtualKey.dart';
 
 void main() {
-  barColor(color: 'white');
   Routers.initRouter();
   return runApp(MyApp());
 }
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    barColor(color: 'white');
     return MaterialApp(
       // 默认配置
       title: '抖音',
