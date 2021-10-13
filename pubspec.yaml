@@ -24,6 +24,7 @@ flutter_native_splash:
   image: "assets/startImg.png"
   ardroid: true
   ios: false
+  android_gravity: fill 在android闪屏页中的位置,值有 bottom, center, center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal, fill_vertical, left, right, start, top
  
 dependencies: 
   path_provider: ^2.0.5 # 获取平台目录统一Api(官方)
