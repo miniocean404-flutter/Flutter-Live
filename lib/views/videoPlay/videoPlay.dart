@@ -21,6 +21,12 @@ class _VideoAppState extends State<VideoApp> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -48,11 +54,5 @@ class _VideoAppState extends State<VideoApp> {
         // splashColor: Colors.blue,
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
   }
 }

@@ -1,22 +1,24 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert' as convert; // 转Json
-
 // 隐藏滚动水波纹
 import 'package:my_app/theme/WaterRipple.dart';
+import 'package:my_app/views/AlbumShow/AlbumShow.dart';
+import 'package:my_app/views/BottomBarPage/BottomBarPage.dart';
+import 'package:my_app/views/BuiltInBrowser/BuiltInBrowser.dart';
+import 'package:my_app/views/DeviceInfo/DeviceInfo.dart';
+import 'package:my_app/views/FileOperate/FileOperate.dart';
+import 'package:my_app/views/PullLoading/PullLoading.dart';
+import 'package:my_app/views/StartPage/StartPage.dart';
+import 'package:my_app/views/category/category.dart';
 // 路由
 import 'package:my_app/views/home/home.dart';
-import 'package:my_app/views/category/category.dart';
-import 'package:my_app/views/mine/mine.dart';
-import 'package:my_app/views/StartPage/StartPage.dart';
-import 'package:my_app/views/router/NameRouter.dart';
-import 'package:my_app/views/videoPlay/videoPlay.dart';
 import 'package:my_app/views/imagePick/ImagePick.dart';
-import 'package:my_app/views/PullLoading/PullLoading.dart';
+import 'package:my_app/views/mine/mine.dart';
+import 'package:my_app/views/router/NameRouter.dart';
 import 'package:my_app/views/router/router.dart';
-import 'package:my_app/views/BottomBarPage/BottomBarPage.dart';
-import 'package:my_app/views/FileOperate/FileOperate.dart';
-import 'package:my_app/views/DeviceInfo/DeviceInfo.dart';
+import 'package:my_app/views/videoPlay/videoPlay.dart';
+
+import 'package:my_app/views/EasyreFresh/EasyreFresh.dart';
 
 var startPageHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
@@ -82,5 +84,23 @@ var fileOperateHandler = Handler(
 var deviceInfoHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return DeviceInfo();
+  },
+);
+
+var albumShowHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return AlbumShow();
+  },
+);
+
+var builtInBrowserHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return BuiltInBrowser();
+  },
+);
+
+var easyreFreshHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return EasyreFresh();
   },
 );

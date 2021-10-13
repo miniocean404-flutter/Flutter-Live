@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/route/routers.dart';
-import 'package:fluro/fluro.dart';
 
 class Category extends StatelessWidget {
   const Category({Key? key}) : super(key: key);
@@ -59,6 +58,26 @@ class Category extends StatelessWidget {
                   child: Text('设备信息'),
                   onPressed: () =>
                       {Routers.navigateTo(context, Routers.Device_Info)},
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  child: Text('内嵌浏览器'),
+                  onPressed: () =>
+                      {Routers.navigateTo(context, Routers.Built_In_Browser)},
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextButton(
+                  child: Text('下拉刷新'),
+                  onPressed: () =>
+                      {Routers.navigateTo(context, Routers.Easyre_Fresh)},
                 ),
               ),
             ],

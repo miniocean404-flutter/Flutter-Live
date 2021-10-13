@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 // 主题
 import 'package:my_app/theme/theme.dart';
@@ -7,7 +8,10 @@ import 'package:my_app/route/routers.dart';
 import 'package:my_app/theme/StateBarAndVirtualKey.dart';
 
 void main() {
+  var env = String.fromEnvironment('APP_CHANNEL'); //
   Routers.initRouter();
+  barColor(color: 'white');
+  GestureBinding.instance?.resamplingEnabled = true; // 启动高刷
   return runApp(MyApp());
 }
 
@@ -16,7 +20,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    barColor(color: 'white');
     return MaterialApp(
       // 默认配置
       title: '抖音',

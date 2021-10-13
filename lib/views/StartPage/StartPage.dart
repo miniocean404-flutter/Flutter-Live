@@ -83,7 +83,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
           Container(
             color: Colors.white,
             child: Image.asset(
-              'assets/startImg.jpg',
+              'assets/startImg.png',
               fit: BoxFit.fill,
               width: double.infinity,
               height: double.infinity,

@@ -30,6 +30,9 @@ class Routers {
   static const String Name_Router = "/NameRouter";
   static const String Router_Page = "/RouterPage";
   static const String Device_Info = "/DeviceInfo";
+  static const String Album_Show = "/AlbumShow";
+  static const String Built_In_Browser = "/BuiltInBrowser";
+  static const String Easyre_Fresh = "/EasyreFresh";
 
   static void defineRoutes() {
     router.notFoundHandler = Handler(
@@ -51,6 +54,9 @@ class Routers {
     router.define(Router_Page, handler: routerPageHandler);
     router.define(File_Operate, handler: fileOperateHandler);
     router.define(Device_Info, handler: deviceInfoHandler);
+    router.define(Album_Show, handler: albumShowHandler);
+    router.define(Built_In_Browser, handler: builtInBrowserHandler);
+    router.define(Easyre_Fresh, handler: easyreFreshHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配
