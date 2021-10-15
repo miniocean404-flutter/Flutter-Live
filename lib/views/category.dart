@@ -28,7 +28,7 @@ class Category extends StatelessWidget {
                 child: TextButton(
                   child: Text('选择图片'),
                   onPressed: () =>
-                      {Routers.navigateTo(context, Routers.Image_Pick)},
+                      {Routers.navigateTo(context, Routers.imagePick)},
                 ),
               ),
               Expanded(
@@ -36,7 +36,7 @@ class Category extends StatelessWidget {
                 child: TextButton(
                   child: Text('文件操作'),
                   onPressed: () =>
-                      {Routers.navigateTo(context, Routers.File_Operate)},
+                      {Routers.navigateTo(context, Routers.fileOperate)},
                 ),
               ),
               // VideoApp()
@@ -49,7 +49,7 @@ class Category extends StatelessWidget {
                 child: TextButton(
                   child: Text('自定义下拉加载更多'),
                   onPressed: () =>
-                      {Routers.navigateTo(context, Routers.Pull_Loading)},
+                      {Routers.navigateTo(context, Routers.pullLoading)},
                 ),
               ),
               Expanded(
@@ -57,7 +57,7 @@ class Category extends StatelessWidget {
                 child: TextButton(
                   child: Text('设备信息'),
                   onPressed: () =>
-                      {Routers.navigateTo(context, Routers.Device_Info)},
+                      {Routers.navigateTo(context, Routers.deviceInfo)},
                 ),
               ),
             ],
@@ -69,7 +69,7 @@ class Category extends StatelessWidget {
                 child: TextButton(
                   child: Text('内嵌浏览器'),
                   onPressed: () =>
-                      {Routers.navigateTo(context, Routers.Built_In_Browser)},
+                      {Routers.navigateTo(context, Routers.builtInBrowser)},
                 ),
               ),
               Expanded(
@@ -77,7 +77,7 @@ class Category extends StatelessWidget {
                 child: TextButton(
                   child: Text('下拉刷新'),
                   onPressed: () =>
-                      {Routers.navigateTo(context, Routers.Easy_Refresh)},
+                      {Routers.navigateTo(context, Routers.easyRefresh)},
                 ),
               ),
             ],

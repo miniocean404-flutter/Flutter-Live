@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:my_app/route/routers.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter/material.dart';
+import 'package:my_app/route/routers.dart';
 
 // * 启动页
 class StartPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
 
   void startJump() {
     timer.cancel();
-    Routers.navigateTo(context, Routers.Bottom_Bar_Page, clearStack: true);
+    Routers.navigateTo(context, Routers.bottomBarPage, clearStack: true);
   }
 
   void anmationExec() {

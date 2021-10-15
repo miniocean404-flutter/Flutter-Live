@@ -11,11 +11,11 @@ class RouterUse extends StatelessWidget {
         children: <Widget>[
           TextButton(
             child: Text('基本路由'),
-            onPressed: () => {Routers.navigateTo(context, Routers.Router_Page)},
+            onPressed: () => {Routers.navigateTo(context, Routers.routerPage)},
           ),
           TextButton(
             child: Text('命名传参路由'),
-            onPressed: () => {Routers.navigateTo(context, Routers.Name_Router)},
+            onPressed: () => {Routers.navigateTo(context, Routers.nameRouter)},
           )
         ],
       ),

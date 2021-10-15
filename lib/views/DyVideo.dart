@@ -13,8 +13,7 @@ class DyVideo extends StatelessWidget {
             flex: 1,
             child: TextButton(
               child: Text('视频播放'),
-              onPressed: () =>
-                  {Routers.navigateTo(context, Routers.Video_Play)},
+              onPressed: () => {Routers.navigateTo(context, Routers.videoplay)},
             ),
           ),
           Expanded(
@@ -22,7 +21,7 @@ class DyVideo extends StatelessWidget {
             child: TextButton(
               child: Text('视频自定义播放器'),
               onPressed: () =>
-                  {Routers.navigateTo(context, Routers.Custom_Video)},
+                  {Routers.navigateTo(context, Routers.customVideo)},
             ),
           ),
         ],

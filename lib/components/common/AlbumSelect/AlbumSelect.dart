@@ -3,7 +3,7 @@
 // import 'PhotoPickerVideoCover.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
-// import 'package:flutter_easyrefresh/easy_refresh.dart';
+// import 'package:flutter_easyrefresh/easyRefresh.dart';
 // import 'package:photo_manager/photo_manager.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 

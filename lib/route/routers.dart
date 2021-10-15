@@ -15,25 +15,25 @@ class Routers {
     }
   }
 
-  static const String Start_Page = "/";
-  static const String Bottom_Bar_Page = "/BottomBarPage";
+  static const String startPage = "/";
+  static const String bottomBarPage = "/bottomBarPage";
 
   static const String home = "/home";
   static const String category = "/category";
   static const String mine = "/mine";
 
-  static const String Video_Play = "/VideoPlay";
-  static const String Image_Pick = "/ImagePick";
-  static const String Pull_Loading = "/PullLoading";
-  static const String File_Operate = "/FileOperate";
+  static const String videoPlay = "/videoPlay";
+  static const String imagePick = "/imagePick";
+  static const String pullLoading = "/pullLoading";
+  static const String fileOperate = "/fileOperate";
   // 路由界面
-  static const String Name_Router = "/NameRouter";
-  static const String Router_Page = "/RouterPage";
-  static const String Device_Info = "/DeviceInfo";
-  static const String Album_Show = "/AlbumShow";
-  static const String Built_In_Browser = "/BuiltInBrowser";
-  static const String Easy_Refresh = "/EasyRefresh";
-  static const String Custom_Video = "/CustomVideo";
+  static const String nameRouter = "/nameRouter";
+  static const String routerPage = "/routerPage";
+  static const String deviceInfo = "/deviceInfo";
+  static const String albumShow = "/albumShow";
+  static const String builtInBrowser = "/builtInBrowser";
+  static const String easyRefresh = "/easyRefresh";
+  static const String customVideo = "/customVideo";
 
   static void defineRoutes() {
     router.notFoundHandler = Handler(
@@ -43,22 +43,22 @@ class Routers {
       },
     );
 
-    router.define(Start_Page, handler: SartPageHandler);
-    router.define(Bottom_Bar_Page, handler: BottomBarPageHandler);
-    router.define(home, handler: HomeCotainerHandler);
-    router.define(category, handler: CategoryHandler);
-    router.define(mine, handler: MineHandler);
-    router.define(Video_Play, handler: VideoAppHandler);
-    router.define(Image_Pick, handler: ImagePickHandler);
-    router.define(Pull_Loading, handler: PullLoadingHandler);
-    router.define(Name_Router, handler: NameRouterHandler);
-    router.define(Router_Page, handler: RouterPageHandler);
-    router.define(File_Operate, handler: FileOperateHandler);
-    router.define(Device_Info, handler: DeviceInfoHandler);
-    router.define(Album_Show, handler: AlbumShowHandler);
-    router.define(Built_In_Browser, handler: BuiltInBrowserHandler);
-    router.define(Easy_Refresh, handler: EasyreFreshHandler);
-    router.define(Custom_Video, handler: CustomVideoHandler);
+    router.define(startPage, handler: startPageHandler);
+    router.define(bottomBarPage, handler: bottomBarPageHandler);
+    router.define(home, handler: homeCotainerHandler);
+    router.define(category, handler: categoryHandler);
+    router.define(mine, handler: mineHandler);
+    router.define(videoPlay, handler: videoAppHandler);
+    router.define(imagePick, handler: imagePickHandler);
+    router.define(pullLoading, handler: pullLoadingHandler);
+    router.define(nameRouter, handler: nameRouterHandler);
+    router.define(routerPage, handler: routerPageHandler);
+    router.define(fileOperate, handler: fileOperateHandler);
+    router.define(deviceInfo, handler: deviceInfoHandler);
+    router.define(albumShow, handler: albumShowHandler);
+    router.define(builtInBrowser, handler: builtInBrowserHandler);
+    router.define(easyRefresh, handler: easyreFreshHandler);
+    router.define(customVideo, handler: customVideoHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

@@ -16,7 +16,7 @@ class NameRouter extends StatelessWidget {
             TextButton(
               child: Text('删除当前页面的栈，并进入下一页面'),
               onPressed: () => {
-                Routers.navigateTo(context, Routers.Router_Page, replace: true)
+                Routers.navigateTo(context, Routers.routerPage, replace: true)
               },
             ),
             TextButton(
@@ -24,7 +24,7 @@ class NameRouter extends StatelessWidget {
               onPressed: () => {
                 Routers.navigateTo(
                   context,
-                  Routers.Bottom_Bar_Page,
+                  Routers.bottomBarPage,
                   clearStack: true,
                 )
               },

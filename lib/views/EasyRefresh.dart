@@ -1,5 +1,5 @@
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easyRefresh.dart';
 
 class EasyreFresh extends StatefulWidget {
   EasyreFresh({Key? key}) : super(key: key);

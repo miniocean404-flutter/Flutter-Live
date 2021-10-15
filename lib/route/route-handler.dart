@@ -7,7 +7,7 @@ import 'package:my_app/views/BottomBarPage.dart';
 import 'package:my_app/views/BuiltInBrowser.dart';
 import 'package:my_app/views/CustomVideo.dart';
 import 'package:my_app/views/DeviceInfo.dart';
-import 'package:my_app/views/EasyRefresh.dart';
+import 'package:my_app/views/EasyreFresh.dart';
 import 'package:my_app/views/FileOperate.dart';
 import 'package:my_app/views/ImagePick.dart';
 import 'package:my_app/views/PullLoading.dart';
@@ -20,92 +20,92 @@ import 'package:my_app/views/router/NameRouter.dart';
 import 'package:my_app/views/router/router.dart';
 import 'package:my_app/views/videoPlay.dart';
 
-var SartPageHandler =
+var startPageHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
   return StartPage();
 });
 
-var BottomBarPageHandler = Handler(
+var bottomBarPageHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return HideScrollWaterRipple(BottomBarPage());
   },
 );
 
-var HomeCotainerHandler = Handler(
+var homeCotainerHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return HomeCotainer();
   },
 );
 
-var CategoryHandler = Handler(
+var categoryHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return Category();
   },
 );
 
-var MineHandler = Handler(
+var mineHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return Mine();
   },
 );
 
-var VideoAppHandler = Handler(
+var videoAppHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return VideoApp();
   },
 );
 
-var ImagePickHandler = Handler(
+var imagePickHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return ImagePick();
   },
 );
-var PullLoadingHandler = Handler(
+var pullLoadingHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return PullLoading();
   },
 );
-var NameRouterHandler = Handler(
+var nameRouterHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return NameRouter();
   },
 );
-var RouterPageHandler = Handler(
+var routerPageHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return RouterPage();
   },
 );
 
-var FileOperateHandler = Handler(
+var fileOperateHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return FileOperate();
   },
 );
-var DeviceInfoHandler = Handler(
+var deviceInfoHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return DeviceInfo();
   },
 );
 
-var AlbumShowHandler = Handler(
+var albumShowHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return AlbumShow();
   },
 );
 
-var BuiltInBrowserHandler = Handler(
+var builtInBrowserHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return BuiltInBrowser();
   },
 );
 
-var EasyreFreshHandler = Handler(
+var easyreFreshHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return EasyreFresh();
   },
 );
 
-var CustomVideoHandler = Handler(
+var customVideoHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return CustomVideo();
   },
