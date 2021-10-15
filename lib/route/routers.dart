@@ -45,7 +45,7 @@ class Routers {
 
     router.define(startPage, handler: startPageHandler);
     router.define(bottomBarPage, handler: bottomBarPageHandler);
-    router.define(home, handler: homeCotainerHandler);
+    router.define(home, handler: homeContainerHandler);
     router.define(category, handler: categoryHandler);
     router.define(mine, handler: mineHandler);
     router.define(videoPlay, handler: videoAppHandler);

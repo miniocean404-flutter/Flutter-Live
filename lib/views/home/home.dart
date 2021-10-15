@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/views/home/RecommendTitle.dart';
 import 'package:my_app/views/home/TabPage/BrowserJump.dart';
-
+import 'package:my_app/views/home/TabPage/ClickAdd.dart';
 import 'package:my_app/views/home/TabPage/Recommend.dart';
 import 'package:my_app/views/home/TabPage/RouterUse.dart';
-import 'package:my_app/views/home/TabPage/ClickAdd.dart';
-
-import 'package:my_app/views/home/RecommendTitle.dart';
 
 // * 主页的容器
-class HomeCotainer extends StatelessWidget {
-  const HomeCotainer({Key? key}) : super(key: key);
+class homeContainer extends StatelessWidget {
+  const homeContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

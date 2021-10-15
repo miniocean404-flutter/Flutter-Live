@@ -2,21 +2,21 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 // 隐藏滚动水波纹
 import 'package:my_app/theme/WaterRipple.dart';
-import 'package:my_app/views/AlbumShow.dart';
-import 'package:my_app/views/BottomBarPage.dart';
-import 'package:my_app/views/BuiltInBrowser.dart';
-import 'package:my_app/views/CustomVideo.dart';
-import 'package:my_app/views/DeviceInfo.dart';
-import 'package:my_app/views/EasyRefreshPage.dart';
-import 'package:my_app/views/FileOperate.dart';
-import 'package:my_app/views/ImagePick.dart';
-import 'package:my_app/views/PullLoading.dart';
-import 'package:my_app/views/StartPage.dart';
+import 'package:my_app/views/albumShow.dart';
+import 'package:my_app/views/bottomBarPage.dart';
+import 'package:my_app/views/builtInBrowser.dart';
 import 'package:my_app/views/category.dart';
+import 'package:my_app/views/customVideo.dart';
+import 'package:my_app/views/deviceInfo.dart';
+import 'package:my_app/views/easyRefreshPage.dart';
+import 'package:my_app/views/fileOperate.dart';
 import 'package:my_app/views/home/home.dart';
+import 'package:my_app/views/imagePick.dart';
 import 'package:my_app/views/mine.dart';
+import 'package:my_app/views/pullLoading.dart';
 import 'package:my_app/views/router/NameRouter.dart';
 import 'package:my_app/views/router/router.dart';
+import 'package:my_app/views/startPage.dart';
 import 'package:my_app/views/videoPlay.dart';
 
 var startPageHandler =
@@ -30,9 +30,9 @@ var bottomBarPageHandler = Handler(
   },
 );
 
-var homeCotainerHandler = Handler(
+var homeContainerHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-    return HomeCotainer();
+    return homeContainer();
   },
 );
 

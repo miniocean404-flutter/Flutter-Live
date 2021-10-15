@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/DyVideo.dart';
 import 'package:my_app/views/category.dart';
+import 'package:my_app/views/dyVideo.dart';
 // theme
 // bottombar
 import 'package:my_app/views/home/home.dart';
@@ -21,7 +21,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
 
   int _currentIndex = 0;
   List<Widget> bottomBarList = [
-    HomeCotainer(),
+    homeContainer(),
     DyVideo(),
     Category(),
     Mine(),
