@@ -77,7 +77,7 @@ class Category extends StatelessWidget {
                 child: TextButton(
                   child: Text('下拉刷新'),
                   onPressed: () =>
-                      {Routers.navigateTo(context, Routers.Easyre_Fresh)},
+                      {Routers.navigateTo(context, Routers.Easy_Refresh)},
                 ),
               ),
             ],

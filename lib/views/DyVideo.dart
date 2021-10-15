@@ -16,7 +16,15 @@ class DyVideo extends StatelessWidget {
               onPressed: () =>
                   {Routers.navigateTo(context, Routers.Video_Play)},
             ),
-          )
+          ),
+          Expanded(
+            flex: 1,
+            child: TextButton(
+              child: Text('视频自定义播放器'),
+              onPressed: () =>
+                  {Routers.navigateTo(context, Routers.Custom_Video)},
+            ),
+          ),
         ],
       ),
     );

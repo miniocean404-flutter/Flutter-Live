@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+// import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:my_app/components/business/ArticleIntroduction.dart';
 
 class Recommend extends StatefulWidget {
@@ -83,23 +83,24 @@ class _RecommendState extends State<Recommend> {
           controller: _controller,
           itemBuilder: (BuildContext context, int index) {
             return index == 0
-                ? new ConstrainedBox(
-                    child: new Swiper(
-                      autoplay: true,
-                      outer: false,
-                      pagination: SwiperPagination(margin: EdgeInsets.all(5.0)),
-                      itemCount: 3,
-                      itemBuilder: (c, i) {
-                        return Image.network(
-                          "http://img.doutula.com/production/uploads/image/2021/10/10/20211010834121_iFOQyd.jpg",
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    ),
-                    constraints: BoxConstraints.loose(
-                      Size(MediaQuery.of(context).size.width, 170.0),
-                    ),
-                  )
+                ? Text('轮播图')
+                // ConstrainedBox(
+                //     child: new Swiper(
+                //       autoplay: true,
+                //       outer: false,
+                //       pagination: SwiperPagination(margin: EdgeInsets.all(5.0)),
+                //       itemCount: 3,
+                //       itemBuilder: (c, i) {
+                //         return Image.network(
+                //           "http://img.doutula.com/production/uploads/image/2021/10/10/20211010834121_iFOQyd.jpg",
+                //           fit: BoxFit.cover,
+                //         );
+                //       },
+                //     ),
+                //     constraints: BoxConstraints.loose(
+                //       Size(MediaQuery.of(context).size.width, 170.0),
+                //     ),
+                //   )
                 : ArticleIntroduction(
                     title: this.introduction[index]['title'],
                     auth: this.introduction[index]['auth'],

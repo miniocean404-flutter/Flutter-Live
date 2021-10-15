@@ -32,7 +32,8 @@ class Routers {
   static const String Device_Info = "/DeviceInfo";
   static const String Album_Show = "/AlbumShow";
   static const String Built_In_Browser = "/BuiltInBrowser";
-  static const String Easyre_Fresh = "/EasyreFresh";
+  static const String Easy_Refresh = "/EasyRefresh";
+  static const String Custom_Video = "/CustomVideo";
 
   static void defineRoutes() {
     router.notFoundHandler = Handler(
@@ -42,21 +43,22 @@ class Routers {
       },
     );
 
-    router.define(Start_Page, handler: startPageHandler);
-    router.define(Bottom_Bar_Page, handler: bottomBarPageHandler);
-    router.define(home, handler: homeCotainerHandler);
-    router.define(category, handler: categoryHandler);
-    router.define(mine, handler: mineHandler);
-    router.define(Video_Play, handler: videoAppHandler);
-    router.define(Image_Pick, handler: imagePickHandler);
-    router.define(Pull_Loading, handler: pullLoadingHandler);
-    router.define(Name_Router, handler: nameRouterHandler);
-    router.define(Router_Page, handler: routerPageHandler);
-    router.define(File_Operate, handler: fileOperateHandler);
-    router.define(Device_Info, handler: deviceInfoHandler);
-    router.define(Album_Show, handler: albumShowHandler);
-    router.define(Built_In_Browser, handler: builtInBrowserHandler);
-    router.define(Easyre_Fresh, handler: easyreFreshHandler);
+    router.define(Start_Page, handler: SartPageHandler);
+    router.define(Bottom_Bar_Page, handler: BottomBarPageHandler);
+    router.define(home, handler: HomeCotainerHandler);
+    router.define(category, handler: CategoryHandler);
+    router.define(mine, handler: MineHandler);
+    router.define(Video_Play, handler: VideoAppHandler);
+    router.define(Image_Pick, handler: ImagePickHandler);
+    router.define(Pull_Loading, handler: PullLoadingHandler);
+    router.define(Name_Router, handler: NameRouterHandler);
+    router.define(Router_Page, handler: RouterPageHandler);
+    router.define(File_Operate, handler: FileOperateHandler);
+    router.define(Device_Info, handler: DeviceInfoHandler);
+    router.define(Album_Show, handler: AlbumShowHandler);
+    router.define(Built_In_Browser, handler: BuiltInBrowserHandler);
+    router.define(Easy_Refresh, handler: EasyreFreshHandler);
+    router.define(Custom_Video, handler: CustomVideoHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

@@ -1,16 +1,17 @@
 import 'dart:async';
 
-import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 import 'controller_widget.dart';
 
+import 'package:common_utils/common_utils.dart';
+
 class VideoPlayerSlider extends StatefulWidget {
   final Function startPlayControlTimer;
   final Timer timer;
 
-  VideoPlayerSlider({this.startPlayControlTimer, this.timer});
+  VideoPlayerSlider({required this.startPlayControlTimer, required this.timer});
 
   @override
   _VideoPlayerSliderState createState() => _VideoPlayerSliderState();
@@ -18,11 +19,11 @@ class VideoPlayerSlider extends StatefulWidget {
 
 class _VideoPlayerSliderState extends State<VideoPlayerSlider> {
   VideoPlayerController get controller =>
-      ControllerWidget.of(context).controller;
+      ControllerWidget.of(context)!.controller;
 
-  bool get videoInit => ControllerWidget.of(context).videoInit;
-  double progressValue; //进度
-  String labelProgress; //tip内容
+  bool get videoInit => ControllerWidget.of(context)!.videoInit;
+  late double progressValue; //进度
+  late String labelProgress; //tip内容
   bool handle = false; //判断是否在滑动的标识
 
   @override

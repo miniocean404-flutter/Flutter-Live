@@ -1,274 +1,247 @@
-import 'dart:async';
-
-import 'package:auto_orientation/auto_orientation.dart';
-import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:screen/screen.dart';
+import './after_layout.dart';
+//import 'package:screen/screen.dart';
 import 'package:video_player/video_player.dart';
 
 import 'controller_widget.dart';
-import 'video_player_slider.dart';
+import 'video_player_control.dart';
 
-class VideoPlayerControl extends StatefulWidget {
-  VideoPlayerControl({
-    Key key,
-  }) : super(key: key);
+import 'package:common_utils/common_utils.dart';
+
+class VideoPlayerPan extends StatefulWidget {
+  VideoPlayerPan({
+//    this.controlKey,
+    required this.child,
+  });
+
+//  final GlobalKey<VideoPlayerControlState> controlKey;
+  final Widget child;
 
   @override
-  VideoPlayerControlState createState() => VideoPlayerControlState();
+  _VideoPlayerPanState createState() => _VideoPlayerPanState();
 }
 
-class VideoPlayerControlState extends State<VideoPlayerControl> {
+class _VideoPlayerPanState extends State<VideoPlayerPan>
+    with AfterLayoutMixin<VideoPlayerPan> {
+  late Offset startPosition; // 起始位置
+  late double movePan; // 偏移量累计总和
+  late double layoutWidth; // 组件宽度
+  late double layoutHeight; // 组件高度
+  String volumePercentage = ''; // 组件位移描述
+  double playDialogOpacity = 0.0;
+  bool allowHorizontal = false; // 是否允许快进
+  Duration position = Duration(seconds: 0); // 当前时间
+  double brightness = 0.0; //亮度
+  bool brightnessOk = false; // 是否允许调节亮度
+
   VideoPlayerController get controller =>
-      ControllerWidget.of(context).controller;
-  bool get videoInit => ControllerWidget.of(context).videoInit;
-  String get title => ControllerWidget.of(context).title;
-  // 记录video播放进度
-  Duration _position = Duration(seconds: 0);
-  Duration _totalDuration = Duration(seconds: 0);
-  Timer _timer; // 计时器，用于延迟隐藏控件ui
-  bool _hidePlayControl = true; // 控制是否隐藏控件ui
-  double _playControlOpacity = 0; // 通过透明度动画显示/隐藏控件ui
-  /// 记录是否全屏
-  bool get _isFullScreen =>
-      MediaQuery.of(context).orientation == Orientation.landscape;
+      ControllerWidget.of(context)!.controller;
+  bool get videoInit => ControllerWidget.of(context)!.videoInit;
+  String get title => ControllerWidget.of(context)!.title;
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    _reset(context);
+  }
 
   @override
   void dispose() {
     super.dispose();
-    if (_timer != null) {
-      _timer.cancel();
-    }
+    brightnessOk = false;
+    allowHorizontal = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: _playOrPause,
-      onTap: _togglePlayControl,
+      onVerticalDragStart: _onVerticalDragStart,
+      onVerticalDragUpdate: _onVerticalDragUpdate,
+      onVerticalDragEnd: _onVerticalDragEnd,
+      onHorizontalDragStart: _onHorizontalDragStart,
+      onHorizontalDragUpdate: _onHorizontalDragUpdate,
+      onHorizontalDragEnd: _onHorizontalDragEnd,
       child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.transparent,
-        child: WillPopScope(
-          child: Offstage(
-            offstage: _hidePlayControl,
-            child: AnimatedOpacity(
-              // 加入透明度动画
-              opacity: _playControlOpacity,
-              duration: Duration(milliseconds: 300),
-              child: Column(
-                children: <Widget>[_top(), _middle(), _bottom(context)],
+        child: Stack(
+          children: <Widget>[
+            widget.child,
+            Center(
+              child: AnimatedOpacity(
+                opacity: playDialogOpacity,
+                duration: Duration(milliseconds: 500),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 6.0),
+                  decoration: BoxDecoration(
+                      color: Colors.black87,
+                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                  child: Text(
+                    volumePercentage,
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ),
               ),
             ),
-          ),
-          onWillPop: _onWillPop,
+            VideoPlayerControl(
+              key: ControllerWidget.of(context)!.controlKey,
+            )
+          ],
         ),
       ),
     );
   }
 
-  // 拦截返回键
-  Future<bool> _onWillPop() async {
-    if (_isFullScreen) {
-      _toggleFullScreen();
-      return false;
+  void _onVerticalDragStart(details) async {
+    _reset(context);
+    startPosition = details.globalPosition;
+    if (startPosition.dx < (layoutWidth / 2)) {
+      /// 左边触摸
+      brightness = await Screen.brightness;
+      brightnessOk = true;
     }
-    return true;
   }
 
-  // 供父组件调用刷新页面，减少父组件的build
-  void setPosition({position, totalDuration}) {
-    setState(() {
-      _position = position;
-      _totalDuration = totalDuration;
-    });
-  }
+  void _onVerticalDragUpdate(details) {
+    if (!videoInit) {
+      return;
+    }
 
-  Widget _bottom(BuildContext context) {
-    return Container(
-      // 底部控件的容器
-      width: double.infinity,
-      height: 40,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          // 来点黑色到透明的渐变优雅一下
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [Color.fromRGBO(0, 0, 0, .7), Color.fromRGBO(0, 0, 0, .1)],
-        ),
-      ),
-      child: Row(
-        // 加载完成时才渲染,flex布局
-        children: <Widget>[
-          IconButton(
-            // 播放按钮
-            padding: EdgeInsets.zero,
-            iconSize: 26,
-            icon: Icon(
-              // 根据控制器动态变化播放图标还是暂停
-              controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-              color: Colors.white,
-            ),
-            onPressed: _playOrPause,
-          ),
-          Expanded(
-            // 相当于前端的flex: 1
-            child: VideoPlayerSlider(
-              startPlayControlTimer: _startPlayControlTimer,
-              timer: _timer,
-            ),
-          ),
-          Container(
-            // 播放时间
-            margin: EdgeInsets.only(left: 10),
-            child: Text(
-              '${DateUtil.formatDateMs(
-                _position?.inMilliseconds,
-                format: 'mm:ss',
-              )}/${DateUtil.formatDateMs(
-                _totalDuration?.inMilliseconds,
-                format: 'mm:ss',
-              )}',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          IconButton(
-            // 全屏/横屏按钮
-            padding: EdgeInsets.zero,
-            iconSize: 26,
-            icon: Icon(
-              // 根据当前屏幕方向切换图标
-              _isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // 点击切换是否全屏
-              _toggleFullScreen();
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _middle() {
-    return Expanded(
-      child: Container(),
-    );
-  }
-
-  Widget _top() {
-    return Container(
-      width: double.infinity,
-      height: 40,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          // 来点黑色到透明的渐变优雅一下
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [Color.fromRGBO(0, 0, 0, .7), Color.fromRGBO(0, 0, 0, .1)],
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          //在最上层或者不是横屏则隐藏按钮
-          ModalRoute.of(context).isFirst && !_isFullScreen
-              ? Container()
-              : IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                  onPressed: backPress),
-          Text(
-            title,
-            style: TextStyle(color: Colors.white),
-          ),
-          //在最上层或者不是横屏则隐藏按钮
-          ModalRoute.of(context).isFirst && !_isFullScreen
-              ? Container()
-              : IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.transparent,
-                  ),
-                  onPressed: () {},
-                ),
-        ],
-      ),
-    );
-  }
-
-  void backPress() {
-    print(_isFullScreen);
-    // 如果是全屏，点击返回键则关闭全屏，如果不是，则系统返回键
-    if (_isFullScreen) {
-      _toggleFullScreen();
-    } else if (ModalRoute.of(context).isFirst) {
-      SystemNavigator.pop();
+    /// 累计计算偏移量(下滑减少百分比，上滑增加百分比)
+    movePan += (-details.delta.dy);
+    if (startPosition.dx < (layoutWidth / 2)) {
+      /// 左边触摸
+      if (brightnessOk = true) {
+        setState(() {
+          volumePercentage = '亮度：${(_setBrightnessValue() * 100).toInt()}%';
+          playDialogOpacity = 1.0;
+        });
+      }
     } else {
-      Navigator.pop(context);
-    }
-  }
-
-  void _playOrPause() {
-    /// 同样的，点击动态播放或者暂停
-    if (videoInit) {
-      controller.value.isPlaying ? controller.pause() : controller.play();
-      _startPlayControlTimer(); // 操作控件后，重置延迟隐藏控件的timer
-    }
-  }
-
-  void _togglePlayControl() {
-    setState(() {
-      if (_hidePlayControl) {
-        /// 如果隐藏则显示
-        _hidePlayControl = false;
-        _playControlOpacity = 1;
-        _startPlayControlTimer(); // 开始计时器，计时后隐藏
-      } else {
-        /// 如果显示就隐藏
-        if (_timer != null) _timer.cancel(); // 有计时器先移除计时器
-        _playControlOpacity = 0;
-        Future.delayed(Duration(milliseconds: 500)).whenComplete(() {
-          _hidePlayControl = true; // 延迟500ms(透明度动画结束)后，隐藏
-        });
-      }
-    });
-  }
-
-  void _startPlayControlTimer() {
-    /// 计时器，用法和前端js的大同小异
-    if (_timer != null) _timer.cancel();
-    _timer = Timer(Duration(seconds: 3), () {
-      /// 延迟3s后隐藏
+      /// 右边触摸
       setState(() {
-        _playControlOpacity = 0;
-        Future.delayed(Duration(milliseconds: 500)).whenComplete(() {
-          _hidePlayControl = true;
-        });
+        volumePercentage = '音量：${(_setVerticalValue(num: 2) * 100).toInt()}%';
+        playDialogOpacity = 1.0;
       });
+    }
+  }
+
+  void _onVerticalDragEnd(_) async {
+    if (!videoInit) {
+      return;
+    }
+    if (startPosition.dx < (layoutWidth / 2)) {
+      if (brightnessOk) {
+        await Screen.setBrightness(_setBrightnessValue());
+        brightnessOk = false;
+        // 左边触摸
+        setState(() {
+          playDialogOpacity = 0.0;
+        });
+      }
+    } else {
+      // 右边触摸
+      await controller.setVolume(_setVerticalValue());
+      setState(() {
+        playDialogOpacity = 0.0;
+      });
+    }
+  }
+
+  double _setBrightnessValue() {
+    // 亮度百分控制
+    double value =
+        double.parse((movePan / layoutHeight + brightness).toStringAsFixed(2));
+    if (value >= 1.00) {
+      value = 1.00;
+    } else if (value <= 0.00) {
+      value = 0.00;
+    }
+    return value;
+  }
+
+  double _setVerticalValue({int num = 1}) {
+    // 声音亮度百分控制
+    double value = double.parse(
+        (movePan / layoutHeight + controller.value.volume)
+            .toStringAsFixed(num));
+    if (value >= 1.0) {
+      value = 1.0;
+    } else if (value <= 0.0) {
+      value = 0.0;
+    }
+    return value;
+  }
+
+  void _reset(BuildContext context) {
+    startPosition = Offset(0, 0);
+    movePan = 0;
+    layoutHeight = context.size!.height;
+    layoutWidth = context.size!.width;
+    volumePercentage = '';
+  }
+
+  void _onHorizontalDragStart(DragStartDetails details) async {
+    _reset(context);
+    if (!videoInit) {
+      return;
+    }
+    // 获取当前时间
+    position = controller.value.position;
+    // 暂停成功后才允许快进手势
+    allowHorizontal = true;
+  }
+
+  void _onHorizontalDragUpdate(DragUpdateDetails details) {
+    if (!videoInit && !allowHorizontal) {
+      return;
+    }
+    // 累计计算偏移量
+    movePan += details.delta.dx;
+    double value = _setHorizontalValue();
+    // 用百分比计算出当前的秒数
+    String currentSecond = DateUtil.formatDateMs(
+      (value * controller.value.duration.inMilliseconds).toInt(),
+      format: 'mm:ss',
+    );
+    if (value >= 0) {
+      setState(() {
+        volumePercentage = '快进至：$currentSecond';
+        playDialogOpacity = 1.0;
+      });
+    } else {
+      setState(() {
+        volumePercentage = '快退至：${(value * 100).toInt()}%';
+        playDialogOpacity = 1.0;
+      });
+    }
+  }
+
+  void _onHorizontalDragEnd(DragEndDetails details) async {
+    if (!videoInit && !allowHorizontal) {
+      return;
+    }
+    double value = _setHorizontalValue();
+    int current = (value * controller.value.duration.inMilliseconds).toInt();
+    await controller.seekTo(Duration(milliseconds: current));
+    allowHorizontal = false;
+    setState(() {
+      playDialogOpacity = 0.0;
     });
   }
 
-  void _toggleFullScreen() {
-    setState(() {
-      if (_isFullScreen) {
-        /// 如果是全屏就切换竖屏
-        AutoOrientation.portraitAutoMode();
-
-        ///显示状态栏，与底部虚拟操作按钮
-        SystemChrome.setEnabledSystemUIOverlays(
-            [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-      } else {
-        AutoOrientation.landscapeAutoMode();
-
-        ///关闭状态栏，与底部虚拟操作按钮
-        SystemChrome.setEnabledSystemUIOverlays([]);
-      }
-      _startPlayControlTimer(); // 操作完控件开始计时隐藏
-    });
+  double _setHorizontalValue() {
+    // 进度条百分控制
+    double valueHorizontal =
+        double.parse((movePan / layoutWidth).toStringAsFixed(2));
+    // 当前进度条百分比
+    double currentValue =
+        position.inMilliseconds / controller.value.duration.inMilliseconds;
+    double value =
+        double.parse((currentValue + valueHorizontal).toStringAsFixed(2));
+    if (value >= 1.00) {
+      value = 1.00;
+    } else if (value <= 0.00) {
+      value = 0.00;
+    }
+    return value;
   }
 }

@@ -58,5 +58,8 @@
 
     <!-- 解决不能直接访问http协议 -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 屏幕常亮 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
   </manifest>
  

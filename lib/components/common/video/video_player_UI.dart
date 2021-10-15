@@ -169,11 +169,13 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
       _videoInit = false;
       _videoError = false;
     });
+
     if (widget.type == VideoPlayerType.file) {
       _controller = VideoPlayerController.file(widget.url);
     } else if (widget.type == VideoPlayerType.asset) {
       _controller = VideoPlayerController.asset(widget.url);
     } else {
+      // 播放器使用文件
       _controller = VideoPlayerController.network(widget.url);
     }
 
@@ -193,14 +195,14 @@ class _VideoPlayerUIState extends State<VideoPlayerUI> {
         _videoError = true;
       });
     } else {
-      Duration res = await _controller.position;
-      if (res >= _controller.value.duration) {
+      Duration? res = await _controller.position;
+      if (res! >= _controller.value.duration) {
         await _controller.seekTo(Duration(seconds: 0));
         await _controller.pause();
       }
       if (_controller.value.isPlaying && _key.currentState != null) {
         /// 减少build次数
-        _key.currentState.setPosition(
+        _key.currentState!.setPosition(
           position: res,
           totalDuration: _controller.value.duration,
         );

@@ -1,7 +1,4 @@
 import 'dart:async';
-
-import 'package:auto_orientation/auto_orientation.dart';
-import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
@@ -9,9 +6,11 @@ import 'package:video_player/video_player.dart';
 import 'controller_widget.dart';
 import 'video_player_slider.dart';
 
+import 'package:common_utils/common_utils.dart';
+
 class VideoPlayerControl extends StatefulWidget {
   VideoPlayerControl({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -20,16 +19,16 @@ class VideoPlayerControl extends StatefulWidget {
 
 class VideoPlayerControlState extends State<VideoPlayerControl> {
   VideoPlayerController get controller =>
-      ControllerWidget.of(context).controller;
-  bool get videoInit => ControllerWidget.of(context).videoInit;
-  String get title => ControllerWidget.of(context).title;
+      ControllerWidget.of(context)!.controller;
+  bool get videoInit => ControllerWidget.of(context)!.videoInit;
+  String get title => ControllerWidget.of(context)!.title;
   // 记录video播放进度
   Duration _position = Duration(seconds: 0);
   Duration _totalDuration = Duration(seconds: 0);
-  Timer _timer; // 计时器，用于延迟隐藏控件ui
+  late Timer _timer; // 计时器，用于延迟隐藏控件ui
   bool _hidePlayControl = true; // 控制是否隐藏控件ui
   double _playControlOpacity = 0; // 通过透明度动画显示/隐藏控件ui
-  /// 记录是否全屏
+  // 记录是否全屏
   bool get _isFullScreen =>
       MediaQuery.of(context).orientation == Orientation.landscape;
 
@@ -124,10 +123,10 @@ class VideoPlayerControlState extends State<VideoPlayerControl> {
             margin: EdgeInsets.only(left: 10),
             child: Text(
               '${DateUtil.formatDateMs(
-                _position?.inMilliseconds,
+                _position.inMilliseconds,
                 format: 'mm:ss',
               )}/${DateUtil.formatDateMs(
-                _totalDuration?.inMilliseconds,
+                _totalDuration.inMilliseconds,
                 format: 'mm:ss',
               )}',
               style: TextStyle(color: Colors.white),
@@ -174,7 +173,7 @@ class VideoPlayerControlState extends State<VideoPlayerControl> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           //在最上层或者不是横屏则隐藏按钮
-          ModalRoute.of(context).isFirst && !_isFullScreen
+          ModalRoute.of(context)!.isFirst && !_isFullScreen
               ? Container()
               : IconButton(
                   icon: Icon(
@@ -187,7 +186,7 @@ class VideoPlayerControlState extends State<VideoPlayerControl> {
             style: TextStyle(color: Colors.white),
           ),
           //在最上层或者不是横屏则隐藏按钮
-          ModalRoute.of(context).isFirst && !_isFullScreen
+          ModalRoute.of(context)!.isFirst && !_isFullScreen
               ? Container()
               : IconButton(
                   icon: Icon(
@@ -206,7 +205,7 @@ class VideoPlayerControlState extends State<VideoPlayerControl> {
     // 如果是全屏，点击返回键则关闭全屏，如果不是，则系统返回键
     if (_isFullScreen) {
       _toggleFullScreen();
-    } else if (ModalRoute.of(context).isFirst) {
+    } else if (ModalRoute.of(context)!.isFirst) {
       SystemNavigator.pop();
     } else {
       Navigator.pop(context);
@@ -257,14 +256,13 @@ class VideoPlayerControlState extends State<VideoPlayerControl> {
     setState(() {
       if (_isFullScreen) {
         /// 如果是全屏就切换竖屏
-        AutoOrientation.portraitAutoMode();
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
         ///显示状态栏，与底部虚拟操作按钮
         SystemChrome.setEnabledSystemUIOverlays(
-            [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+          [SystemUiOverlay.top, SystemUiOverlay.bottom],
+        );
       } else {
-        AutoOrientation.landscapeAutoMode();
-
         ///关闭状态栏，与底部虚拟操作按钮
         SystemChrome.setEnabledSystemUIOverlays([]);
       }
