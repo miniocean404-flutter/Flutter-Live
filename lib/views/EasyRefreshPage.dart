@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easyRefresh.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
-class EasyreFresh extends StatefulWidget {
-  EasyreFresh({Key? key}) : super(key: key);
+class EasyRefreshPage extends StatefulWidget {
+  EasyRefreshPage({Key? key}) : super(key: key);
 
   @override
-  _EasyreFreshState createState() => _EasyreFreshState();
+  _EasyRefreshPageState createState() => _EasyRefreshPageState();
 }
 
-class _EasyreFreshState extends State<EasyreFresh> {
+class _EasyRefreshPageState extends State<EasyRefresh> {
   late EasyRefreshController _controller;
   List<String> list = [];
 

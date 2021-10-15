@@ -7,13 +7,12 @@ import 'package:my_app/views/BottomBarPage.dart';
 import 'package:my_app/views/BuiltInBrowser.dart';
 import 'package:my_app/views/CustomVideo.dart';
 import 'package:my_app/views/DeviceInfo.dart';
-import 'package:my_app/views/EasyreFresh.dart';
+import 'package:my_app/views/EasyRefreshPage.dart';
 import 'package:my_app/views/FileOperate.dart';
 import 'package:my_app/views/ImagePick.dart';
 import 'package:my_app/views/PullLoading.dart';
 import 'package:my_app/views/StartPage.dart';
 import 'package:my_app/views/category.dart';
-// 路由
 import 'package:my_app/views/home/home.dart';
 import 'package:my_app/views/mine.dart';
 import 'package:my_app/views/router/NameRouter.dart';
@@ -60,6 +59,7 @@ var imagePickHandler = Handler(
     return ImagePick();
   },
 );
+
 var pullLoadingHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return PullLoading();
@@ -99,9 +99,9 @@ var builtInBrowserHandler = Handler(
   },
 );
 
-var easyreFreshHandler = Handler(
+var easyRefreshHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-    return EasyreFresh();
+    return EasyRefreshPage();
   },
 );
 

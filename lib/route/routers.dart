@@ -57,7 +57,7 @@ class Routers {
     router.define(deviceInfo, handler: deviceInfoHandler);
     router.define(albumShow, handler: albumShowHandler);
     router.define(builtInBrowser, handler: builtInBrowserHandler);
-    router.define(easyRefresh, handler: easyreFreshHandler);
+    router.define(easyRefresh, handler: easyRefreshHandler);
     router.define(customVideo, handler: customVideoHandler);
   }
 
