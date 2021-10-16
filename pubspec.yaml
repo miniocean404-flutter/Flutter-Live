@@ -37,14 +37,15 @@ dependencies:
 
   fluro: ^2.0.3 # 路由
   dio: ^4.0.0 # http请求（中国封装）
-  provider: ^6.0.1 # 状态管理
+  provider: ^6.0.1 # 状态管理 
   fluttertoast: ^8.0.8 # toast
 
   flutter_screenutil: ^5.0.0+2 # 屏幕自适应及适配不同屏幕
   flutter_easyrefresh: ^2.2.1 # 拉刷新或者上拉加载插件
   cached_network_image: ^3.1.0 # 缓存图片
+  wakelock: ^0.5.6 # 控制屏幕常亮
   flutter:
-    sdk: flutter
+    sdk: flutter 
  
 
   # The following adds the Cupertino Icons font to your application.
@@ -62,13 +63,15 @@ dev_dependencies:
   # photo_manager: ^1.3.6 # 图片相册读取 图片视频选择 https://blog.csdn.net/heheda123321123/article/details/113615680
   # get: ^4.3.8 # 状态管理、智能依赖注入和路由管理
   # http: ^0.13.3 # http请求 (官方)
-  # wakelock: ^0.5.6 # 控制屏幕常亮
-  # chewie: ^1.2.2 视频完成品插件
   # crypto: ^3.0.1 # 加密
   # web_socket_channel: ^2.1.0  # websocket
   # quick_actions: ^0.6.0+7 桌面长按快速操作 （官方）
   # flutter_swiper: ^1.1.6 # 轮播图插件
   # screen: ^0.0.5 # 控制屏幕亮度 屏幕常亮
+  
+  # chewie: ^1.2.2 # 视频完成品插件
+  # fijkplayer: ^0.10.0 # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter 
+
   
  
 flutter_icons: 

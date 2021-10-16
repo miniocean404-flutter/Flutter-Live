@@ -54,10 +54,9 @@
 //   final GlobalKey<VideoPlayerControlState> _key =
 //       GlobalKey<VideoPlayerControlState>();
 
-//   ///指示video资源是否加载完成，加载完成后会获得总时长和视频长宽比等信息
+//   //指示video资源是否加载完成，加载完成后会获得总时长和视频长宽比等信息
 //   bool _videoInit = false;
 //   bool _videoError = false;
-
 //   late VideoPlayerController _controller; // video控件管理器
 
 //   /// 记录是否全屏
@@ -159,11 +158,9 @@
 
 //   void _urlChange() async {
 //     if (widget.url == null || widget.url == '') return;
-//     if (_controller != null) {
-//       /// 如果控制器存在，清理掉重新创建
-//       _controller.removeListener(_videoListener);
-//       _controller.dispose();
-//     }
+//     _controller.removeListener(_videoListener);
+//     _controller.dispose();
+
 //     setState(() {
 //       /// 重置组件参数
 //       _videoInit = false;

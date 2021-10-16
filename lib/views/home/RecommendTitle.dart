@@ -7,13 +7,12 @@ class RecommendTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Expanded(
-          flex: 3,
+        Flexible(
           child: Container(
             padding: EdgeInsets.fromLTRB(15, 5, 0, 5),
             decoration: BoxDecoration(
               color: Color(0xFFf5f6f7),
-              borderRadius: BorderRadius.all(Radius.circular(1)),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
             child: Row(
               children: [
@@ -36,40 +35,26 @@ class RecommendTitle extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Icon(
-                  Icons.collections_bookmark_outlined,
-                  color: Theme.of(context).unselectedWidgetColor,
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.calendar_today_outlined,
-                      color: Theme.of(context).unselectedWidgetColor,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8),
-                      child: Text(
-                        '签到',
-                        style: TextStyle(
-                          fontSize: 13,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.collections_bookmark_outlined,
+            color: Theme.of(context).unselectedWidgetColor,
           ),
-        )
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.calendar_today_outlined,
+            color: Theme.of(context).unselectedWidgetColor,
+          ),
+        ),
+        Text(
+          '签到',
+          style: TextStyle(
+            fontSize: 13,
+          ),
+        ),
       ],
     );
   }

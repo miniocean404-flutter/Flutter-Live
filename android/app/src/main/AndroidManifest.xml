@@ -6,7 +6,7 @@
         android:icon="@mipmap/ic_launcher"
         
         android:usesCleartextTraffic="true" 
-        android:networkSecurityConfig="@xml/basecommon_network_security_config"
+        android:networkSecurityConfig="@xml/basecommon_network_security_config" 
         >
         <activity
             android:name=".MainActivity"

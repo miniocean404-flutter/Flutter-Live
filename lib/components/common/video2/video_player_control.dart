@@ -22,6 +22,7 @@
 //       ControllerWidget.of(context)!.controller;
 //   bool get videoInit => ControllerWidget.of(context)!.videoInit;
 //   String get title => ControllerWidget.of(context)!.title;
+
 //   // 记录video播放进度
 //   Duration _position = Duration(seconds: 0);
 //   Duration _totalDuration = Duration(seconds: 0);
@@ -35,9 +36,7 @@
 //   @override
 //   void dispose() {
 //     super.dispose();
-//     if (_timer != null) {
-//       _timer.cancel();
-//     }
+//     _timer.cancel();
 //   }
 
 //   @override

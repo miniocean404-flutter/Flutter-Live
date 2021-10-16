@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 /// [size] 设计稿上的大小
 ///
 /// [width] 设计稿尺寸
-double toRpx(
-    {double size = 0, double width = 750, required BuildContext context}) {
+double toRpx({
+  double size = 0,
+  double width = 750,
+  required BuildContext context,
+}) {
   //屏幕大小
   Size mSize = MediaQuery.of(context).size;
   //密度

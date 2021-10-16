@@ -1,14 +1,4 @@
 <!-- 解决不能直接访问http协议 -->
-<!-- <?xml version ="1.0" encoding ="utf-8"?>
-<network-security-config>
-  <base-config cleartextTrafficPermitted="true">  
-    <trust-anchora>
-        <certificates src='system'/>
-    </trust-anchora>
-  <base-config/>
-</network-security-config> -->
-
-<!-- <?xml version ="1.0" encoding ="utf-8"?> -->
 <network-security-config>
     <base-config cleartextTrafficPermitted="true"/>
 </network-security-config>

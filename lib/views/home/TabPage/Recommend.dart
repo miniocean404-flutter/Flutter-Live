@@ -75,7 +75,6 @@ class _RecommendState extends State<Recommend> {
         onRefresh: _onRefresh, //下拉刷新回调
         displacement: 10, //指示器显示时距顶部位置
         color: Colors.blue, //指示器颜色，默认ThemeData.accentColor
-        // backgroundColor: Colors.blue, //指示器背景颜色，默认ThemeData.canvasColor
         notificationPredicate:
             defaultScrollNotificationPredicate, //是否应处理滚动通知的检查（是否通知下拉刷新动作）
         child: ListView.builder(
@@ -83,7 +82,7 @@ class _RecommendState extends State<Recommend> {
           controller: _controller,
           itemBuilder: (BuildContext context, int index) {
             return index == 0
-                ? Text('轮播图')
+                ? Text('轮播图被删除了')
                 // ConstrainedBox(
                 //     child: new Swiper(
                 //       autoplay: true,

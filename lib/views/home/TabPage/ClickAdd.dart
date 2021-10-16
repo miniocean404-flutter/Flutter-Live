@@ -13,19 +13,6 @@ class _ClickAddState extends State<ClickAdd> {
 
   Widget _addNum() {
     return Column(children: <Widget>[
-      ButtonBar(
-        children: <Widget>[
-          ElevatedButton(
-            child: Text('爱你'),
-            onPressed: () => {
-              setState(() => {print('你好')}),
-            },
-            style: ButtonStyle(
-                // backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                ),
-          ),
-        ],
-      ),
       Text(
         '$num',
         style: TextStyle(color: Colors.red, fontSize: 32.0),
@@ -34,6 +21,19 @@ class _ClickAddState extends State<ClickAdd> {
         child: Text('点我'),
         textTheme: ButtonTextTheme.primary,
         onPressed: () => {setState(() => this.num++)},
+      ),
+      ButtonBar(
+        children: <Widget>[
+          ElevatedButton(
+            child: Text('按钮'),
+            onPressed: () => {
+              setState(() => {print('你好')}),
+            },
+            style: ButtonStyle(
+                // backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                ),
+          ),
+        ],
       ),
     ]);
   }

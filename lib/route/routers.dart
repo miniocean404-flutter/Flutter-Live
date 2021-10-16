@@ -87,7 +87,10 @@ class Routers {
       }
     }
 
-    print('我是navigateTo传递的参数：$query');
+    if (query.isNotEmpty) {
+      print('路由传参：$query');
+    }
+
     path = path + query;
     return router.navigateTo(
       context,
