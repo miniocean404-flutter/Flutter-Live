@@ -32,7 +32,7 @@ var bottomBarPageHandler = Handler(
 
 var homeContainerHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-    return homeContainer();
+    return HomeContainer();
   },
 );
 

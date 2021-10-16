@@ -13,16 +13,16 @@ double toRpx(
   //密度
   double mRatio = MediaQuery.of(context).devicePixelRatio;
   //设备像素
-  double DeviceWidth = mSize.width * mRatio;
-  double DeviceHeight = mSize.height * mRatio;
+  double deviceWidth = mSize.width * mRatio;
+  // double deviceHeight = mSize.height * mRatio;
 
-  double rpx = DeviceWidth / width;
+  double rpx = deviceWidth / width;
   return size * rpx;
 }
 
 // 数字简化为k/w格式
 String formatCharCount(int count) {
-  if (count == null || count < 0 || count.isNaN) {
+  if (count < 0 || count.isNaN) {
     return '0';
   }
   String strCount = count.toString();
@@ -42,7 +42,7 @@ String formatCharCount(int count) {
 
 // * 秒数转时:分:秒格式
 String secondsToTime(int seconds) {
-  if (seconds == null || seconds <= 0 || seconds.isNaN) {
+  if (seconds <= 0 || seconds.isNaN) {
     return '00:00';
   }
   // 时分数

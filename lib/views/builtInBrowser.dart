@@ -13,10 +13,9 @@ class BuiltInBrowser extends StatefulWidget {
 
 class _BuiltInBrowserState extends State<BuiltInBrowser> {
   late WebViewController _controller;
-  String _title = "webview";
   double _height = 100;
-  double _width = 100;
-  String htmlStr = """<p>ListView中的webview_flutter要放在SizedBox中，指定并指定sizedbox的高度，
+  String htmlStr =
+      """<p>ListView中的webview_flutter要放在SizedBox中，指定并指定sizedbox的高度，
                       否则会出错。<span style="color:#e74c3c">实际高度可以调用js来获得返回的高度
                       </span></p>
 

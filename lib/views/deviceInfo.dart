@@ -53,7 +53,8 @@ class DeviceInfo extends StatelessWidget {
               child: Text('宽：$width,高 $height'),
             ),
             Center(
-              child: Text('上边刘海高度：$topPadding,下边导航高度：$bottomPadding'),
+              child: Text(
+                  '上边刘海高度：$topPadding,下边导航高度：$bottomPadding,总padding$padding'),
             ),
             Center(
               child: Text('字体逻辑像素：$textScaleFactor'),

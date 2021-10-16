@@ -83,7 +83,6 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
       body: Listener(
         //手指的移动时
         onPointerMove: (result) {
-          print(result);
           updatePicHeight(result.position.dy); //自定义方法，图片的放大由它完成。
         },
         //当手指抬起离开屏幕时

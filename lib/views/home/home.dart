@@ -6,8 +6,8 @@ import 'package:my_app/views/home/TabPage/Recommend.dart';
 import 'package:my_app/views/home/TabPage/RouterUse.dart';
 
 // * 主页的容器
-class homeContainer extends StatelessWidget {
-  const homeContainer({Key? key}) : super(key: key);
+class HomeContainer extends StatelessWidget {
+  const HomeContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

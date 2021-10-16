@@ -8,7 +8,10 @@ import 'package:my_app/theme/StateBarAndVirtualKey.dart';
 import 'package:my_app/theme/theme.dart';
 
 void main() {
-  var env = String.fromEnvironment('APP_CHANNEL'); //
+  // 获取当前环境
+  var env = String.fromEnvironment('APP_CHANNEL');
+  print(env);
+
   Routers.initRouter();
   barColor(color: 'white');
   GestureBinding.instance?.resamplingEnabled = true; // 启动高刷

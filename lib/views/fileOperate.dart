@@ -54,6 +54,8 @@ class _FileOperateState extends State<FileOperate> {
     String dir = (await getApplicationDocumentsDirectory()).path; // 获取应用目录
     String dir2 = (await getExternalStorageDirectory())!.path; // SD卡目录
     String dir3 = (await getTemporaryDirectory()).path; // 临时目录
+    print('SD卡目录:$dir2');
+    print('SD卡目录:$dir3');
 
     // 读取所有文件
     Stream<FileSystemEntity> dirList =

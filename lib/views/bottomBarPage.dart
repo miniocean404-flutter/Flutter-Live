@@ -21,7 +21,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
 
   int _currentIndex = 0;
   List<Widget> bottomBarList = [
-    homeContainer(),
+    HomeContainer(),
     DyVideo(),
     Category(),
     Mine(),

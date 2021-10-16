@@ -88,7 +88,7 @@ class HttpRequest {
       path,
       queryParameters: params,
       options: requestOptions,
-      cancelToken: cancelToken ?? _cancelToken,
+      cancelToken: cancelToken,
     );
     return response.data;
   }
@@ -101,7 +101,7 @@ class HttpRequest {
     required Options options,
     required CancelToken cancelToken,
   }) async {
-    Options requestOptions = setAuthorizationHeader(options ?? Options());
+    Options requestOptions = setAuthorizationHeader(Options());
 
     Response response = await dio.post(
       path,
@@ -120,7 +120,7 @@ class HttpRequest {
     required Options options,
     required CancelToken cancelToken,
   }) async {
-    Options requestOptions = setAuthorizationHeader(options ?? Options());
+    Options requestOptions = setAuthorizationHeader(Options());
 
     Response response = await dio.post(
       path,

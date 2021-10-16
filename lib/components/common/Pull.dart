@@ -121,7 +121,7 @@ abstract class LnpullListenerState<T extends StatefulWidget> extends State<T>
   }
 
   finishLoading() {
-    if (scrollController != null && scrollController.hasClients) {
+    if (scrollController.hasClients) {
       scrollController.animateTo(
         headNormalHeight,
         curve: Curves.easeOut,
