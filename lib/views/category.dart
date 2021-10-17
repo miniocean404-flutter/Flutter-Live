@@ -19,68 +19,34 @@ class Category extends StatelessWidget {
           stops: [0.0, 0.5, 1.0],
         ),
       ),
-      child: ListView(
+      child: GridView(
+        scrollDirection: Axis.vertical,
+        reverse: false,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 0.1,
+        ),
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  child: Text('选择图片'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.imagePick)},
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  child: Text('文件操作'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.fileOperate)},
-                ),
-              ),
-              // VideoApp()
-            ],
+          TextButton(
+            child: Text('选择图片'),
+            onPressed: () => {Routers.navigateTo(context, Routers.imagePick)},
           ),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  child: Text('自定义下拉加载更多'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.pullLoading)},
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  child: Text('设备信息'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.deviceInfo)},
-                ),
-              ),
-            ],
+          TextButton(
+            child: Text('文件操作'),
+            onPressed: () => {Routers.navigateTo(context, Routers.fileOperate)},
           ),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  child: Text('内嵌浏览器'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.builtInBrowser)},
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  child: Text('下拉刷新'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.easyRefresh)},
-                ),
-              ),
-            ],
+          TextButton(
+            child: Text('设备信息'),
+            onPressed: () => {Routers.navigateTo(context, Routers.deviceInfo)},
+          ),
+          TextButton(
+            child: Text('内嵌浏览器'),
+            onPressed: () =>
+                {Routers.navigateTo(context, Routers.builtInBrowser)},
+          ),
+          TextButton(
+            child: Text('下拉刷新'),
+            onPressed: () => {Routers.navigateTo(context, Routers.easyRefresh)},
           ),
         ],
       ),

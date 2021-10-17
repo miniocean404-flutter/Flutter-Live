@@ -34,7 +34,9 @@ dependencies:
   image_picker: ^0.8.4+2 # 选择图片 (官方)
   animations: ^2.0.1 # 动画 (官方)
   intl: ^0.17.0 # 时间格式化插件（官方）
+  shared_preferences: ^2.0.8 # 简单数据持久化，清除数据就消失（官方）
 
+  sqflite: ^2.0.0+4 # 数据持久化
   fluro: ^2.0.3 # 路由
   dio: ^4.0.0 # http请求（中国封装）
   provider: ^6.0.1 # 状态管理 
@@ -53,6 +55,8 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  json_serializable: ^6.0.0 # JSON序列化（官方）
+
   flutter_launcher_icons: "^0.9.2" # 图标生成
   flutter_native_splash: ^1.2.4 # 自动生成原生启动页
   flutter_test:

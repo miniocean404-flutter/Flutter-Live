@@ -92,49 +92,35 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
         },
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              // SliverAppBar透明
-              // backgroundColor: Colors.transparent,
-              // elevation: 0,
-              pinned: true, // 代表是否会在顶部保留SliverAppBar
-              floating: false, // 代表是否会发生下拉立即出现SliverAppBar
-              snap:
-                  false, //snap必须与floatingtrue联合使用，表示显示SliverAppBar之后，如果没有完全拉伸，是否会完全神展开
-              expandedHeight: 236 + scrollGap, //顶部控件所占的高度,跟随因手指滑动所产生的位置变化而变化。
-              flexibleSpace: FlexibleSpaceBar(
-                title: null, //标题
-                background: SliverTopBar(
-                  scrollGap: scrollGap,
-                  fitType: fitType,
-                ), //自定义Widget
-              ),
-            ),
+            // SliverAppBar(
+            //   // SliverAppBar透明
+            //   // backgroundColor: Colors.transparent,
+            //   // elevation: 0,
+            //   pinned: false, // 代表是否会在顶部保留SliverAppBar
+            //   floating: false, // 代表是否会发生下拉立即出现SliverAppBar
+            //   snap:
+            //       false, //设置为true时，当手指放开时，SliverAppBar会根据当前的位置进行调整，始终保持展开或收起的状态，此效果在floating=true时生效
+            //   expandedHeight: 236 + scrollGap, //顶部控件所占的高度,跟随因手指滑动所产生的位置变化而变化。
+            //   flexibleSpace: FlexibleSpaceBar(
+            //     title: null, //标题
+            //     background: SliverTopBar(
+            //       scrollGap: scrollGap,
+            //       fitType: fitType,
+            //     ), //自定义Widget
+            //   ),
+            // ),
             SliverPersistentHeader(
               pinned: true,
-              delegate: _SliverAppBarDelegate(
-                TabBar(
-                  labelColor: Colors.red,
-                  unselectedLabelColor: Colors.grey,
-                  tabs: [
-                    Tab(icon: Icon(Icons.cake), text: '左侧'),
-                    Tab(icon: Icon(Icons.golf_course), text: '右侧'),
-                  ],
-                  controller: TabController(length: 2, vsync: this),
-                ),
-              ),
+              delegate: _SliverAppBarDelegate(),
             ),
-            // MineBody(),
             SliverList(
-              // 无限创建
-              delegate: SliverChildBuilderDelegate(
-                (context, i) {
-                  return Container(
-                    padding: EdgeInsets.all(16),
-                    child: Text("我是第$i元素"),
-                    color: Colors.white70,
-                  );
-                },
-              ),
+              // childCount不设置时候 无限创建
+              delegate: SliverChildBuilderDelegate((context, i) {
+                return Container(
+                  height: 65,
+                  color: Colors.primaries[i % Colors.primaries.length],
+                );
+              }, childCount: 30),
             )
           ],
         ),
@@ -168,36 +154,36 @@ class SliverTopBar extends StatelessWidget {
                 fit: fitType,
               ),
             ),
-            Container(
-              height: 80,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.white,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(left: 16, top: 10),
-                    child: Text("QQ：54063222"),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 16, top: 8),
-                    child: Text("男：四川 成都"),
-                  )
-                ],
-              ),
-            ),
+            // Container(
+            //   height: 80,
+            //   width: MediaQuery.of(context).size.width,
+            //   color: Colors.white,
+            //   child: Column(
+            //     children: <Widget>[
+            //       Container(
+            //         padding: EdgeInsets.only(left: 16, top: 10),
+            //         child: Text("QQ：54063222"),
+            //       ),
+            //       Container(
+            //         padding: EdgeInsets.only(left: 16, top: 8),
+            //         child: Text("男：四川 成都"),
+            //       )
+            //     ],
+            //   ),
+            // ),
           ],
         ),
-        Positioned(
-          left: 30,
-          top: 130 + scrollGap,
-          child: Container(
-            width: 100,
-            height: 100,
-            child: CircleAvatar(
-                // backgroundImage: AssetImage('images/bg.jpg'),
-                ),
-          ),
-        )
+        // Positioned(
+        //   left: 30,
+        //   top: 130 + scrollGap,
+        //   child: Container(
+        //     width: 100,
+        //     height: 100,
+        //     child: CircleAvatar(
+        //         // backgroundImage: AssetImage('images/bg.jpg'),
+        //         ),
+        //   ),
+        // )
       ],
     );
   }
@@ -205,38 +191,64 @@ class SliverTopBar extends StatelessWidget {
 
 // Bar
 
-class MineBody extends StatelessWidget {
-  const MineBody({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(''),
-    );
-  }
-}
-
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
-
-  final TabBar _tabBar;
+  // 设置最大展示大小
+  @override
+  double get maxExtent => 200.0;
+  // 设置最小展示大小
+  @override
+  double get minExtent => 50.0;
 
   @override
-  double get minExtent => _tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
+  }
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      child: _tabBar,
+      color: Colors.blue,
+      child: Image.network(
+        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531798262708&di=53d278a8427f482c5b836fa0e057f4ea&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F342ac65c103853434cc02dda9f13b07eca80883a.jpg',
+        fit: BoxFit.fitWidth,
+      ),
+
+      // Text(
+      //   '我是一个SliverPersistentHeader',
+      //   style: TextStyle(color: Colors.white),
+      // ),
     );
   }
+}
+
+// * 横向控制条
+class TabBarHeader extends StatefulWidget {
+  const TabBarHeader({Key? key}) : super(key: key);
 
   @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
+  _TabBarHeaderState createState() => _TabBarHeaderState();
+}
+
+class _TabBarHeaderState extends State<TabBarHeader>
+    with TickerProviderStateMixin {
+  // 设置 SliverPersistentHeaderDelegate 时候需要SliverPersistentHeaderDelegate继承的类设置其长度宽度
+  // @override
+  // double get minExtent => _tabBar.preferredSize.height;
+
+  // @override
+  // double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBar(
+      labelColor: Colors.blue,
+      unselectedLabelColor: Colors.grey,
+      tabs: [
+        Tab(icon: Icon(Icons.cake), text: '左侧'),
+        Tab(icon: Icon(Icons.golf_course), text: '右侧'),
+      ],
+      controller: TabController(length: 2, vsync: this),
+    );
   }
 }

@@ -13,11 +13,9 @@ import 'package:my_app/views/fileOperate.dart';
 import 'package:my_app/views/home/home.dart';
 import 'package:my_app/views/imagePick.dart';
 import 'package:my_app/views/mine.dart';
-import 'package:my_app/views/pullLoading.dart';
 import 'package:my_app/views/router/NameRouter.dart';
 import 'package:my_app/views/router/router.dart';
 import 'package:my_app/views/startPage.dart';
-import 'package:my_app/views/videoPlay.dart';
 
 var startPageHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
@@ -48,23 +46,12 @@ var mineHandler = Handler(
   },
 );
 
-var videoAppHandler = Handler(
-  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-    return VideoApp();
-  },
-);
-
 var imagePickHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return ImagePick();
   },
 );
 
-var pullLoadingHandler = Handler(
-  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-    return PullLoading();
-  },
-);
 var nameRouterHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return NameRouter();

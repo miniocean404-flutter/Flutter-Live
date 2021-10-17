@@ -22,9 +22,7 @@ class Routers {
   static const String category = "/category";
   static const String mine = "/mine";
 
-  static const String videoPlay = "/videoPlay";
   static const String imagePick = "/imagePick";
-  static const String pullLoading = "/pullLoading";
   static const String fileOperate = "/fileOperate";
   // 路由界面
   static const String nameRouter = "/nameRouter";
@@ -48,11 +46,8 @@ class Routers {
     router.define(home, handler: homeContainerHandler);
     router.define(category, handler: categoryHandler);
     router.define(mine, handler: mineHandler);
-    router.define(videoPlay, handler: videoAppHandler);
     router.define(imagePick, handler: imagePickHandler);
-    router.define(pullLoading, handler: pullLoadingHandler);
     router.define(nameRouter, handler: nameRouterHandler);
-    router.define(routerPage, handler: routerPageHandler);
     router.define(fileOperate, handler: fileOperateHandler);
     router.define(deviceInfo, handler: deviceInfoHandler);
     router.define(albumShow, handler: albumShowHandler);

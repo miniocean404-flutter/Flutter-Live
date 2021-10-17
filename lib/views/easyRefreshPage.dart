@@ -8,7 +8,7 @@ class EasyRefreshPage extends StatefulWidget {
   _EasyRefreshPageState createState() => _EasyRefreshPageState();
 }
 
-class _EasyRefreshPageState extends State<EasyRefresh> {
+class _EasyRefreshPageState extends State<EasyRefreshPage> {
   late EasyRefreshController _controller;
   List<String> list = [];
 
