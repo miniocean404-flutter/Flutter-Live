@@ -15,14 +15,24 @@ class _ClickAddState extends State<ClickAdd> {
     return Container(
         child: Column(children: <Widget>[
       MaterialButton(
-        child: Text('点我'),
+        child: Text('MaterialButton'),
         textTheme: ButtonTextTheme.primary,
         onPressed: () => {},
       ),
       ButtonBar(
+        alignment: MainAxisAlignment.center,
         children: <Widget>[
           ElevatedButton(
-            child: Text('按钮'),
+            child: Text('ButtonBar'),
+            onPressed: () => {
+              setState(() => {print('你好')}),
+            },
+            style: ButtonStyle(
+                // backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                ),
+          ),
+          ElevatedButton(
+            child: Text('ButtonBar'),
             onPressed: () => {
               setState(() => {print('你好')}),
             },
@@ -32,14 +42,8 @@ class _ClickAddState extends State<ClickAdd> {
           ),
         ],
       ),
-      Dialog(
-        child: Container(
-          height: 200,
-          child: Text('1'),
-        ),
-      ),
-      RaisedButton(
-        child: Text('切换'),
+      ElevatedButton(
+        child: Text('IOS弹窗'),
         onPressed: () {
           showCupertinoDialog(
               context: context,
@@ -50,17 +54,27 @@ class _ClickAddState extends State<ClickAdd> {
                   actions: <Widget>[
                     CupertinoDialogAction(
                       child: Text('取消'),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop('cancel');
+                      },
                     ),
                     CupertinoDialogAction(
                       child: Text('确认'),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop('ok');
+                      },
                     ),
                   ],
                 );
               });
         },
-      )
+      ),
+      Dialog(
+        child: Container(
+          height: 200,
+          child: Text('1'),
+        ),
+      ),
     ]));
   }
 }
