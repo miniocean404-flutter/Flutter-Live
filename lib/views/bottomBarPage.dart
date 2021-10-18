@@ -31,6 +31,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 30,
         type: BottomNavigationBarType.fixed, // 导航条过长是否进行隐藏
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

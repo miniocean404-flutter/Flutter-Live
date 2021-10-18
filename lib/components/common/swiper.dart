@@ -32,15 +32,16 @@ class _SwiperState extends State<Swiper> {
           children: <Widget>[
             // 连续滚动
             PageView.builder(
+              controller: PageController(initialPage: 5000),
+              itemCount: 10000,
+              itemBuilder: (context, index) {
+                return _buildPageViewItem(pageList[index % (pageList.length)]);
+              },
               onPageChanged: (int index) {
                 setState(() {
                   // 取余设置当前的轮播图
                   _currentPageIndex = index % (pageList.length);
                 });
-              },
-              itemCount: 10000,
-              itemBuilder: (context, index) {
-                return _buildPageViewItem(pageList[index % (pageList.length)]);
               },
             ),
             // 指示器

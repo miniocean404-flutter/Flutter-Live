@@ -46,7 +46,7 @@ class _VideoUiState extends State<VideoUi> with VideoControl {
 
     void isFullscreen() {
       // 横着
-      if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      if (MediaQuery.of(context).orientation == Orientation.portrait) {
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.landscapeRight,
         ]);
