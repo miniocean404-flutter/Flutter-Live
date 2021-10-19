@@ -30,6 +30,7 @@ class _SwiperState extends State<Swiper> {
 
   @override
   void dispose() {
+    _timer.cancel();
     super.dispose();
   }
 

@@ -39,31 +39,36 @@ class ArticleIntroduction extends Params {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 150,
-      margin: EdgeInsets.fromLTRB(0, 6, 0, 3),
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(0)),
-        border: Border.all(width: 1, style: BorderStyle.none),
-        boxShadow: [
-          BoxShadow(
-            spreadRadius: 0.2,
-            blurRadius: 1,
-            color: Colors.grey[300] as Color,
+    return Card(
+      child: InkWell(
+        onTap: () {},
+        child: Container(
+          width: double.infinity,
+          height: 150,
+          margin: EdgeInsets.fromLTRB(0, 6, 0, 3),
+          padding: EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(0)),
+            // border: Border.all(width: 1, style: BorderStyle.none),
+            // boxShadow: [
+            //   BoxShadow(
+            //     spreadRadius: 0.2,
+            //     blurRadius: 1,
+            //     color: Colors.grey[300] as Color,
+            //   ),
+            // ],
           ),
-        ],
-      ),
-      child: ContentInfo<String>(
-        title: this.title,
-        auth: this.auth,
-        content: this.content,
-        child: Bottom<String>(
-          thumbNum: this.thumbNum,
-          messageNum: this.messageNum,
-          type: this.type,
+          child: ContentInfo<String>(
+            title: this.title,
+            auth: this.auth,
+            content: this.content,
+            child: Bottom<String>(
+              thumbNum: this.thumbNum,
+              messageNum: this.messageNum,
+              type: this.type,
+            ),
+          ),
         ),
       ),
     );

@@ -6,14 +6,15 @@ import 'package:my_app/theme/theme.dart'; // 主题
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // import 'local/AppLocalizationsDelegate.dart';
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 void main() {
   // 获取当前环境
   var env = String.fromEnvironment('APP_CHANNEL');
-  print(env);
+  print('当前类型${env.runtimeType.toString()}');
 
   barColor(color: 'white');
-  GestureBinding.instance?.resamplingEnabled = true; // 启动高刷
+  GestureBinding.instance?.resamplingEnabled = true; // 当输入和显示频率不同导致的性能下降处理
 
   Routers.initRouter();
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme(), //黑暗模式的主题
         initialRoute: Routers.startPage,
         onGenerateRoute: Routers.router.generator,
+        navigatorKey: navigatorKey,
         // // 国际化支持的语言
         // supportedLocales: [
         //   const Locale('zh'),

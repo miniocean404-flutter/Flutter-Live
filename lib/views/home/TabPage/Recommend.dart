@@ -72,26 +72,27 @@ class _RecommendState extends State<Recommend> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-        onRefresh: _onRefresh, //下拉刷新回调
-        displacement: 10, //指示器显示时距顶部位置
-        color: Colors.blue, //指示器颜色，默认ThemeData.accentColor
-        notificationPredicate:
-            defaultScrollNotificationPredicate, //是否应处理滚动通知的检查（是否通知下拉刷新动作）
-        child: ListView.builder(
-          itemCount: introduction.length,
-          controller: _controller,
-          itemBuilder: (BuildContext context, int index) {
-            return index == 0
-                ? Swiper()
-                : ArticleIntroduction(
-                    title: this.introduction[index]['title'],
-                    auth: this.introduction[index]['auth'],
-                    content: this.introduction[index]['content'],
-                    thumbNum: this.introduction[index]['thumbNum'],
-                    messageNum: this.introduction[index]['messageNum'],
-                    type: this.introduction[index]['type'],
-                  );
-          },
-        ));
+      onRefresh: _onRefresh, //下拉刷新回调
+      displacement: 10, //指示器显示时距顶部位置
+      color: Colors.blue, //指示器颜色，默认ThemeData.accentColor
+      notificationPredicate:
+          defaultScrollNotificationPredicate, //是否应处理滚动通知的检查（是否通知下拉刷新动作）
+      child: ListView.builder(
+        itemCount: introduction.length,
+        controller: _controller,
+        itemBuilder: (BuildContext context, int index) {
+          return index == 0
+              ? Swiper()
+              : ArticleIntroduction(
+                  title: this.introduction[index]['title'],
+                  auth: this.introduction[index]['auth'],
+                  content: this.introduction[index]['content'],
+                  thumbNum: this.introduction[index]['thumbNum'],
+                  messageNum: this.introduction[index]['messageNum'],
+                  type: this.introduction[index]['type'],
+                );
+        },
+      ),
+    );
   }
 }

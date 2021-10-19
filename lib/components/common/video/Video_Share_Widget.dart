@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoShareWidget extends InheritedWidget {
-  late VideoPlayerController videoPlayController;
+  final VideoPlayerController videoPlayController;
+  final bool? isFullscreen;
+  final Size? size;
 
   VideoShareWidget({
     Key? key,
     required this.child,
     required this.videoPlayController,
+    this.isFullscreen,
+    this.size,
   }) : super(key: key, child: child);
 
   final Widget child;
