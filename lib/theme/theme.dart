@@ -2,29 +2,31 @@ import 'package:flutter/material.dart';
 import './WaterRipple.dart';
 import './color.dart';
 
+// 全局主题配置
 class ColorSchemeConfig {
   static ColorScheme colorScheme({mode = Brightness.light}) {
     return ColorScheme(
       brightness: mode,
+      // 脚手架上面标题等主要颜色(包括文本按钮的颜色,旋转指示器)
       primary: AppColor.backgroundColor,
-      // 脚手架上面标题等主要颜色(包括文本按钮的颜色)
-      primaryVariant: Colors.black,
       // 黑暗主题的主色调
-      secondary: Colors.blue,
+      primaryVariant: Colors.black,
       // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
-      secondaryVariant: AppColor.selectColor,
-      //
-      surface: Colors.transparent,
-      //小部件的背景色 如:card appbar
-      background: Colors.green,
-      //可滚动内容后面的颜色
-      error: Colors.red,
-      //用于输入验证错误的颜色，例如:InputDecoration.errorText
 
+      secondary: Colors.blue,
+      secondaryVariant: AppColor.selectColor,
+
+      //小部件的背景色 如:card appbar
+      surface: Colors.transparent,
+      //可滚动内容后面的颜色
+      background: Colors.green,
+      //用于输入验证错误的颜色，例如:InputDecoration.errorText
+      error: Colors.red,
+
+      //(按钮、AppBar) 在主色调上绘制清晰易读的字体颜色
       onPrimary: Colors.black,
-      //  (按钮、AppBar) 在主色调上绘制清晰易读的字体颜色
-      onSecondary: Colors.white,
       //在secondary上绘制清晰易读的颜色
+      onSecondary: Colors.white,
       onSurface: AppColor.backgroundColor,
       onBackground: Colors.blue,
       onError: Colors.red,
@@ -37,8 +39,8 @@ ThemeData themeColor() {
     // platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
     // 用于去除水波纹
     // splashColor: Colors.transparent,
-    highlightColor: Colors.transparent,
-    splashFactory: const NoSplashFactory(),
+    // highlightColor: Colors.transparent,
+    // splashFactory: const NoSplashFactory(),
 
     //用于materia应用程序或app内页面的背景色
     // scaffoldBackgroundColor: _backgroundColor,
@@ -102,6 +104,10 @@ ThemeData themeColor() {
         //外边框装饰 会覆盖 side 配置的样式
         shape: MaterialStateProperty.all(StadiumBorder()),
       ),
+    ),
+    // * 进度指示器主题
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: Colors.blue,
     ),
   );
 }

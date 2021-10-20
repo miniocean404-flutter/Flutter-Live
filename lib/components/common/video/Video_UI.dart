@@ -14,12 +14,17 @@ class VideoUi extends StatefulWidget {
   VideoUiState createState() => VideoUiState();
 }
 
-class VideoUiState extends State<VideoUi> with VideoControl {
+class VideoUiState extends State<VideoUi> with SingleTickerProviderStateMixin {
   late VideoShareWidget? share;
   late VideoPlayerController _videoPlayController;
 
+  // 控制展示
+  late AnimationController _animationController;
+  late Timer uiShowTimer;
+  bool isShowControllerUi = true;
+
   // 滚动时间
-  late Timer _timer;
+  late Timer _progressTimer;
   late String videoTotalTime;
   late String videoCurrentTime;
 
@@ -31,13 +36,23 @@ class VideoUiState extends State<VideoUi> with VideoControl {
   @override
   void initState() {
     currentPlayPotion();
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    uiShowTimer = Timer(
+      Duration(milliseconds: 1000),
+      () => setState(() {
+        isShowControllerUi = false;
+      }),
+    );
     super.initState();
   }
 
   @override
   void dispose() {
+    _animationController.dispose();
+    _progressTimer.cancel();
+    uiShowTimer.cancel();
     super.dispose();
-    _timer.cancel();
   }
 
   @override
@@ -48,7 +63,7 @@ class VideoUiState extends State<VideoUi> with VideoControl {
   }
 
   currentPlayPotion() {
-    _timer = Timer.periodic(Duration(milliseconds: 1000), (value) {
+    _progressTimer = Timer.periodic(Duration(milliseconds: 1000), (value) {
       setState(() {});
     });
   }
@@ -57,7 +72,7 @@ class VideoUiState extends State<VideoUi> with VideoControl {
     if (_videoPlayController.value.isPlaying) {
       _videoPlayController.pause();
       setState(() {
-        _timer.cancel();
+        _progressTimer.cancel();
       });
     } else {
       _videoPlayController.play();
@@ -70,36 +85,24 @@ class VideoUiState extends State<VideoUi> with VideoControl {
     if (share!.isFullscreen == false) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft, // 向左旋转
+        DeviceOrientation.landscapeRight,
       ]);
 
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky); //隐藏
     } else {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
       ]);
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); //恢复
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    print('VideoUI渲染');
-    // 共享数据
-    share = VideoShareWidget.of(context);
-    _videoPlayController = share!.videoPlayController;
-
-    // 视频时间
-    videoTotalTime =
-        _videoPlayController.value.duration.toString().substring(0, 7);
-    videoCurrentTime =
-        _videoPlayController.value.position.toString().substring(0, 7);
-
-    return Positioned(
-      top: 0,
-      left: 0,
-      width: share!.size!.width,
-      height: share!.isFullscreen == true ? share!.size!.height : null,
-      child: AspectRatio(
+  Widget shouldShowUI() {
+    if (this.isShowControllerUi == true) {
+      return AspectRatio(
         aspectRatio: _videoPlayController.value.aspectRatio,
         child: Container(
           child: Flex(
@@ -181,7 +184,33 @@ class VideoUiState extends State<VideoUi> with VideoControl {
             ],
           ),
         ),
-      ),
+      );
+    } else {
+      return Container(
+        child: Text(''),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('VideoUI渲染');
+    // 共享数据
+    share = VideoShareWidget.of(context);
+    _videoPlayController = share!.videoPlayController;
+
+    // 视频时间
+    videoTotalTime =
+        _videoPlayController.value.duration.toString().substring(0, 7);
+    videoCurrentTime =
+        _videoPlayController.value.position.toString().substring(0, 7);
+
+    return Positioned(
+      top: 0,
+      left: 0,
+      width: share!.size!.width,
+      height: share!.isFullscreen == true ? share!.size!.height : null,
+      child: shouldShowUI(),
     );
   }
 }

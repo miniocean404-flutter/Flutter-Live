@@ -18,6 +18,7 @@ class VideoShareWidget extends InheritedWidget {
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static VideoShareWidget? of(BuildContext context) {
+    //  return context.getElementForInheritedWidgetOfExactType<VideoShareWidget>().widget; 发生变化时候不调用其didChangeDependencies()
     return context.dependOnInheritedWidgetOfExactType<VideoShareWidget>();
   }
 

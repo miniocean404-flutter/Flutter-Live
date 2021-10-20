@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:my_app/route/routers.dart'; // 路由
 import 'package:my_app/theme/StateBarAndVirtualKey.dart'; // 状态栏
 import 'package:my_app/theme/theme.dart'; // 主题
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // 屏幕适配
 
 // import 'local/AppLocalizationsDelegate.dart';
-final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 void main() {
   // 获取当前环境
@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme(), //黑暗模式的主题
         initialRoute: Routers.startPage,
         onGenerateRoute: Routers.router.generator,
-        navigatorKey: navigatorKey,
         // // 国际化支持的语言
         // supportedLocales: [
         //   const Locale('zh'),

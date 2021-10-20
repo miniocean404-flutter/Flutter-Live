@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:my_app/http/http_options.dart';
-
-import 'http_interceptor.dart';
+import './http_options.dart';
+import './http_interceptor.dart';
 
 // http 请求单例类
 class HttpRequest {
@@ -22,7 +21,7 @@ class HttpRequest {
       headers: {},
     );
 
-    dio = new Dio(baseOptions);
+    dio = Dio(baseOptions);
     dio.interceptors.add(HttpInterceptor()); // 添加拦截器
   }
 

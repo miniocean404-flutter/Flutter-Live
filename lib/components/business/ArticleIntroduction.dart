@@ -39,9 +39,9 @@ class ArticleIntroduction extends Params {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: InkWell(
-        onTap: () {},
+    return InkWell(
+      onTap: () {},
+      child: Card(
         child: Container(
           width: double.infinity,
           height: 150,
@@ -50,14 +50,14 @@ class ArticleIntroduction extends Params {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(0)),
-            // border: Border.all(width: 1, style: BorderStyle.none),
-            // boxShadow: [
-            //   BoxShadow(
-            //     spreadRadius: 0.2,
-            //     blurRadius: 1,
-            //     color: Colors.grey[300] as Color,
-            //   ),
-            // ],
+            border: Border.all(width: 1, style: BorderStyle.none),
+            boxShadow: [
+              BoxShadow(
+                spreadRadius: 0.2,
+                blurRadius: 1,
+                color: Colors.grey[300] as Color,
+              ),
+            ],
           ),
           child: ContentInfo<String>(
             title: this.title,

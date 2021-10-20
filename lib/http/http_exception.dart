@@ -35,15 +35,15 @@ class HttpException implements Exception {
           case 403:
             return HttpException(code: statusCode, msg: '服务器拒绝执行');
           case 404:
-            return HttpException(code: statusCode, msg: '无法连接服务器');
+            return HttpException(code: statusCode, msg: '找不到地址');
+          case 405:
+            return HttpException(code: statusCode, msg: '不支持HTTP协议请求');
           case 500:
             return HttpException(code: statusCode, msg: '服务器内部错误');
           case 502:
             return HttpException(code: statusCode, msg: '无效的请求');
           case 503:
             return HttpException(code: statusCode, msg: '服务器挂了');
-          case 505:
-            return HttpException(code: statusCode, msg: '不支持HTTP协议请求');
           default:
             return HttpException(
               code: statusCode,

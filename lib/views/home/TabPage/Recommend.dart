@@ -69,6 +69,10 @@ class _RecommendState extends State<Recommend> {
     );
   }
 
+  Future<String> mockNetworkData() async {
+    return Future.delayed(Duration(seconds: 2), () => "我是从互联网上获取的数据");
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -77,20 +81,39 @@ class _RecommendState extends State<Recommend> {
       color: Colors.blue, //指示器颜色，默认ThemeData.accentColor
       notificationPredicate:
           defaultScrollNotificationPredicate, //是否应处理滚动通知的检查（是否通知下拉刷新动作）
-      child: ListView.builder(
-        itemCount: introduction.length,
-        controller: _controller,
-        itemBuilder: (BuildContext context, int index) {
-          return index == 0
-              ? Swiper()
-              : ArticleIntroduction(
-                  title: this.introduction[index]['title'],
-                  auth: this.introduction[index]['auth'],
-                  content: this.introduction[index]['content'],
-                  thumbNum: this.introduction[index]['thumbNum'],
-                  messageNum: this.introduction[index]['messageNum'],
-                  type: this.introduction[index]['type'],
-                );
+      child: FutureBuilder<String>(
+        future: mockNetworkData(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          // 请求已结束
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              // 请求失败，显示错误
+              return Text("Error: ${snapshot.error}");
+            } else {
+              // 请求成功，显示数据
+              return ListView.builder(
+                itemCount: introduction.length,
+                controller: _controller,
+                itemBuilder: (BuildContext context, int index) {
+                  return index == 0
+                      ? Swiper()
+                      : ArticleIntroduction(
+                          title: this.introduction[index]['title'],
+                          auth: this.introduction[index]['auth'],
+                          content: this.introduction[index]['content'],
+                          thumbNum: this.introduction[index]['thumbNum'],
+                          messageNum: this.introduction[index]['messageNum'],
+                          type: this.introduction[index]['type'],
+                        );
+                },
+              );
+            }
+          } else {
+            // 请求未结束，显示loading
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         },
       ),
     );

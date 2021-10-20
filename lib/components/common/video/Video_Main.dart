@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
@@ -50,7 +51,7 @@ class _VideoUiMainState extends State<VideoMain> {
   late double containerHeight;
   late bool _isFullScreen;
   // 可调用子widget数据
-  final GlobalKey<VideoUiState> videoUiKey = GlobalKey<VideoUiState>();
+  // final GlobalKey<VideoUiState> videoUiKey = GlobalKey<VideoUiState>();
   // Size get _window => MediaQueryData.fromWindow(window).size;
 
   @override
