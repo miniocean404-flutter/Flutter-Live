@@ -4,7 +4,7 @@ import './http_interceptor.dart';
 
 // http 请求单例类
 class HttpRequest {
-  // 工厂构造方法
+  // 工厂构造方法，当你需要构造函数不是每次都创建一个新的对象时，使用factory关键字。
   factory HttpRequest() => _instance;
   // 初始化一个单例实例
   static final HttpRequest _instance = HttpRequest._internal();
@@ -18,20 +18,20 @@ class HttpRequest {
       baseUrl: HttpOptions.BASE_URL,
       connectTimeout: HttpOptions.CONNECT_TIMEOUT,
       receiveTimeout: HttpOptions.RECEIVE_TIMEOUT,
-      headers: {},
+      headers: HttpOptions.HEADER,
+      responseType: HttpOptions.RESPONSE_TYPE,
     );
 
-    dio = Dio(baseOptions);
+    dio = new Dio(baseOptions);
     dio.interceptors.add(HttpInterceptor()); // 添加拦截器
   }
 
-  /// 初始化公共属性 如果需要覆盖原配置项 就调用它
-  ///
-  /// [baseUrl] 地址前缀
-  /// [connectTimeout] 连接超时赶时间
-  /// [receiveTimeout] 接收超时赶时间
-  /// [headers] 请求头
-  /// [interceptors] 基础拦截器
+  //* 初始化公共属性 如果需要覆盖原配置项 就调用它
+  // [baseUrl] 地址前缀
+  // [connectTimeout] 连接超时赶时间
+  // [receiveTimeout] 接收超时赶时间
+  // [headers] 请求头
+  // [interceptors] 基础拦截器
   void init({
     required String baseUrl,
     required int connectTimeout,
@@ -48,12 +48,11 @@ class HttpRequest {
     }
   }
 
-  /// 设置请求头
+  //* 设置请求头
   void setHeaders(Map<String, dynamic> headers) {
     dio.options.headers.addAll(headers);
   }
 
-  CancelToken _cancelToken = new CancelToken();
   /*
    * 取消请求
    *
@@ -61,11 +60,12 @@ class HttpRequest {
    * 当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
    * 所以参数可选
    */
+  CancelToken _cancelToken = new CancelToken();
   void cancelRequests({required CancelToken token}) {
     _cancelToken.cancel("cancelled");
   }
 
-  /// 设置鉴权请求头
+  // * 设置鉴权请求头
   Options setAuthorizationHeader(Options requestOptions) {
     String _token = '';
     if (_token.isNotEmpty) {
@@ -74,12 +74,12 @@ class HttpRequest {
     return requestOptions;
   }
 
-  /// restful get 操作
+  //* restful get 操作
   Future get(
     String path, {
-    required Map<String, dynamic> params,
-    required Options options,
-    required CancelToken cancelToken,
+    Map<String, dynamic>? params,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = setAuthorizationHeader(Options());
 
@@ -92,13 +92,13 @@ class HttpRequest {
     return response.data;
   }
 
-  /// restful post 操作
+  //* restful post 操作
   Future post(
     String path, {
-    required Map<String, dynamic> params,
+    Map<String, dynamic>? params,
     dynamic data,
-    required Options options,
-    required CancelToken cancelToken,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = setAuthorizationHeader(Options());
 
@@ -112,12 +112,12 @@ class HttpRequest {
     return response.data;
   }
 
-  /// restful post form 表单提交操作
+  //* restful post form 表单提交操作
   Future postForm(
     String path, {
     required Map<String, dynamic> params,
-    required Options options,
-    required CancelToken cancelToken,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = setAuthorizationHeader(Options());
 
@@ -128,5 +128,29 @@ class HttpRequest {
       cancelToken: cancelToken,
     );
     return response.data;
+  }
+
+  // * 下载文件
+  downLoadFile(
+    path,
+    savePath, {
+    ProgressCallback? onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    CancelToken? cancelToken,
+    data,
+    Options? options,
+  }) async {
+    Response? response = await dio.download(
+      path,
+      savePath,
+      onReceiveProgress: (int count, int total) {
+        print('$count $total');
+      },
+      queryParameters: queryParameters,
+      cancelToken: cancelToken,
+      data: data,
+      options: options,
+    );
+    return response;
   }
 }

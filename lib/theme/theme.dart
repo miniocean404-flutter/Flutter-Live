@@ -8,7 +8,7 @@ class ColorSchemeConfig {
     return ColorScheme(
       brightness: mode,
       // 脚手架上面标题等主要颜色(包括文本按钮的颜色,旋转指示器)
-      primary: AppColor.backgroundColor,
+      primary: AppColor.primary,
       // 黑暗主题的主色调
       primaryVariant: Colors.black,
       // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
@@ -27,7 +27,7 @@ class ColorSchemeConfig {
       onPrimary: Colors.black,
       //在secondary上绘制清晰易读的颜色
       onSecondary: Colors.white,
-      onSurface: AppColor.backgroundColor,
+      onSurface: AppColor.primary,
       onBackground: Colors.blue,
       onError: Colors.red,
     );
@@ -37,20 +37,21 @@ class ColorSchemeConfig {
 ThemeData themeColor() {
   return ThemeData(
     // platform: TargetPlatform.iOS, //启动时候的平台模式，打包还是原来的模式
+
     // 用于去除水波纹
     // splashColor: Colors.transparent,
     // highlightColor: Colors.transparent,
     // splashFactory: const NoSplashFactory(),
 
+    primaryColor: Colors.blue,
     //用于materia应用程序或app内页面的背景色
-    // scaffoldBackgroundColor: _backgroundColor,
+    scaffoldBackgroundColor: AppColor.page,
 
     // * 全局主题
     colorScheme: ColorSchemeConfig.colorScheme(),
 
     // * 横向TabBar的主题
     tabBarTheme: TabBarTheme(
-      // indicator:,
       indicatorSize: TabBarIndicatorSize.label,
       labelColor: AppColor.selectColor,
       labelStyle: TextStyle(
@@ -63,22 +64,27 @@ ThemeData themeColor() {
       ),
     ),
 
-    // * 底部按钮主题
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColor.backgroundColor,
-      elevation: 0, //虚线阴影
-      selectedItemColor: AppColor.selectColor,
-      unselectedItemColor: AppColor.unselectColor,
-      // selectedIconTheme:,
-      // unselectedIconTheme:,
-      // selectedLabelStyle:,
-      // unselectedLabelStyle:,
-      // showSelectedLabels:,
-      // showUnselectedLabels:,
-      // type:,
-      // enableFeedback:,
-      // landscapeLayout:,
-    ),
+    // ElevatedButton 主题
+    // elevatedButtonTheme: ElevatedButtonThemeData(
+    //   style: ButtonStyle(
+    //     // 文字颜色
+    //     foregroundColor: MaterialStateProperty.resolveWith((states) {
+    //       if (states.contains(MaterialState.disabled)) {
+    //         return Colors.white;
+    //       } else {
+    //         return null;
+    //       }
+    //     }),
+    //     // 背景色
+    //     backgroundColor: MaterialStateProperty.resolveWith((states) {
+    //       if (states.contains(MaterialState.disabled)) {
+    //         return DQColor.danger.withOpacity(0.5);
+    //       } else {
+    //         return DQColor.danger;
+    //       }
+    //     }),
+    //   ),
+    // ),
 
     // * 文字按钮主题
     textButtonTheme: TextButtonThemeData(
@@ -108,6 +114,27 @@ ThemeData themeColor() {
     // * 进度指示器主题
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: Colors.blue,
+    ),
+    // * AppBar主题配置
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColor.nav,
+      elevation: 1,
+    ),
+    // * 底部按钮主题
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColor.primary,
+      elevation: 0, //虚线阴影
+      selectedItemColor: AppColor.selectColor,
+      unselectedItemColor: AppColor.unselectColor,
+      // selectedIconTheme:,
+      // unselectedIconTheme:,
+      // selectedLabelStyle:,
+      // unselectedLabelStyle:,
+      // showSelectedLabels:,
+      // showUnselectedLabels:,
+      // type:,
+      // enableFeedback:,
+      // landscapeLayout:,
     ),
   );
 }
