@@ -19,6 +19,7 @@ class Routers {
   static const String bottomBarPage = "/bottomBarPage";
 
   static const String home = "/home";
+
   static const String category = "/category";
   static const String mine = "/mine";
 
@@ -32,6 +33,9 @@ class Routers {
   static const String builtInBrowser = "/builtInBrowser";
   static const String easyRefresh = "/easyRefresh";
   static const String customVideo = "/customVideo";
+
+  // 公共功能页
+  static const String search = "/search";
 
   static void defineRoutes() {
     router.notFoundHandler = Handler(
@@ -54,6 +58,7 @@ class Routers {
     router.define(builtInBrowser, handler: builtInBrowserHandler);
     router.define(easyRefresh, handler: easyRefreshHandler);
     router.define(customVideo, handler: customVideoHandler);
+    router.define(search, handler: searchHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

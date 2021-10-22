@@ -16,6 +16,7 @@ import 'package:my_app/views/mine.dart';
 import 'package:my_app/views/router/NameRouter.dart';
 import 'package:my_app/views/router/router.dart';
 import 'package:my_app/views/startPage.dart';
+import 'package:my_app/views/search.dart';
 
 var startPageHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
@@ -95,5 +96,11 @@ var easyRefreshHandler = Handler(
 var customVideoHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return CustomVideo();
+  },
+);
+
+var searchHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return Search();
   },
 );

@@ -3,16 +3,16 @@ import './http_options.dart';
 import './http_interceptor.dart';
 
 // http 请求单例类
-class HttpRequest {
+class Http {
   // 工厂构造方法，当你需要构造函数不是每次都创建一个新的对象时，使用factory关键字。
-  factory HttpRequest() => _instance;
+  factory Http() => _instance;
   // 初始化一个单例实例
-  static final HttpRequest _instance = HttpRequest._internal();
+  static final Http _instance = Http._internal();
   // dio 实例
   late Dio dio;
 
   // 内部构造方法
-  HttpRequest._internal() {
+  Http._internal() {
     // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
     BaseOptions baseOptions = BaseOptions(
       baseUrl: HttpOptions.BASE_URL,
@@ -34,16 +34,16 @@ class HttpRequest {
   // [interceptors] 基础拦截器
   void init({
     required String baseUrl,
-    required int connectTimeout,
-    required int receiveTimeout,
-    required Map<String, dynamic> headers,
-    required List<Interceptor> interceptors,
+    int? connectTimeout,
+    int? receiveTimeout,
+    Map<String, dynamic>? headers,
+    List<Interceptor>? interceptors,
   }) {
     dio.options.baseUrl = baseUrl;
-    dio.options.connectTimeout = connectTimeout;
-    dio.options.receiveTimeout = receiveTimeout;
+    dio.options.connectTimeout = connectTimeout!;
+    dio.options.receiveTimeout = receiveTimeout!;
     dio.options.headers = headers;
-    if (interceptors.isNotEmpty) {
+    if (interceptors!.isNotEmpty) {
       dio.interceptors..addAll(interceptors);
     }
   }

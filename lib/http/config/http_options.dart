@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 class HttpOptions {
   // 地址前缀
-  static const String BASE_URL = 'http://192.168.0.111';
+  static const String BASE_URL = 'http://debugers.com:8888/api';
   // 连接服务器超时时间，单位是毫秒
   static const int CONNECT_TIMEOUT = 30000;
   // 接收超时时间，单位是毫秒

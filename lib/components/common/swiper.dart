@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class Swiper extends StatefulWidget {
-  late double height;
-  late int druation;
+  final double height;
+  final int druation;
   Swiper({Key? key, this.height = 230, this.druation = 2000}) : super(key: key);
 
   @override

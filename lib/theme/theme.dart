@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './WaterRipple.dart';
 import './color.dart';
+import './WaterRipple.dart';
 
 // 全局主题配置
 class ColorSchemeConfig {
@@ -12,12 +12,11 @@ class ColorSchemeConfig {
       // 黑暗主题的主色调
       primaryVariant: Colors.black,
       // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
-
-      secondary: Colors.blue,
+      secondary: AppColor.info,
       secondaryVariant: AppColor.selectColor,
 
       //小部件的背景色 如:card appbar
-      surface: Colors.transparent,
+      surface: Colors.blue,
       //可滚动内容后面的颜色
       background: Colors.green,
       //用于输入验证错误的颜色，例如:InputDecoration.errorText

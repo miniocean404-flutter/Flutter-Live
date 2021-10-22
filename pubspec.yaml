@@ -56,8 +56,6 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
-  json_serializable: ^6.0.0 # JSON序列化（官方）
-
   flutter_launcher_icons: "^0.9.2" # 图标生成
   flutter_native_splash: ^1.2.4 # 自动生成原生启动页
   flutter_test:
@@ -71,6 +69,7 @@ dev_dependencies:
   # crypto: ^3.0.1 # 加密
   # web_socket_channel: ^2.1.0  # websocket
   # quick_actions: ^0.6.0+7 桌面长按快速操作 （官方）
+  # json_serializable: ^6.0.0 # JSON序列化（官方）
   # flutter_swiper: ^1.1.6 # 轮播图插件
   # screen: ^0.0.5 # 控制屏幕亮度 屏幕常亮
   
@@ -96,6 +95,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/startImg.png
+    - assets/cache.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

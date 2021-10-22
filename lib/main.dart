@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       designSize: Size(750, 1334),
       builder: () => MaterialApp(
         // 默认配置
-        title: '抖音',
+        title: 'H直播',
         debugShowCheckedModeBanner: false,
         theme: themeColor(), // 默认的主题
         darkTheme: darkTheme(), //黑暗模式的主题
