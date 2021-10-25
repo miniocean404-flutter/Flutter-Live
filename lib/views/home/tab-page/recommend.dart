@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/components/common/BackToTop.dart';
+import 'package:my_app/components/common/back-to-top.dart';
 import 'package:my_app/components/common/swiper.dart';
 import 'package:my_app/http/platform_list.dart';
 import 'package:my_app/route/routers.dart';

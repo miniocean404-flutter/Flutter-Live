@@ -1,12 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // 屏幕适配
 import 'package:my_app/route/routers.dart'; // 路由
-import 'package:my_app/theme/StateBarAndVirtualKey.dart'; // 状态栏
+import 'package:my_app/theme/state-bar-and-virtual-key.dart'; // 状态栏
 import 'package:my_app/theme/theme.dart'; // 主题
 
-import 'package:flutter_screenutil/flutter_screenutil.dart'; // 屏幕适配
-
-// import 'local/AppLocalizationsDelegate.dart';
+// import 'local/app-localizations-delegate.dart';
 
 void main() {
   // 获取当前环境

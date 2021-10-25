@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/common/ScrollBar.dart';
-import 'package:my_app/views/home/RecommendTitle.dart';
-import 'package:my_app/views/home/TabPage/BrowserJump.dart';
-import 'package:my_app/views/home/TabPage/ClickAdd.dart';
-import 'package:my_app/views/home/TabPage/Recommend.dart';
-import 'package:my_app/views/home/TabPage/RouterUse.dart';
+import 'package:my_app/components/common/scroll-bar.dart';
+import 'package:my_app/views/home/recommend-title.dart';
+import 'package:my_app/views/home/tab-page/browser-jump.dart';
+import 'package:my_app/views/home/tab-page/click-add.dart';
+import 'package:my_app/views/home/tab-page/recommend.dart';
+import 'package:my_app/views/home/tab-page/router-use.dart';
 
 // * 主页的容器
 class HomeContainer extends StatelessWidget {

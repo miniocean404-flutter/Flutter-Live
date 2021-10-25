@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/dyVideo.dart';
+import 'package:my_app/views/dy-video.dart';
 import 'package:my_app/views/home/category.dart';
 // bottomBar
 import 'package:my_app/views/home/home.dart';
