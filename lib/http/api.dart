@@ -3,8 +3,8 @@
 // import 'package:alltv/model/verion_info.dart';
 
 import 'package:dio/dio.dart';
-import 'package:my_app/utils/util.dart';
-import './config/http_request.dart';
+// import 'package:my_app/utils/util.dart';
+// import './config/http_request.dart';
 
 class API {
   // /// 首页推荐

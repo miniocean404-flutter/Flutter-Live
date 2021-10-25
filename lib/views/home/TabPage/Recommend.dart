@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/components/common/BackToTop.dart';
 import 'package:my_app/components/common/swiper.dart';
 import 'package:my_app/http/platform_list.dart';
+import 'package:my_app/route/routers.dart';
 import 'package:my_app/utils/util.dart';
-import 'package:my_app/components/common/BackToTop.dart';
 
 class Recommend extends StatefulWidget {
   Recommend({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _RecommendState extends State<Recommend>
   // late List recommendList;
   late Future<List> initLoading;
   late List recommendList;
+  late List swiperList;
   int pageNum = 0;
 
   // AutomaticKeepAliveClientMixin 抽象类的实现
@@ -43,6 +45,18 @@ class _RecommendState extends State<Recommend>
     super.dispose();
   }
 
+  //  初始化
+  Future<List> getRecommendList() async {
+    List res = await PlatformList.getRecommendAll('0', 0);
+    recommendList = res;
+    // res.forEach((i,index) {
+    //   if(index<=3){
+    //     swiperList.add(i[]);
+    //   }
+    // });
+    return res;
+  }
+
   //上拉加载更多
   Future<Null> _loadMoreData() async {
     List res = await PlatformList.getRecommendAll('0', pageNum++);
@@ -60,14 +74,7 @@ class _RecommendState extends State<Recommend>
     });
   }
 
-  //  初始化
-  Future<List> getRecommendList() async {
-    List res = await PlatformList.getRecommendAll('0', 0);
-    recommendList = res;
-    return res;
-  }
-
-  Widget sucessWidget() {
+  Widget successWidget() {
     return BackToTop(
       _controller,
       child: ListView(
@@ -79,7 +86,7 @@ class _RecommendState extends State<Recommend>
             physics: NeverScrollableScrollPhysics(), //禁用滑动事件
             itemCount: recommendList.length,
             // itemCount: 4,
-            // itemExtent: 500, 每一项的高度
+            itemExtent: 380, // 每一项的高度,极大提升性能
             itemBuilder: (BuildContext context, int index) {
               String showUrl = recommendList[index]['roomThumb'];
               String liveType = recommendList[index]['cateName'];
@@ -100,7 +107,9 @@ class _RecommendState extends State<Recommend>
 
               return Card(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Routers.navigateTo(context, Routers.liveVideoPage);
+                  },
                   child: Column(
                     children: [
                       LiveRoomImage(
@@ -144,7 +153,7 @@ class _RecommendState extends State<Recommend>
               return Text("Error: ${snapshot.error}");
             } else {
               // 请求成功，显示数据
-              return sucessWidget();
+              return successWidget();
             }
           } else if (snapshot.connectionState == ConnectionState.active ||
               snapshot.connectionState == ConnectionState.waiting) {

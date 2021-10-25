@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/components/common/ScrollBar.dart';
 import 'package:my_app/views/home/RecommendTitle.dart';
 import 'package:my_app/views/home/TabPage/BrowserJump.dart';
 import 'package:my_app/views/home/TabPage/ClickAdd.dart';
 import 'package:my_app/views/home/TabPage/Recommend.dart';
 import 'package:my_app/views/home/TabPage/RouterUse.dart';
-import 'package:my_app/components/common/ScrollBar.dart';
 
 // * 主页的容器
 class HomeContainer extends StatelessWidget {
@@ -13,7 +13,7 @@ class HomeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 8,
+      length: 7,
       child: Scaffold(
         appBar: HomeAppbar()._buildAppBar(context),
         body: HomeBody(),
@@ -55,9 +55,6 @@ class HomeAppbar {
           Tab(
             child: Text('界面好看'),
           ),
-          Tab(
-            child: Text('界面'),
-          ),
         ],
       ),
     );
@@ -97,7 +94,6 @@ class _HomeBodyState extends State<HomeBody> {
           )),
         ),
         Container(child: Text('bar2')),
-        Container(child: Text('bar 2')),
         Container(child: Text('bar2')),
       ],
     );

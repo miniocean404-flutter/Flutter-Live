@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
-import './Video_Control.dart';
-import './Video_Share_Widget.dart';
+
 import './Silder_UI.dart';
+import './Video_Share_Widget.dart';
 
 class VideoUi extends StatefulWidget {
   VideoUi({Key? key}) : super(key: key);

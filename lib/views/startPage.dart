@@ -29,7 +29,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
     Routers.navigateTo(context, Routers.bottomBarPage, clearStack: true);
   }
 
-  void anmationExec() {
+  void animationExec() {
     //创建动画控制器
     _animationController = AnimationController(
       // 1.当创建一个AnimationController时，需要传递一个vsync参数，存在vsync时会防止屏幕外动画（动画的 UI不在当前屏幕时）消耗不必要的资源。
@@ -64,7 +64,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
   @override
   void initState() {
     // SystemChrome.setEnabledSystemUIMode();
-    this.anmationExec();
+    this.animationExec();
     this.startTiming();
     super.initState();
   }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/category.dart';
 import 'package:my_app/views/dyVideo.dart';
-// theme
-// bottombar
+import 'package:my_app/views/home/category.dart';
+// bottomBar
 import 'package:my_app/views/home/home.dart';
-import 'package:my_app/views/mine.dart';
+import 'package:my_app/views/home/mine.dart';
 
 class BottomBarPage extends StatefulWidget {
   const BottomBarPage({Key? key}) : super(key: key);

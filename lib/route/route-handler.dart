@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 // 隐藏滚动水波纹
 import 'package:my_app/theme/WaterRipple.dart';
 import 'package:my_app/views/albumShow.dart';
-import 'package:my_app/views/bottomBarPage.dart';
 import 'package:my_app/views/builtInBrowser.dart';
-import 'package:my_app/views/category.dart';
 import 'package:my_app/views/customVideo.dart';
 import 'package:my_app/views/deviceInfo.dart';
 import 'package:my_app/views/easyRefreshPage.dart';
 import 'package:my_app/views/fileOperate.dart';
+import 'package:my_app/views/home/bottomBarPage.dart';
+import 'package:my_app/views/home/category.dart';
 import 'package:my_app/views/home/home.dart';
+import 'package:my_app/views/home/mine.dart';
 import 'package:my_app/views/imagePick.dart';
-import 'package:my_app/views/mine.dart';
+import 'package:my_app/views/live_video_page.dart';
 import 'package:my_app/views/router/NameRouter.dart';
 import 'package:my_app/views/router/router.dart';
-import 'package:my_app/views/startPage.dart';
 import 'package:my_app/views/search.dart';
+import 'package:my_app/views/startPage.dart';
 
 var startPageHandler =
     Handler(handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
@@ -102,5 +103,11 @@ var customVideoHandler = Handler(
 var searchHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return Search();
+  },
+);
+
+var liveVideoPageHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return LiveVideoPage();
   },
 );

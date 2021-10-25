@@ -36,6 +36,7 @@ class Routers {
 
   // 公共功能页
   static const String search = "/search";
+  static const String liveVideoPage = "/liveVideoPage";
 
   static void defineRoutes() {
     router.notFoundHandler = Handler(
@@ -59,6 +60,7 @@ class Routers {
     router.define(easyRefresh, handler: easyRefreshHandler);
     router.define(customVideo, handler: customVideoHandler);
     router.define(search, handler: searchHandler);
+    router.define(liveVideoPage, handler: liveVideoPageHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配
