@@ -5,17 +5,28 @@ import 'package:flutter/material.dart';
 class Swiper extends StatefulWidget {
   final double height;
   final int druation;
-  Swiper({Key? key, this.height = 230, this.druation = 2000}) : super(key: key);
+  final List<String> pageList;
+  const Swiper({
+    Key? key,
+    required this.pageList,
+    this.height = 230,
+    this.druation = 2000,
+  }) : super(key: key);
 
   @override
-  _SwiperState createState() => _SwiperState();
+  _SwiperState createState() => _SwiperState(pageList: pageList);
 }
 
 class _SwiperState extends State<Swiper> {
-  List<String> pageList = ['轮播图1', '轮播图2', '轮播图3'];
   late PageController pageController;
-  int _currentPageIndex = 10002;
   late Timer _timer;
+
+  final List<String> pageList;
+  int _currentPageIndex = 3 * 10000 ~/ 2 - 1;
+
+  _SwiperState({
+    required this.pageList,
+  });
 
   @override
   void initState() {
@@ -46,26 +57,6 @@ class _SwiperState extends State<Swiper> {
     });
   }
 
-  // 界面
-  _buildPageViewItem(String txt, {Color color = Colors.blue}) {
-    return Listener(
-      child: Container(
-        color: color,
-        alignment: Alignment.center,
-        child: Text(
-          txt,
-          style: TextStyle(color: Colors.white, fontSize: 28),
-        ),
-      ),
-      onPointerDown: (PointerDownEvent pointerDownEvent) {
-        _timer.cancel();
-      },
-      onPointerUp: (PointerUpEvent upEvent) {
-        startTimer();
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -78,7 +69,15 @@ class _SwiperState extends State<Swiper> {
               controller: pageController,
               itemCount: pageList.length * 10000,
               itemBuilder: (context, index) {
-                return _buildPageViewItem(pageList[index % (pageList.length)]);
+                return SwiperItem(
+                  url: pageList[index % (pageList.length)],
+                  onPointerUp: (PointerUpEvent upEvent) {
+                    startTimer();
+                  },
+                  onPointerDown: (PointerDownEvent pointerDownEvent) {
+                    _timer.cancel();
+                  },
+                );
               },
               onPageChanged: (int index) {
                 setState(() {
@@ -87,30 +86,78 @@ class _SwiperState extends State<Swiper> {
                 });
               },
             ),
-            // 指示器
-            Positioned(
-              bottom: 10,
-              left: 0,
-              right: 0,
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(pageList.length, (i) {
-                    return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _currentPageIndex % (pageList.length) == i
-                              ? Colors.white
-                              : Colors.grey),
-                    );
-                  }).toList(),
-                ),
-              ),
+            Indicator(
+              length: pageList.length,
+              currentIndex: _currentPageIndex,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// 界面
+class SwiperItem extends StatelessWidget {
+  final Color backgroundColor = Colors.white;
+  final String url;
+  final PointerUpEventListener onPointerUp;
+  final PointerDownEventListener onPointerDown;
+
+  const SwiperItem({
+    Key? key,
+    required this.url,
+    required this.onPointerUp,
+    required this.onPointerDown,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Listener(
+      child: Container(
+        color: backgroundColor,
+        child: Image.network(
+          url,
+          fit: BoxFit.fill,
+        ),
+      ),
+      onPointerDown: onPointerDown,
+      onPointerUp: onPointerUp,
+    );
+  }
+}
+
+// 指示器
+class Indicator extends StatelessWidget {
+  final int length;
+  final int currentIndex;
+  const Indicator({
+    Key? key,
+    required this.length,
+    required this.currentIndex,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 10,
+      left: 0,
+      right: 0,
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(length, (i) {
+            return Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              width: 10,
+              height: 10,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color:
+                    currentIndex % (length) == i ? Colors.white : Colors.grey,
+              ),
+            );
+          }).toList(),
         ),
       ),
     );

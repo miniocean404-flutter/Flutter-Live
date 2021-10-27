@@ -16,26 +16,21 @@ class LiveVideoPage extends StatefulWidget {
 
 class _LiveVideoPageState extends State<LiveVideoPage> {
   final FijkPlayer player = FijkPlayer();
+  final double aspectRatio = 16 / 9;
   late final String url;
 
   _LiveVideoPageState();
 
   @override
   void initState() {
-    super.initState();
-
     Platform.getLiveUrl(widget.platform, widget.roomId).then((value) => {
           this.setState(() {
             url = value;
           }),
           player.setDataSource(url, autoPlay: true)
         });
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-    player.release();
+    super.initState();
   }
 
   @override
@@ -43,11 +38,19 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
     return Scaffold(
       appBar: AppBar(title: Text("直播")),
       body: Container(
-        alignment: Alignment.center,
         child: FijkView(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width / aspectRatio,
           player: player,
+          color: Colors.black,
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    player.release();
   }
 }

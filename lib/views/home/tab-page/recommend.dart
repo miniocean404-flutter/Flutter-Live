@@ -16,10 +16,9 @@ class Recommend extends StatefulWidget {
 class _RecommendState extends State<Recommend>
     with AutomaticKeepAliveClientMixin {
   ScrollController _controller = new ScrollController();
-  // late List recommendList;
   late Future<List> initLoading;
   late List recommendList;
-  late List swiperList;
+  late List<String> swiperList = [];
   int pageNum = 0;
 
   // AutomaticKeepAliveClientMixin 抽象类的实现
@@ -49,11 +48,11 @@ class _RecommendState extends State<Recommend>
   Future<List> getRecommendList() async {
     List res = await Platform.getRecommendAll('0', 0);
     recommendList = res;
-    // res.forEach((i,index) {
-    //   if(index<=3){
-    //     swiperList.add(i[]);
-    //   }
-    // });
+
+    for (var i = 0; i < 3; i++) {
+      swiperList.add(res[i]['roomThumb']);
+    }
+
     return res;
   }
 
@@ -79,13 +78,15 @@ class _RecommendState extends State<Recommend>
       child: ListView(
         controller: _controller,
         children: [
-          Swiper(),
+          Swiper(
+            pageList: swiperList,
+          ),
           ListView.builder(
             shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
             physics: NeverScrollableScrollPhysics(), //禁用滑动事件
             itemCount: recommendList.length,
             // itemCount: 4,
-            itemExtent: 385, // 每一项的高度,极大提升性能
+            // itemExtent: 385, // 每一项的高度,极大提升性能
             itemBuilder: (BuildContext context, int index) {
               String showUrl = recommendList[index]['roomThumb'];
               String liveType = recommendList[index]['cateName'];
@@ -191,8 +192,7 @@ class LiveRoomImage extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: showUrl,
           width: double.infinity,
-          height: 300,
-          fit: BoxFit.fill,
+          fit: BoxFit.fitWidth,
           placeholder: (context, url) => Image.asset(
             "assets/cache.png",
             fit: BoxFit.fitWidth,

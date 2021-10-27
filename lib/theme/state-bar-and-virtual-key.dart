@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import './color.dart';
 import 'dart:io';
 
 void barColor({required String color}) {
@@ -9,8 +10,8 @@ void barColor({required String color}) {
   // 白色沉浸式状态栏颜色  白色文字
   SystemUiOverlayStyle light = SystemUiOverlayStyle(
     // * 虚拟按键
-    systemNavigationBarDividerColor: Color(0xFFFFFFFF), //分割颜色
-    systemNavigationBarColor: Color(0xFFFFFFFF), //背景色
+    systemNavigationBarDividerColor: AppColor.primary, //分割颜色
+    systemNavigationBarColor: AppColor.primary, //背景色
     systemNavigationBarIconBrightness: Brightness.dark, //图标色(按钮、小白条)
     systemNavigationBarContrastEnforced: false,
 
@@ -24,8 +25,8 @@ void barColor({required String color}) {
 
   // 黑色沉浸式状态栏颜色 黑色文字
   SystemUiOverlayStyle dark = SystemUiOverlayStyle(
-    systemNavigationBarColor: Color(0xFF000000),
-    systemNavigationBarDividerColor: Color(0xFF000000),
+    systemNavigationBarColor: AppColor.dark,
+    systemNavigationBarDividerColor: AppColor.dark,
     systemNavigationBarIconBrightness: Brightness.light,
 
     /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
