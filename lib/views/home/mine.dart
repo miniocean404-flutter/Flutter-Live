@@ -9,7 +9,6 @@ class Mine extends StatefulWidget {
 
 class _MineState extends State<Mine> with TickerProviderStateMixin {
   double scrollGap = 0; //初始化要加载到图片上的高度
-  late BoxFit fitType; //图片填充类型（刚开始滑动时是以宽度填充，拉开之后以高度填充）
   late double firstPositon; //前一次手指所在处的y值
 
   // 动画
@@ -21,7 +20,6 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
     // 初始化数据状态
     super.initState();
     firstPositon = 0;
-    fitType = BoxFit.fitWidth;
 
     // 动画
     animationController =
@@ -39,15 +37,8 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
     setState(() {
       anim = Tween(begin: scrollGap, end: 0.0).animate(animationController)
         ..addListener(() {
-          if (scrollGap >= 45) {
-            //同样改变图片填充类型
-            fitType = BoxFit.fitHeight;
-          } else {
-            fitType = BoxFit.fitWidth;
-          }
           setState(() {
             scrollGap = anim.value;
-            fitType = fitType;
           });
         });
       firstPositon = 0; //同样归零
@@ -61,20 +52,19 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
       firstPositon = changed;
     }
 
-    if (scrollGap >= 45) {
-      //当我们加载到图片上的高度大于某个值的时候，改变图片的填充方式，让它由以宽度填充变为以高度填充，从而实现了图片视角上的放大。
-      fitType = BoxFit.fitHeight;
-    } else {
-      fitType = BoxFit.fitWidth;
-    }
-
     scrollGap += changed - firstPositon; // 新的一个y值减去前一次的y值然后累加，作为加载到图片上的高度。
     setState(() {
       //更新数据
       firstPositon = changed;
       scrollGap = scrollGap;
-      fitType = fitType;
     });
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    // anim.removeListener(() {});
+    super.dispose();
   }
 
   @override
@@ -92,27 +82,26 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
         },
         child: CustomScrollView(
           slivers: [
-            // SliverAppBar(
-            //   // SliverAppBar透明
-            //   // backgroundColor: Colors.transparent,
-            //   // elevation: 0,
-            //   pinned: false, // 代表是否会在顶部保留SliverAppBar
-            //   floating: false, // 代表是否会发生下拉立即出现SliverAppBar
-            //   snap:
-            //       false, //设置为true时，当手指放开时，SliverAppBar会根据当前的位置进行调整，始终保持展开或收起的状态，此效果在floating=true时生效
-            //   expandedHeight: 236 + scrollGap, //顶部控件所占的高度,跟随因手指滑动所产生的位置变化而变化。
-            //   flexibleSpace: FlexibleSpaceBar(
-            //     title: null, //标题
-            //     background: SliverTopBar(
-            //       scrollGap: scrollGap,
-            //       fitType: fitType,
-            //     ), //自定义Widget
-            //   ),
-            // ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _SliverAppBarDelegate(),
+            SliverAppBar(
+              // SliverAppBar透明
+              // backgroundColor: Colors.transparent,
+              // elevation: 0,
+              pinned: false, // 代表是否会在顶部保留SliverAppBar
+              floating: false, // 代表是否会发生下拉立即出现SliverAppBar
+              //设置为true时，当手指放开时，SliverAppBar会根据当前的位置进行调整，始终保持展开或收起的状态，此效果在floating=true时生效
+              snap: false,
+              expandedHeight: 170 + scrollGap, //顶部控件所占的高度,跟随因手指滑动所产生的位置变化而变化。
+              flexibleSpace: FlexibleSpaceBar(
+                title: null, //标题
+                background: SliverTopBar(
+                  scrollGap: scrollGap,
+                ), //自定义Widget
+              ),
             ),
+            // SliverPersistentHeader(
+            //   pinned: true,
+            //   delegate: _SliverAppBarDelegate(),
+            // ),
             SliverList(
               // childCount不设置时候 无限创建
               delegate: SliverChildBuilderDelegate((context, i) {
@@ -131,59 +120,25 @@ class _MineState extends State<Mine> with TickerProviderStateMixin {
 
 class SliverTopBar extends StatelessWidget {
   final double scrollGap; // 传入的加载到图片上的高度
-  final BoxFit fitType; // 传入的填充方式
 
   const SliverTopBar({
     Key? key,
     required this.scrollGap,
-    required this.fitType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            Container(
-              //缩放的图片
-              width: MediaQuery.of(context).size.width,
-              child: Image.network(
-                'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531798262708&di=53d278a8427f482c5b836fa0e057f4ea&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F342ac65c103853434cc02dda9f13b07eca80883a.jpg',
-                height: 180 + scrollGap,
-                fit: fitType,
-              ),
-            ),
-            // Container(
-            //   height: 80,
-            //   width: MediaQuery.of(context).size.width,
-            //   color: Colors.white,
-            //   child: Column(
-            //     children: <Widget>[
-            //       Container(
-            //         padding: EdgeInsets.only(left: 16, top: 10),
-            //         child: Text("QQ：54063222"),
-            //       ),
-            //       Container(
-            //         padding: EdgeInsets.only(left: 16, top: 8),
-            //         child: Text("男：四川 成都"),
-            //       )
-            //     ],
-            //   ),
-            // ),
-          ],
-        ),
-        // Positioned(
-        //   left: 30,
-        //   top: 130 + scrollGap,
-        //   child: Container(
-        //     width: 100,
-        //     height: 100,
-        //     child: CircleAvatar(
-        //         // backgroundImage: AssetImage('images/bg.jpg'),
-        //         ),
-        //   ),
-        // )
+        Container(
+          //缩放的图片
+          child: Image.network(
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531798262708&di=53d278a8427f482c5b836fa0e057f4ea&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F342ac65c103853434cc02dda9f13b07eca80883a.jpg',
+            height: 200 + scrollGap,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+        )
       ],
     );
   }
@@ -214,11 +169,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531798262708&di=53d278a8427f482c5b836fa0e057f4ea&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F342ac65c103853434cc02dda9f13b07eca80883a.jpg',
         fit: BoxFit.fitWidth,
       ),
-
-      // Text(
-      //   '我是一个SliverPersistentHeader',
-      //   style: TextStyle(color: Colors.white),
-      // ),
     );
   }
 }

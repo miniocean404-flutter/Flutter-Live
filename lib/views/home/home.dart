@@ -30,32 +30,45 @@ class HomeAppbar {
       centerTitle: true,
       elevation: 0,
       // brightness: Brightness.light,
-      bottom: TabBar(
-        isScrollable: true, // 横向滚动
-
-        tabs: [
-          Tab(
-            child: Text('推荐'),
-          ),
-          Tab(
-            child: Text('路由'),
-          ),
-          Tab(
-            child: Text('按钮'),
-          ),
-          Tab(
-            child: Text('打开默认浏览器'),
-          ),
-          Tab(
-            child: Text('自定义滚动条'),
-          ),
-          Tab(
-            child: Text('界面'),
-          ),
-          Tab(
-            child: Text('界面好看'),
-          ),
-        ],
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(35),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: TabBar(
+                isScrollable: true, // 横向滚动
+                tabs: [
+                  Tab(
+                    text: '推荐',
+                  ),
+                  Tab(
+                    text: '路由',
+                  ),
+                  Tab(
+                    text: '按钮',
+                  ),
+                  Tab(
+                    text: '打开默认浏览器',
+                  ),
+                  Tab(
+                    text: '自定义滚动条',
+                  ),
+                  Tab(
+                    text: '界面',
+                  ),
+                  Tab(
+                    text: '界面好看',
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Icon(Icons.menu),
+            )
+          ],
+        ),
       ),
     );
   }
