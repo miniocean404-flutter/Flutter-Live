@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/components/common/back-to-top.dart';
 import 'package:my_app/components/common/swiper.dart';
-import 'package:my_app/http/platform_list.dart';
+import 'package:my_app/http/platform.dart';
 import 'package:my_app/route/routers.dart';
 import 'package:my_app/utils/util.dart';
 
@@ -47,7 +47,7 @@ class _RecommendState extends State<Recommend>
 
   //  初始化
   Future<List> getRecommendList() async {
-    List res = await PlatformList.getRecommendAll('0', 0);
+    List res = await Platform.getRecommendAll('0', 0);
     recommendList = res;
     // res.forEach((i,index) {
     //   if(index<=3){
@@ -59,7 +59,7 @@ class _RecommendState extends State<Recommend>
 
   //上拉加载更多
   Future<Null> _loadMoreData() async {
-    List res = await PlatformList.getRecommendAll('0', pageNum++);
+    List res = await Platform.getRecommendAll('0', pageNum++);
     setState(() {
       recommendList.addAll(res);
     });
@@ -67,8 +67,7 @@ class _RecommendState extends State<Recommend>
 
   // 下拉刷新
   Future<Null> _onRefresh() async {
-    List res =
-        await PlatformList.getRecommendAll('0', getRandomRangeInt(1, 100));
+    List res = await Platform.getRecommendAll('0', getRandomRangeInt(1, 100));
     setState(() {
       recommendList = res;
     });
@@ -86,7 +85,7 @@ class _RecommendState extends State<Recommend>
             physics: NeverScrollableScrollPhysics(), //禁用滑动事件
             itemCount: recommendList.length,
             // itemCount: 4,
-            itemExtent: 380, // 每一项的高度,极大提升性能
+            itemExtent: 385, // 每一项的高度,极大提升性能
             itemBuilder: (BuildContext context, int index) {
               String showUrl = recommendList[index]['roomThumb'];
               String liveType = recommendList[index]['cateName'];
@@ -108,7 +107,11 @@ class _RecommendState extends State<Recommend>
               return Card(
                 child: InkWell(
                   onTap: () {
-                    Routers.navigateTo(context, Routers.liveVideoPage);
+                    Routers.navigateTo(
+                      context,
+                      Routers.liveVideoPage,
+                      params: recommendList[index],
+                    );
                   },
                   child: Column(
                     children: [
@@ -188,7 +191,8 @@ class LiveRoomImage extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: showUrl,
           width: double.infinity,
-          fit: BoxFit.fitWidth,
+          height: 300,
+          fit: BoxFit.fill,
           placeholder: (context, url) => Image.asset(
             "assets/cache.png",
             fit: BoxFit.fitWidth,

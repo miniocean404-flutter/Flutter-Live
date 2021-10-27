@@ -15,8 +15,7 @@ void main() {
   barColor(color: 'white');
   GestureBinding.instance?.resamplingEnabled = true; // 当输入和显示频率不同导致的性能下降处理
 
-  Routers.initRouter();
-
+  Routers.defineRoutes();
   return runApp(MyApp());
 }
 

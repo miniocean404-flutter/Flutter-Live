@@ -108,6 +108,9 @@ var searchHandler = Handler(
 
 var liveVideoPageHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
-    return LiveVideoPage();
+    return LiveVideoPage(
+      platform: params['com'][0],
+      roomId: params['roomId'][0],
+    );
   },
 );

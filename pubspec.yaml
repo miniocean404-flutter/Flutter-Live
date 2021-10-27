@@ -37,7 +37,7 @@ dependencies:
   shared_preferences: ^2.0.8 # 简单数据持久化，清除数据就消失（官方）
 
   logger: ^1.1.0 # 日志打印
-#  logger_flutter: ^0.7.1 # app日志控制台
+  #  logger_flutter: ^0.7.1 # app日志控制台
   
   sqflite: ^2.0.0+4 # 数据持久化
   fluro: ^2.0.3 # 路由
