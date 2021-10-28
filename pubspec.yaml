@@ -35,6 +35,7 @@ dependencies:
   animations: ^2.0.1 # 动画 (官方)
   intl: ^0.17.0 # 时间格式化插件（官方）
   shared_preferences: ^2.0.8 # 简单数据持久化，清除数据就消失（官方）
+  
 
   logger: ^1.1.0 # 日志打印
   #  logger_flutter: ^0.7.1 # app日志控制台

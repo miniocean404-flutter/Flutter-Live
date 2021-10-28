@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart'; // 屏幕适配
 import 'package:my_app/route/routers.dart'; // 路由
 import 'package:my_app/theme/state-bar-and-virtual-key.dart'; // 状态栏
 import 'package:my_app/theme/theme.dart'; // 主题
+import 'package:provider/provider.dart';
+import 'package:my_app/provider/theme.dart';
 
 // import 'local/app-localizations-delegate.dart';
 
@@ -24,24 +26,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(750, 1334),
-      builder: () => MaterialApp(
-        // 默认配置
-        title: 'H直播',
-        debugShowCheckedModeBanner: false,
-        theme: themeColor(), // 默认的主题
-        darkTheme: darkTheme(), //黑暗模式的主题
-        initialRoute: Routers.startPage,
-        onGenerateRoute: Routers.router.generator,
-        // // 国际化支持的语言
-        // supportedLocales: [
-        //   const Locale('zh'),
-        //   const Locale('en'),
-        // ],
-        // localizationsDelegates: [
-        //   AppLocalizationsDelegate(),
-        // ],
+    return ChangeNotifierProvider(
+      create: (ctx) {
+        return ThemeInfo();
+      },
+      child: ScreenUtilInit(
+        designSize: Size(750, 1334),
+        builder: () => MaterialApp(
+          // 默认配置
+          title: 'H直播',
+          debugShowCheckedModeBanner: false,
+          theme: themeColor(), // 默认的主题
+          darkTheme: darkTheme(), //黑暗模式的主题
+          initialRoute: Routers.startPage,
+          onGenerateRoute: Routers.router.generator,
+          // // 国际化支持的语言
+          // supportedLocales: [
+          //   const Locale('zh'),
+          //   const Locale('en'),
+          // ],
+          // localizationsDelegates: [
+          //   AppLocalizationsDelegate(),
+          // ],
+        ),
       ),
     );
   }

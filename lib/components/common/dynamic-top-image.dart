@@ -10,7 +10,8 @@ class DynamicTopImage extends StatefulWidget {
 class _DynamicTopImageState extends State<DynamicTopImage>
     with TickerProviderStateMixin {
   double scrollGap = 0; //初始化要加载到图片上的高度
-  late double firstPositon; //前一次手指所在处的y值
+  late double oldPosition = 0; //前一次手指所在处的y值
+  bool downPull = false;
 
   // 动画
   late AnimationController animationController;
@@ -18,9 +19,6 @@ class _DynamicTopImageState extends State<DynamicTopImage>
 
   @override
   void initState() {
-    // 初始化数据状态
-    firstPositon = 0;
-
     // 动画
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
@@ -35,29 +33,29 @@ class _DynamicTopImageState extends State<DynamicTopImage>
   // * 松手执行反向动画
   void runAnimate() {
     //设置动画让scrollGap的值从当前的值渐渐回到 0
-    setState(() {
-      anim = Tween(begin: scrollGap, end: 0.0).animate(animationController)
-        ..addListener(() {
-          setState(() {
-            scrollGap = anim.value;
-          });
+    anim = Tween(begin: scrollGap, end: 0.0).animate(animationController)
+      ..addListener(() {
+        setState(() {
+          scrollGap = anim.value;
         });
-      firstPositon = 0; //同样归零
-    });
+      });
+    oldPosition = 0; //同样归零
   }
 
   // * 下拉计算高度
-  void updatePicHeight(changed) {
-    if (firstPositon == 0) {
-      // 如果是手指第一次点下时，我们不希望图片大小就直接发生变化，所以进行一个判定。
-      firstPositon = changed;
+  // * 下拉计算高度
+  void updatePicHeight(y) {
+    if (oldPosition == 0) {
+      oldPosition = y;
+      return;
     }
 
-    scrollGap += changed - firstPositon; // 新的一个y值减去前一次的y值然后累加，作为加载到图片上的高度。
-    setState(() {
-      //更新数据
-      firstPositon = changed;
-      scrollGap = scrollGap;
+    double gap = y - oldPosition;
+    gap > 0 ? downPull = true : downPull = false;
+
+    this.setState(() {
+      scrollGap += gap;
+      oldPosition = y;
     });
   }
 
@@ -82,19 +80,14 @@ class _DynamicTopImageState extends State<DynamicTopImage>
       },
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: SliverTopBar(
-              scrollGap: scrollGap,
-            ),
-          ),
           SliverAppBar(
             // SliverAppBar透明
             // backgroundColor: Colors.transparent,
             // elevation: 0,
             pinned: false, // 代表是否会在顶部保留SliverAppBar
-            floating: false, // 代表是否会发生下拉立即出现SliverAppBar
+            floating: true, // 代表是否会发生下拉立即出现SliverAppBar
             //设置为true时，当手指放开时，SliverAppBar会根据当前的位置进行调整，始终保持展开或收起的状态，此效果在floating=true时生效
-            snap: false,
+            snap: true,
             expandedHeight: 170 + scrollGap, //顶部控件所占的高度,跟随因手指滑动所产生的位置变化而变化。
             flexibleSpace: FlexibleSpaceBar(
               title: null, //标题

@@ -5,6 +5,8 @@ import 'package:my_app/views/home/tab-page/browser-jump.dart';
 import 'package:my_app/views/home/tab-page/click-add.dart';
 import 'package:my_app/views/home/tab-page/recommend.dart';
 import 'package:my_app/views/home/tab-page/router-use.dart';
+import 'package:my_app/views/home/tab-page/provider-page.dart';
+import 'package:my_app/views/home/tab-page/scrollbar-page.dart';
 
 // * 主页的容器
 class HomeContainer extends StatelessWidget {
@@ -55,7 +57,7 @@ class HomeAppbar {
                     text: '自定义滚动条',
                   ),
                   Tab(
-                    text: '界面',
+                    text: 'Provider',
                   ),
                   Tab(
                     text: '界面好看',
@@ -91,22 +93,8 @@ class _HomeBodyState extends State<HomeBody> {
         RouterUse(),
         ClickAdd(),
         BrowserJump(),
-        Container(
-          child: ScrollBar(ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                child: Container(
-                  height: 45,
-                  alignment: Alignment.center,
-                  child: Text('$index'),
-                ),
-              );
-            },
-            itemCount: 30,
-            itemExtent: 50,
-          )),
-        ),
-        Container(child: Text('bar2')),
+        ScrollbarPage(),
+        ProviderPage(),
         Container(child: Text('bar2')),
       ],
     );

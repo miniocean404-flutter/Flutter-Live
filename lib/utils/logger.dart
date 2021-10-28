@@ -1,7 +1,5 @@
 import 'package:logger/logger.dart';
 
-const String _tag = "easy_tab_controller";
-
 var _logger = Logger(
   printer: PrettyPrinter(
     methodCount: 2, //展示方法调用数
@@ -13,27 +11,26 @@ var _logger = Logger(
   ),
 );
 
-
-logV(String msg) {
-  _logger.v("$_tag :: $msg");
+logV(dynamic msg) {
+  _logger.v(msg);
 }
 
-logD(String msg) {
-  _logger.d("$_tag :: $msg");
+logD(dynamic msg) {
+  _logger.d(msg);
 }
 
-logI(String msg) {
-  _logger.i("$_tag :: $msg");
+logI(dynamic msg) {
+  _logger.i(msg);
 }
 
-logW(String msg) {
-  _logger.w("$_tag :: $msg");
+logW(dynamic msg) {
+  _logger.w(msg);
 }
 
-logE(String msg) {
-  _logger.e("$_tag :: $msg");
+logE(dynamic msg) {
+  _logger.e(msg);
 }
 
-logWTF(String msg) {
-  _logger.wtf("$_tag :: $msg");
+logWTF(dynamic msg) {
+  _logger.wtf(msg);
 }

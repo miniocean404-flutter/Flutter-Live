@@ -35,7 +35,10 @@ class SearchInput extends StatelessWidget {
       child: TextField(
         cursorColor: AppColor.info, //设置光标
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: Icon(
+            Icons.search,
+            color: AppColor.un3active,
+          ),
           fillColor: Color(0x30cccccc),
           filled: true,
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/route/routers.dart';
+import 'package:my_app/theme/color.dart';
 
 class RecommendTitle extends StatelessWidget {
   const RecommendTitle({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class RecommendTitle extends StatelessWidget {
               child: Icon(
                 Icons.search,
                 size: 18,
-                color: Theme.of(context).unselectedWidgetColor,
+                color: AppColor.un3active,
               ),
             ),
             Text(
