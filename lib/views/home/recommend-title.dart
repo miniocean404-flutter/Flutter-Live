@@ -13,7 +13,7 @@ class RecommendTitle extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.fromLTRB(15, 5, 0, 5),
         decoration: BoxDecoration(
-          color: Color(0xFFf5f6f7),
+          color: Color(0x30cccccc),
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
         child: Row(

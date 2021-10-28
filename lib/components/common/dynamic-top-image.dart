@@ -82,6 +82,11 @@ class _DynamicTopImageState extends State<DynamicTopImage>
       },
       child: CustomScrollView(
         slivers: [
+          SliverToBoxAdapter(
+            child: SliverTopBar(
+              scrollGap: scrollGap,
+            ),
+          ),
           SliverAppBar(
             // SliverAppBar透明
             // backgroundColor: Colors.transparent,

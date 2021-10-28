@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/theme/color.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -12,40 +13,50 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          padding: EdgeInsets.fromLTRB(15, 5, 0, 5),
-          decoration: BoxDecoration(
-            color: Color(0xFFf5f6f7),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          child: TextField(
-            cursorColor: Colors.black, //设置光标
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              hintText: "请搜索",
-              // hintStyle: new TextStyle(fontSize: 14, color: Colors.white),
-              //输入框decoration属性
-              //contentPadding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 1.0),
-              // contentPadding: new EdgeInsets.only(left: 0.0),
-              // fillColor: Colors.white,
-              // border: InputBorder.none,
-            ),
-            // style: new TextStyle(fontSize: 14, color: Colors.white),
-          ),
-        ),
-        actions: [
-          Center(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('搜索'),
-            ),
-          )
-        ],
+        leading: null,
+        title: SearchInput(),
       ),
       body: Center(
         child: Container(
           child: Text('搜索栏'),
         ),
+      ),
+    );
+  }
+}
+
+class SearchInput extends StatelessWidget {
+  const SearchInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 30,
+      child: TextField(
+        cursorColor: AppColor.info, //设置光标
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search),
+          fillColor: Color(0x30cccccc),
+          filled: true,
+
+          hintText: "请搜索",
+          // hintStyle: new TextStyle(fontSize: 14, color: Colors.white),
+
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x00FF0000)),
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0x00000000)),
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+          ),
+
+          //输入框光标内容位置
+          contentPadding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 1.0),
+          border: InputBorder.none,
+        ),
+        onChanged: (value) {},
+        // style: new TextStyle(fontSize: 14, color: Colors.white),
       ),
     );
   }

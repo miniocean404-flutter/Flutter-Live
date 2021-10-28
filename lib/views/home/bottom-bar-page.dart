@@ -28,39 +28,43 @@ class _BottomBarPageState extends State<BottomBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 30,
-        type: BottomNavigationBarType.fixed, // 导航条过长是否进行隐藏
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '首页',
+    return WillPopScope(
+        child: Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            elevation: 30,
+            type: BottomNavigationBarType.fixed, // 导航条过长是否进行隐藏
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: '首页',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.video_call_rounded),
+                label: '视频',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.category),
+                label: '分类',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: '我',
+              )
+            ],
+            onTap: (int index) {
+              setState(() {
+                this._currentIndex = index;
+              });
+            },
+            currentIndex: _currentIndex,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.video_call_rounded),
-            label: '视频',
+          body: IndexedStack(
+            index: this._currentIndex,
+            children: bottomBarList,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: '分类',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '我',
-          )
-        ],
-        onTap: (int index) {
-          setState(() {
-            this._currentIndex = index;
-          });
-        },
-        currentIndex: _currentIndex,
-      ),
-      body: IndexedStack(
-        index: this._currentIndex,
-        children: bottomBarList,
-      ),
-    );
+        ),
+        onWillPop: () async {
+          return true;
+        });
   }
 }
