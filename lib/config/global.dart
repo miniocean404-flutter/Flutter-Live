@@ -4,7 +4,6 @@ import 'package:my_app/config/state-bar-and-virtual-key.dart';
 import 'package:my_app/config/theme-color.dart';
 import 'package:my_app/provider/key.dart';
 import 'package:my_app/route/routers.dart';
-import 'package:my_app/utils/logger.dart';
 import 'package:my_app/utils/sp-helper.dart';
 
 import 'color.dart';
@@ -24,11 +23,8 @@ class Global {
   static void changeTheme() {
     dynamic currentColor = SpHelper.getLocalStorage(keyThemeColor);
     if (currentColor != null) {
-      logI(currentColor);
-      if (currentColor.runtimeType.toString() == 'String') {
-        Color color = themeColorMap[currentColor]!;
-        AppColor.primary = color;
-      }
+      Color color = themeColorMap[currentColor]!;
+      AppColor.primary = color;
     }
   }
 }
