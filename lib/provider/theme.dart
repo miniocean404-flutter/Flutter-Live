@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ThemeInfo extends ChangeNotifier {
-  String? _themeColor = '白色';
+  Color? _themeColor;
 
-  String? get getColor => _themeColor;
+  Color? get getColor => _themeColor;
 
-  set setColor(String v) {
+  set setColor(Color v) {
     _themeColor = v;
     notifyListeners();
   }

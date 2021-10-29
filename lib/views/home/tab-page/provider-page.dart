@@ -12,18 +12,23 @@ class ProviderPage extends StatefulWidget {
 class _ProviderPageState extends State<ProviderPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Text('${Provider.of<ThemeInfo>(context).getColor}'),
-          MaterialButton(
-            onPressed: () {
-              Provider.of<ThemeInfo>(context, listen: false).setColor = '黑色';
-            },
-            child: Text('改变颜色'),
-          )
-        ],
-      ),
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int i) {
+        Color currentColor = Colors.primaries[i % Colors.primaries.length];
+
+        return GestureDetector(
+          onTap: () {
+            Provider.of<ThemeInfo>(context, listen: false).setColor =
+                Colors.primaries[i % Colors.primaries.length];
+          },
+          child: Container(
+            height: 60,
+            color: currentColor,
+          ),
+        );
+      },
+      itemExtent: 50,
+      itemCount: 6,
     );
   }
 }

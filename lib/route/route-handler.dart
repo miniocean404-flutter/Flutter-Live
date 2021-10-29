@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 // 隐藏滚动水波纹
-import 'package:my_app/theme/water-ripple.dart';
+import 'package:my_app/config/water-ripple.dart';
 import 'package:my_app/views/album-show.dart';
 import 'package:my_app/views/builtIn-browser.dart';
 import 'package:my_app/views/custom-video.dart';

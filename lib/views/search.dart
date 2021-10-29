@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/theme/color.dart';
+import 'package:my_app/config/color.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);

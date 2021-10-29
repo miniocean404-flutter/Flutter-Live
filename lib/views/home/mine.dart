@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/utils/logger.dart';
 
 class Mine extends StatefulWidget {
   Mine({Key? key}) : super(key: key);

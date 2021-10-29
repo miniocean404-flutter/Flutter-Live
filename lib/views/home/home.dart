@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/common/scroll-bar.dart';
 import 'package:my_app/views/home/recommend-title.dart';
 import 'package:my_app/views/home/tab-page/browser-jump.dart';
 import 'package:my_app/views/home/tab-page/click-add.dart';
