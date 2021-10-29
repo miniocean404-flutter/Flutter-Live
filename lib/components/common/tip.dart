@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/utils/util.dart';
 
 enum ImageType {
   error,
@@ -40,7 +39,7 @@ class FeedBack extends StatelessWidget {
         children: [
           Image.asset(
             imageList[imageType.index],
-            width: toRpx(size: 216, context: context),
+            width: 216,
             fit: BoxFit.fitWidth,
           ),
           Offstage(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_app/views/dy-video.dart';
 import 'package:my_app/views/home/category.dart';
 // bottomBar
@@ -28,6 +29,15 @@ class _BottomBarPageState extends State<BottomBarPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width,
+        maxHeight: MediaQuery.of(context).size.height,
+      ),
+      designSize: Size(1080, 2356),
+      orientation: Orientation.portrait,
+    );
+
     return WillPopScope(
         child: Scaffold(
           bottomNavigationBar: BottomNavigationBar(

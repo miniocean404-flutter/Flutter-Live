@@ -14,7 +14,7 @@ class ColorSchemeConfig {
       primaryVariant: AppColor.dark,
       // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
       secondary: AppColor.info,
-      secondaryVariant: AppColor.active,
+      secondaryVariant: AppColor.info,
 
       //小部件的背景色 如:card appbar
       surface: AppColor.info,
@@ -53,7 +53,7 @@ ThemeData themeColor() {
     // * 横向TabBar的主题
     tabBarTheme: TabBarTheme(
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColor.active,
+      labelColor: AppColor.info,
       labelStyle: TextStyle(
         fontWeight: AppColor.fontWeight,
       ),
@@ -116,14 +116,14 @@ ThemeData themeColor() {
     ),
     // * AppBar主题配置
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColor.nav,
+      backgroundColor: AppColor.primary,
       elevation: 1,
     ),
     // * 底部按钮主题
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColor.primary,
       elevation: 0, //虚线阴影
-      selectedItemColor: AppColor.active,
+      selectedItemColor: AppColor.info,
       unselectedItemColor: AppColor.unactive,
       // selectedIconTheme:,
       // unselectedIconTheme:,
@@ -147,7 +147,7 @@ ThemeData darkTheme() {
     tabBarTheme: TabBarTheme(
       // indicator:,
       indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColor.active,
+      labelColor: AppColor.info,
       labelStyle: TextStyle(
         fontWeight: AppColor.fontWeight,
       ),

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/utils/sp-helper.dart';
+
+import 'key.dart';
 
 class ThemeInfo extends ChangeNotifier {
-  Color? _themeColor;
+  String? _themeColor;
 
-  Color? get getColor => _themeColor;
+  String? get getColor => _themeColor;
 
-  set setColor(Color v) {
+  set setColor(String v) {
     _themeColor = v;
+
+    SpHelper.setLocalStorage(keyThemeColor, v);
     notifyListeners();
   }
 }
