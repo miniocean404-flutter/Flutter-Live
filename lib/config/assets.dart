@@ -38,7 +38,7 @@ class Assets {
       'assets/lottie/page_loading_anim.json';
   static const String LottieRefreshFooter = 'assets/lottie/refresh_footer.json';
   static const String LottieRefreshHeader =
-      'assets/lottie/refresh_head_loading.json';
+      'assets/lottie/refresh_head_loading.json'; // 小飞机
   static const String LottieRefreshEmpty =
       'assets/lottie/refresh_empty_page.json';
   static const String LottieRefreshError = 'assets/lottie/refresh_error.json';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
+import 'package:my_app/config/assets.dart';
 import 'package:my_app/config/color.dart';
 import 'package:my_app/route/routers.dart';
 import 'package:share_plus/share_plus.dart';
@@ -24,7 +26,12 @@ class _MineState extends State<Mine> {
             SizedBox(height: 40.w),
             MineAssets(),
             SizedBox(height: 40.w),
-            MineSelect()
+            MineSelect(),
+            Lottie.asset(
+              Assets.LottiePageLoading,
+              width: 200,
+              animate: true,
+            ),
           ],
         ),
       ),
@@ -141,7 +148,7 @@ class MineSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.3.sh,
+      height: 0.35.sh,
       decoration: BoxDecoration(
         color: AppColor.primary,
         borderRadius: BorderRadius.circular(20),
