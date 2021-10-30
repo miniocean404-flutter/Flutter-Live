@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:my_app/config/assets.dart';
 import 'package:my_app/route/routers.dart';
 
 // * 启动页
@@ -83,7 +84,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
           Container(
             color: Colors.white,
             child: Image.asset(
-              'assets/startImg.png',
+              Assets.splashImg,
               fit: BoxFit.fill,
               width: double.infinity,
               height: double.infinity,

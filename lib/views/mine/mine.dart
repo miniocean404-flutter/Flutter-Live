@@ -16,7 +16,7 @@ class _MineState extends State<Mine> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 0.1.sw),
+        margin: EdgeInsets.symmetric(horizontal: 0.07.sw),
         child: Column(
           children: [
             SizedBox(height: 40.w),
@@ -32,6 +32,7 @@ class _MineState extends State<Mine> {
   }
 }
 
+// * 头像
 class MineInfo extends StatelessWidget {
   const MineInfo({Key? key}) : super(key: key);
 
@@ -64,10 +65,10 @@ class MineInfo extends StatelessWidget {
               Routers.navigateTo(context, Routers.settings);
             },
             child: Container(
-              width: 100.w,
-              height: 60.w,
+              width: 130.w,
+              height: 100.w,
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Colors.grey[300],
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20.0),
                   topLeft: Radius.circular(20.0),
@@ -82,6 +83,7 @@ class MineInfo extends StatelessWidget {
   }
 }
 
+// * 收藏信息
 class MineAssets extends StatelessWidget {
   const MineAssets({Key? key}) : super(key: key);
 
@@ -98,7 +100,7 @@ class MineAssets extends StatelessWidget {
         direction: Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          InfoShow(num: 0, info: '收藏'),
+          InfoShow(num: 10, info: '收藏'),
           InfoShow(num: 3, info: '分享'),
           InfoShow(num: 7, info: '积分'),
           InfoShow(num: 11, info: '历史'),
@@ -122,13 +124,17 @@ class InfoShow extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text('$num'),
+        Text(
+          '$num',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
         Text('$info'),
       ],
     );
   }
 }
 
+// * 功能
 class MineSelect extends StatelessWidget {
   const MineSelect({Key? key}) : super(key: key);
 
@@ -140,6 +146,7 @@ class MineSelect extends StatelessWidget {
         color: AppColor.primary,
         borderRadius: BorderRadius.circular(20),
       ),
+      padding: EdgeInsets.symmetric(vertical: 30.w),
       child: Flex(
         direction: Axis.vertical,
         mainAxisAlignment: MainAxisAlignment.spaceAround,

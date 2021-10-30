@@ -37,7 +37,7 @@ dependencies:
   shared_preferences: ^2.0.8 # 简单数据持久化，清除数据就消失（官方）
   share_plus: ^3.0.4 # 调用分享平台（官方）
   connectivity: ^3.0.6 # 网络检测（官方）
-  
+  flutter_svg: ^0.23.0+1 # SVG使用（官方）
 
   logger: ^1.1.0 # 日志打印 
   #  logger_flutter: ^0.7.1 # app日志控制台

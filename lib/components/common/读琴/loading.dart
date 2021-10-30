@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/common/tip.dart';
+import 'package:my_app/components/common/%E8%AF%BB%E7%90%B4/tip.dart';
 
+// 读琴项目
 class RefreshFeedBack {
   final bool firstRefresh; // 是否首次加载
   final bool loading; // 是否在加载

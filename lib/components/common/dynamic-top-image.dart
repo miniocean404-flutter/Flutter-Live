@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 下拉放大图片
 class DynamicTopImage extends StatefulWidget {
   const DynamicTopImage({Key? key}) : super(key: key);
 

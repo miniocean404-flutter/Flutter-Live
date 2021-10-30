@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/components/common/back-to-top.dart';
 import 'package:my_app/components/common/swiper.dart';
+import 'package:my_app/config/assets.dart';
 import 'package:my_app/http/platform.dart';
 import 'package:my_app/route/routers.dart';
 import 'package:my_app/utils/util.dart';
@@ -194,12 +195,12 @@ class LiveRoomImage extends StatelessWidget {
           width: double.infinity,
           fit: BoxFit.fitWidth,
           placeholder: (context, url) => Image.asset(
-            "assets/cache.png",
+            Assets.cache,
             fit: BoxFit.fitWidth,
             width: double.infinity,
           ),
           errorWidget: (context, url, error) => Image.asset(
-            "assets/cache.png",
+            Assets.cache,
             fit: BoxFit.fitWidth,
             width: double.infinity,
           ),

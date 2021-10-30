@@ -15,16 +15,12 @@ class _EasyRefreshPageState extends State<EasyRefreshPage> {
       RefreshController(initialRefresh: false);
 
   void _onRefresh() async {
-    // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
-    // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
 
   void _onLoading() async {
-    // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
-    // if failed,use loadFailed(),if no data return,use LoadNodata()
     items.add((items.length + 1).toString());
     if (mounted) setState(() {});
     _refreshController.loadComplete();
@@ -35,9 +31,9 @@ class _EasyRefreshPageState extends State<EasyRefreshPage> {
     super.initState();
   }
 
-  // 项目中没有讲到 在实例化后销毁当前页面时需要销毁该controller
   @override
   void dispose() {
+    _refreshController.dispose();
     super.dispose();
   }
 
@@ -47,10 +43,14 @@ class _EasyRefreshPageState extends State<EasyRefreshPage> {
       body: SmartRefresher(
         enablePullDown: true,
         enablePullUp: true,
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
         header: WaterDropHeader(),
         footer: CustomFooter(
           builder: (BuildContext context, LoadStatus? mode) {
             Widget body;
+
             if (mode == LoadStatus.idle) {
               body = Text("上拉加载");
             } else if (mode == LoadStatus.loading) {
@@ -68,9 +68,6 @@ class _EasyRefreshPageState extends State<EasyRefreshPage> {
             );
           },
         ),
-        controller: _refreshController,
-        onRefresh: _onRefresh,
-        onLoading: _onLoading,
         child: ListView.builder(
           itemBuilder: (c, i) => Card(child: Center(child: Text(items[i]))),
           itemExtent: 100.0,
