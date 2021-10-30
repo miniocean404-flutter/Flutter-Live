@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 // 隐藏滚动水波纹
 import 'package:my_app/config/water-ripple.dart';
 import 'package:my_app/views/album-show.dart';
-import 'package:my_app/views/builtIn-browser.dart';
-import 'package:my_app/views/custom-video.dart';
-import 'package:my_app/views/device-info.dart';
-import 'package:my_app/views/easy-refresh-page.dart';
-import 'package:my_app/views/file-operate.dart';
+import 'package:my_app/views/home/tab-page/builtIn-browser.dart';
+import 'package:my_app/views/mine/about.dart';
+import 'package:my_app/views/mine/settings.dart';
+import 'package:my_app/views/video/custom-video.dart';
+import 'package:my_app/views/category/device-info.dart';
+import 'package:my_app/views/category/easy-refresh-page.dart';
+import 'package:my_app/views/category/file-operate.dart';
 import 'package:my_app/views/home/bottom-bar-page.dart';
-import 'package:my_app/views/home/category.dart';
+import 'package:my_app/views/category/category.dart';
 import 'package:my_app/views/home/home.dart';
-import 'package:my_app/views/home/mine.dart';
-import 'package:my_app/views/image-pick.dart';
-import 'package:my_app/views/live_video_page.dart';
+import 'package:my_app/views/mine/mine.dart';
+import 'package:my_app/views/category/image-pick.dart';
+import 'package:my_app/views/video/live_video_page.dart';
 import 'package:my_app/views/router/name-router.dart';
 import 'package:my_app/views/router/router.dart';
 import 'package:my_app/views/search.dart';
@@ -112,5 +114,16 @@ var liveVideoPageHandler = Handler(
       platform: params['com'][0],
       roomId: params['roomId'][0],
     );
+  },
+);
+var aboutHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return About();
+  },
+);
+
+var settingsHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return Settings();
   },
 );

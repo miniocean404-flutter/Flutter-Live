@@ -10,25 +10,31 @@ class Routers {
   static const String startPage = "/";
   static const String bottomBarPage = "/bottomBarPage";
 
+  // 主页
   static const String home = "/home";
-
-  static const String category = "/category";
-  static const String mine = "/mine";
-
-  static const String imagePick = "/imagePick";
-  static const String fileOperate = "/fileOperate";
-  // 路由界面
   static const String nameRouter = "/nameRouter";
   static const String routerPage = "/routerPage";
-  static const String deviceInfo = "/deviceInfo";
-  static const String albumShow = "/albumShow";
   static const String builtInBrowser = "/builtInBrowser";
-  static const String easyRefresh = "/easyRefresh";
+
+  // 视频
   static const String customVideo = "/customVideo";
+  static const String liveVideoPage = "/liveVideoPage";
+
+  // 分类
+  static const String category = "/category";
+  static const String imagePick = "/imagePick";
+  static const String fileOperate = "/fileOperate";
+  static const String deviceInfo = "/deviceInfo";
+  static const String easyRefresh = "/easyRefresh";
+  static const String albumShow = "/albumShow";
+
+  // 我的
+  static const String mine = "/mine";
+  static const String about = "/about";
+  static const String settings = "/settings";
 
   // 公共功能页
   static const String search = "/search";
-  static const String liveVideoPage = "/liveVideoPage";
 
   static void defineRoutes() {
     router.notFoundHandler = Handler(
@@ -53,6 +59,8 @@ class Routers {
     router.define(customVideo, handler: customVideoHandler);
     router.define(search, handler: searchHandler);
     router.define(liveVideoPage, handler: liveVideoPageHandler);
+    router.define(about, handler: aboutHandler);
+    router.define(settings, handler: settingsHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

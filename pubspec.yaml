@@ -35,9 +35,11 @@ dependencies:
   animations: ^2.0.1 # 动画 (官方)
   intl: ^0.17.0 # 时间格式化插件（官方）
   shared_preferences: ^2.0.8 # 简单数据持久化，清除数据就消失（官方）
+  share_plus: ^3.0.4 # 调用分享平台（官方）
+  connectivity: ^3.0.6 # 网络检测（官方）
   
 
-  logger: ^1.1.0 # 日志打印
+  logger: ^1.1.0 # 日志打印 
   #  logger_flutter: ^0.7.1 # app日志控制台
   
   sqflite: ^2.0.0+4 # 数据持久化
@@ -47,10 +49,11 @@ dependencies:
   fluttertoast: ^8.0.8 # toast
 
   flutter_screenutil: ^5.0.0+2 # 屏幕自适应及适配不同屏幕
-  flutter_easyrefresh: ^2.2.1 # 拉刷新或者上拉加载插件
+  pull_to_refresh: ^2.0.0 # 拉刷新或者上拉加载插件
   cached_network_image: ^3.1.0 # 缓存图片
   wakelock: ^0.5.6 # 控制屏幕常亮
   fijkplayer: ^0.10.0 # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter 
+  lottie: ^1.2.1 # 加载AE制作的炫酷动画
   flutter:
     sdk: flutter 
  

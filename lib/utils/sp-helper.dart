@@ -42,7 +42,7 @@ class SpHelper {
   }
 
   // 获取持久化数据
-  static dynamic getLocalStorage<T>(String key) {
+  static T getLocalStorage<T>(String key) {
     dynamic value = prefs.get(key);
     if (value.runtimeType.toString() == "String") {
       if (_isJson(value)) {

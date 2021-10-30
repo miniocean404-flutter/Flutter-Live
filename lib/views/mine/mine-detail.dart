@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Mine extends StatefulWidget {
-  Mine({Key? key}) : super(key: key);
+class MineDetail extends StatefulWidget {
+  MineDetail({Key? key}) : super(key: key);
 
   @override
   _MineState createState() => _MineState();
 }
 
-class _MineState extends State<Mine> with TickerProviderStateMixin {
+class _MineState extends State<MineDetail> with TickerProviderStateMixin {
   double scrollGap = 0; //初始化要加载到图片上的高度
   late double oldPosition = 0;
   bool downPull = false;
