@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
 import 'package:my_app/config/state-bar-and-virtual-key.dart';
 import 'package:my_app/config/theme-color.dart';
 import 'package:my_app/provider/key.dart';
@@ -14,6 +13,7 @@ class Global {
     // 获取当前环境、identical 检查是否是同一个对象
     var env = String.fromEnvironment('APP_CHANNEL');
     barColor(color: 'white');
+
     GestureBinding.instance?.resamplingEnabled = true; // 当输入和显示频率不同导致的性能下降处理
     Routers.defineRoutes();
 
@@ -29,6 +29,7 @@ class Global {
     // RendererBinding 渲染树与Flutter engine的桥梁
     // WidgetsBinding Widget层与Flutter engine的桥梁
     WidgetsFlutterBinding.ensureInitialized();
+
     await SpHelper.initPrefs();
   }
 

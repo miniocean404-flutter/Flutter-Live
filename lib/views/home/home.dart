@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/views/home/recommend-title.dart';
-import 'package:my_app/views/home/tab-page/browser-jump.dart';
 import 'package:my_app/views/home/tab-page/click-add.dart';
 import 'package:my_app/views/home/tab-page/recommend.dart';
 import 'package:my_app/views/home/tab-page/router-use.dart';
@@ -14,7 +13,7 @@ class HomeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 7,
+      length: 6,
       child: Scaffold(
         appBar: HomeAppbar()._buildAppBar(context),
         body: HomeBody(),
@@ -47,10 +46,7 @@ class HomeAppbar {
                     text: '路由',
                   ),
                   Tab(
-                    text: '按钮',
-                  ),
-                  Tab(
-                    text: '打开默认浏览器',
+                    text: '弹窗',
                   ),
                   Tab(
                     text: '自定义滚动条',
@@ -83,7 +79,7 @@ class HomeBody extends StatefulWidget {
   _HomeBodyState createState() => _HomeBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody> {
+class _HomeBodyState extends State<HomeBody> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return TabBarView(
@@ -91,7 +87,6 @@ class _HomeBodyState extends State<HomeBody> {
         Recommend(),
         RouterUse(),
         ClickAdd(),
-        BrowserJump(),
         ScrollbarPage(),
         ProviderPage(),
         Container(child: Text('bar2')),

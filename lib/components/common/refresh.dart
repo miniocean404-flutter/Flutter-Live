@@ -111,11 +111,14 @@ class _RefreshWidgetState extends State<RefreshWidget>
                         animate: true,
                       );
                     } else if (mode == LoadStatus.failed) {
-                      ///加载失败
+                      //加载失败
                       footer = Text('加载失败', style: fontStyle);
-                    } else {
-                      ///无更多数据
+                    } else if (mode == LoadStatus.noMore) {
                       footer = Text("没有更多数据啦", style: fontStyle);
+                    } else if (mode == LoadStatus.canLoading) {
+                      footer = Text("下滑取消加载", style: fontStyle);
+                    } else {
+                      footer = Text("", style: fontStyle);
                     }
 
                     return SizedBox(

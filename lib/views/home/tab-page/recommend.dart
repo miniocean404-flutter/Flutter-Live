@@ -73,66 +73,71 @@ class _RecommendState extends State<Recommend>
     });
   }
 
+  // ListView.builder(
+  //     controller: _controller,
+  //     shrinkWrap: false, //为true可以解决子控件必须设置高度的问题,但是没有懒加载，非常影响性能
+  //     // physics: NeverScrollableScrollPhysics(), //禁用滑动事件
+  //     itemCount: recommendList.length,
+  //     // itemExtent: 385, // 每一项的高度,极大提升性能
+  //     itemBuilder: (BuildContext context, int index) {},
+  //   )
+
   Widget successWidget() {
     return BackToTop(
       _controller,
-      child: ListView(
+      child: CustomScrollView(
         controller: _controller,
-        children: [
-          Swiper(
-            pageList: swiperList,
-          ),
-          ListView.builder(
-            shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
-            physics: NeverScrollableScrollPhysics(), //禁用滑动事件
-            itemCount: recommendList.length,
-            // itemCount: 4,
-            // itemExtent: 385, // 每一项的高度,极大提升性能
-            itemBuilder: (BuildContext context, int index) {
-              String showUrl = recommendList[index]['roomThumb'];
-              String liveType = recommendList[index]['cateName'];
-              String roomName = recommendList[index]['roomName'];
-              String liveAvatar =
-                  recommendList[index]['avatar'].toString().indexOf('https') >
-                          -1
-                      ? recommendList[index]['avatar']
-                      : 'https:${recommendList[index]['avatar']}';
-              String personNum = recommendList[index]['online']
-                          .toString()
-                          .length >=
-                      3
-                  ? '${recommendList[index]['online'].toString().substring(0, 3)}万'
-                  : '${recommendList[index]['online'].toString()}万';
-              String platformAndOwner =
-                  '${recommendList[index]['com']} · ${recommendList[index]['ownerName']}';
+        slivers: [
+          SliverToBoxAdapter(child: Swiper(pageList: swiperList)),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (content, index) {
+                String showUrl = recommendList[index]['roomThumb'];
+                String liveType = recommendList[index]['cateName'];
+                String roomName = recommendList[index]['roomName'];
+                String liveAvatar =
+                    recommendList[index]['avatar'].toString().indexOf('https') >
+                            -1
+                        ? recommendList[index]['avatar']
+                        : 'https:${recommendList[index]['avatar']}';
+                String personNum = recommendList[index]['online']
+                            .toString()
+                            .length >=
+                        3
+                    ? '${recommendList[index]['online'].toString().substring(0, 3)}万'
+                    : '${recommendList[index]['online'].toString()}万';
+                String platformAndOwner =
+                    '${recommendList[index]['com']} · ${recommendList[index]['ownerName']}';
 
-              return Card(
-                child: InkWell(
-                  onTap: () {
-                    Routers.navigateTo(
-                      context,
-                      Routers.liveVideoPage,
-                      params: recommendList[index],
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      LiveRoomImage(
-                        showUrl: showUrl,
-                        liveType: liveType,
-                        personNum: personNum,
-                      ),
-                      LiveRoomTitle(
-                        liveAvatar: liveAvatar,
-                        platformAndOwner: platformAndOwner,
-                        roomName: roomName,
-                      )
-                    ],
+                return Card(
+                  child: InkWell(
+                    onTap: () {
+                      Routers.navigateTo(
+                        context,
+                        Routers.liveVideoPage,
+                        params: recommendList[index],
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        LiveRoomImage(
+                          showUrl: showUrl,
+                          liveType: liveType,
+                          personNum: personNum,
+                        ),
+                        LiveRoomTitle(
+                          liveAvatar: liveAvatar,
+                          platformAndOwner: platformAndOwner,
+                          roomName: roomName,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
+                );
+              },
+              childCount: recommendList.length,
+            ),
+          )
         ],
       ),
     );
@@ -149,7 +154,6 @@ class _RecommendState extends State<Recommend>
           defaultScrollNotificationPredicate, //是否应处理滚动通知的检查（是否通知下拉刷新动作）
       child: FutureBuilder<List<dynamic>>(
         future: initLoading,
-        // initialData: recommendList,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           // 请求已结束
           if (snapshot.connectionState == ConnectionState.done) {

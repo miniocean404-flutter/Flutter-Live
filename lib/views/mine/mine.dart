@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_app/components/business/dialog-share-application.dart';
 import 'package:my_app/config/assets.dart';
 import 'package:my_app/config/color.dart';
 import 'package:my_app/route/routers.dart';
@@ -27,11 +28,6 @@ class _MineState extends State<Mine> {
             MineAssets(),
             SizedBox(height: 40.w),
             MineSelect(),
-            Lottie.asset(
-              Assets.LottiePageLoading,
-              width: 200,
-              animate: true,
-            ),
           ],
         ),
       ),
@@ -167,9 +163,9 @@ class MineSelect extends StatelessWidget {
             info: '分享',
             icon: Icons.share,
             cb: () {
-              Share.share(
-                'check out my website https://example.com',
-                subject: 'H直播',
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => ShareDialog(),
               );
             },
           ),

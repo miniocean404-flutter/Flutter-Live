@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'key.dart';
-
 class AllController extends ChangeNotifier {
   late RefreshController refreshController;
   late int loadState;
