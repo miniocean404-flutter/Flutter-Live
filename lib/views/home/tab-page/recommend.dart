@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/components/common/back-to-top.dart';
+import 'package:my_app/components/common/refresh/refresh.dart';
 import 'package:my_app/components/common/swiper.dart';
 import 'package:my_app/config/assets.dart';
 import 'package:my_app/http/platform.dart';
 import 'package:my_app/route/routers.dart';
+import 'package:my_app/utils/logger.dart';
 import 'package:my_app/utils/util.dart';
 
 class Recommend extends StatefulWidget {
@@ -17,10 +19,111 @@ class Recommend extends StatefulWidget {
 class _RecommendState extends State<Recommend>
     with AutomaticKeepAliveClientMixin {
   ScrollController _controller = new ScrollController();
-  late Future<List> initLoading;
-  late List recommendList;
+  late List recommendList = [];
   late List<String> swiperList = [];
   int pageNum = 0;
+  late Refresh state;
+
+  //  初始化
+  void getRecommendList() async {
+    state = Refresh.first;
+
+    List res = await Platform.getRecommendAll('0', 0);
+    for (var i = 0; i < 3; i++) {
+      swiperList.add(res[i]['roomThumb']);
+    }
+
+    if (res.length <= 0) {
+      state = Refresh.noData;
+    } else {
+      this.setState(() {
+        recommendList = res;
+        state = Refresh.refresh;
+      });
+    }
+  }
+
+  //上拉加载更多
+  Future<Null> _loadMoreData(c) async {
+    List res = await Platform.getRecommendAll('0', pageNum++);
+    recommendList.addAll(res);
+
+    if (mounted) setState(() {});
+    c.loadComplete();
+  }
+
+  // 下拉刷新
+  void _onRefresh(c) async {
+    state = Refresh.first;
+    List res = await Platform.getRecommendAll('0', getRandomRangeInt(1, 100));
+
+    if (res.length <= 0) {
+      state = Refresh.noData;
+    } else {
+      this.setState(() {
+        recommendList = res;
+
+        state = Refresh.refresh;
+        c.refreshCompleted();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return BackToTop(
+      _controller,
+      child: RefreshWidget(
+        state: state,
+        enablePullDown: true,
+        enablePullUp: true,
+        onRefresh: _onRefresh,
+        onLoadMore: _loadMoreData,
+        scrollController: _controller,
+        child: CustomScrollView(
+          controller: _controller,
+          slivers: [
+            SliverToBoxAdapter(child: Swiper(pageList: swiperList)),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (content, index) {
+                  final Map currentObj = listDataHandle(index);
+
+                  return Card(
+                    child: InkWell(
+                      onTap: () {
+                        Routers.navigateTo(
+                          context,
+                          Routers.liveVideoPage,
+                          params: recommendList[index],
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          LiveRoomImage(
+                            showUrl: currentObj['showUrl'],
+                            liveType: currentObj['liveType'],
+                            personNum: currentObj['personNum'],
+                          ),
+                          LiveRoomTitle(
+                            liveAvatar: currentObj['liveAvatar'],
+                            platformAndOwner: currentObj['platformAndOwner'],
+                            roomName: currentObj['roomName'],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                childCount: recommendList.length,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
   // AutomaticKeepAliveClientMixin 抽象类的实现
   @override
@@ -28,15 +131,8 @@ class _RecommendState extends State<Recommend>
 
   @override
   void initState() {
+    getRecommendList();
     super.initState();
-
-    initLoading = getRecommendList();
-
-    _controller.addListener(() {
-      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-        _loadMoreData();
-      }
-    });
   }
 
   @override
@@ -45,137 +141,26 @@ class _RecommendState extends State<Recommend>
     super.dispose();
   }
 
-  //  初始化
-  Future<List> getRecommendList() async {
-    List res = await Platform.getRecommendAll('0', 0);
-    recommendList = res;
+  // 渲染数据处理
+  Map<String, dynamic> listDataHandle(index) {
+    int length = recommendList[index]['online'].toString().length;
+    final bool isAddHttps =
+        recommendList[index]['avatar'].toString().indexOf('https') > -1;
 
-    for (var i = 0; i < 3; i++) {
-      swiperList.add(res[i]['roomThumb']);
-    }
-
-    return res;
-  }
-
-  //上拉加载更多
-  Future<Null> _loadMoreData() async {
-    List res = await Platform.getRecommendAll('0', pageNum++);
-    setState(() {
-      recommendList.addAll(res);
-    });
-  }
-
-  // 下拉刷新
-  Future<Null> _onRefresh() async {
-    List res = await Platform.getRecommendAll('0', getRandomRangeInt(1, 100));
-    setState(() {
-      recommendList = res;
-    });
-  }
-
-  // ListView.builder(
-  //     controller: _controller,
-  //     shrinkWrap: false, //为true可以解决子控件必须设置高度的问题,但是没有懒加载，非常影响性能
-  //     // physics: NeverScrollableScrollPhysics(), //禁用滑动事件
-  //     itemCount: recommendList.length,
-  //     // itemExtent: 385, // 每一项的高度,极大提升性能
-  //     itemBuilder: (BuildContext context, int index) {},
-  //   )
-
-  Widget successWidget() {
-    return BackToTop(
-      _controller,
-      child: CustomScrollView(
-        controller: _controller,
-        slivers: [
-          SliverToBoxAdapter(child: Swiper(pageList: swiperList)),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (content, index) {
-                String showUrl = recommendList[index]['roomThumb'];
-                String liveType = recommendList[index]['cateName'];
-                String roomName = recommendList[index]['roomName'];
-                String liveAvatar =
-                    recommendList[index]['avatar'].toString().indexOf('https') >
-                            -1
-                        ? recommendList[index]['avatar']
-                        : 'https:${recommendList[index]['avatar']}';
-                String personNum = recommendList[index]['online']
-                            .toString()
-                            .length >=
-                        3
-                    ? '${recommendList[index]['online'].toString().substring(0, 3)}万'
-                    : '${recommendList[index]['online'].toString()}万';
-                String platformAndOwner =
-                    '${recommendList[index]['com']} · ${recommendList[index]['ownerName']}';
-
-                return Card(
-                  child: InkWell(
-                    onTap: () {
-                      Routers.navigateTo(
-                        context,
-                        Routers.liveVideoPage,
-                        params: recommendList[index],
-                      );
-                    },
-                    child: Column(
-                      children: [
-                        LiveRoomImage(
-                          showUrl: showUrl,
-                          liveType: liveType,
-                          personNum: personNum,
-                        ),
-                        LiveRoomTitle(
-                          liveAvatar: liveAvatar,
-                          platformAndOwner: platformAndOwner,
-                          roomName: roomName,
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-              childCount: recommendList.length,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    return RefreshIndicator(
-      onRefresh: _onRefresh, //下拉刷新回调
-      displacement: 10, //指示器显示时距顶部位置
-      color: Colors.blue, //指示器颜色，默认ThemeData.accentColor
-      notificationPredicate:
-          defaultScrollNotificationPredicate, //是否应处理滚动通知的检查（是否通知下拉刷新动作）
-      child: FutureBuilder<List<dynamic>>(
-        future: initLoading,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          // 请求已结束
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              // 请求失败，显示错误
-              return Text("Error: ${snapshot.error}");
-            } else {
-              // 请求成功，显示数据
-              return successWidget();
-            }
-          } else if (snapshot.connectionState == ConnectionState.active ||
-              snapshot.connectionState == ConnectionState.waiting) {
-            // 请求未结束，显示loading
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return Container();
-          }
-        },
-      ),
-    );
+    return {
+      'showUrl': recommendList[index]['roomThumb'],
+      'liveType': recommendList[index]['cateName'],
+      'roomName': recommendList[index]['roomName'],
+      'liveAvatar': isAddHttps
+          ? recommendList[index]['avatar']
+          : 'https:${recommendList[index]['avatar']}',
+      'personNum': length >= 3
+          ? '${recommendList[index]['online'].toString().substring(0, length - 3)}万'
+          : '${recommendList[index]['online'].toString()}万',
+      'platformAndOwner':
+          '${recommendList[index]['com']} · ${recommendList[index]['ownerName']}',
+      'recommendList': recommendList[index]['online'].toString().length
+    };
   }
 }
 

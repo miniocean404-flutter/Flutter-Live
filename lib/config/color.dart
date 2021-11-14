@@ -12,7 +12,8 @@ class AppColor {
   static Color unactive = Color(0xff7b7b7b);
   static Color un2active = Color(0xff8d8d8d);
   static Color un3active = Color(0xffb1b1b1);
-  static Color page = Color(0xfff7f7f7);
+  // static Color page = Color(0xfff7f7f7);
+  static Color page = Color(0xFFFFFFFF);
   static Color border = Color(0xfff5f5f5);
   static Color dark = Color(0xFF000000);
   static Color transparent = Colors.transparent;

@@ -35,50 +35,35 @@ class _BackToTopState extends State<BackToTop> {
         Positioned(
           bottom: MediaQuery.of(context).padding.bottom + (widget.bottom),
           right: 20,
+          // Offstage 是否显示空间
           child: Offstage(
             offstage: !shown,
             child: GestureDetector(
-                onTap: () {
-                  widget.controller.animateTo(
-                    0,
-                    duration: Duration(milliseconds: 200),
-                    curve: Curves.easeIn,
-                  );
-                },
-                // 返回顶部按钮样式
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black26),
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
-                  width: 44,
-                  height: 44,
-                  child: Center(
-                    child: Icon(
-                      Icons.arrow_upward,
-                      size: 20,
-                      color: Colors.black38,
-                    ),
-                  ),
-                )
-
-                // Container(
-                //     height: 44,
-                //     width: 44,
-                //     alignment: Alignment(0, 0),
-                //     decoration: new BoxDecoration(
-                //       color: Colors.white,
-                //       borderRadius: BorderRadius.all(Radius.circular(16)),
-                //       boxShadow: [
-                //         BoxShadow(
-                //             color: Color(0xFF000000).withOpacity(0.1),
-                //             blurRadius: 4,
-                //             spreadRadius: 0),
-                //       ],
-                //     ),
-                //     child: ),
+              onTap: () {
+                widget.controller.animateTo(
+                  0,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.easeIn,
+                );
+              },
+              // 返回顶部按钮样式
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black26),
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
                 ),
+                width: 44,
+                height: 44,
+                child: Center(
+                  child: Icon(
+                    Icons.arrow_upward,
+                    size: 20,
+                    color: Colors.black38,
+                  ),
+                ),
+              ),
+            ),
           ),
         )
       ],

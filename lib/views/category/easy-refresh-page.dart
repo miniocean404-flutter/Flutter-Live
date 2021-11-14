@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/components/common/refresh.dart';
+import 'package:my_app/components/common/refresh/refresh.dart';
 
 class EasyRefreshPage extends StatefulWidget {
   EasyRefreshPage({Key? key}) : super(key: key);

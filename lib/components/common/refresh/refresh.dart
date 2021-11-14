@@ -18,6 +18,7 @@ class RefreshWidget extends StatefulWidget {
   final Function? onRefresh;
   final Function? onLoadMore;
   final Refresh state;
+  final ScrollController? scrollController;
   //子类，必须是ListView
   final Widget child;
 
@@ -29,6 +30,7 @@ class RefreshWidget extends StatefulWidget {
     this.enablePullDown,
     this.onRefresh,
     this.onLoadMore,
+    this.scrollController,
   }) : super(key: key);
 
   @override
@@ -37,6 +39,7 @@ class RefreshWidget extends StatefulWidget {
 
 class _RefreshWidgetState extends State<RefreshWidget>
     with AutomaticKeepAliveClientMixin {
+  // final bool = this.refreshController != null;
   RefreshController controller = RefreshController(initialRefresh: false);
   final TextStyle fontStyle = TextStyle(color: Color(0xFFB8C0D4), fontSize: 14);
 
@@ -66,6 +69,7 @@ class _RefreshWidgetState extends State<RefreshWidget>
                 enablePullUp: widget.enablePullUp!,
                 onRefresh: () => widget.onRefresh!(controller),
                 onLoading: () => widget.onLoadMore!(controller),
+                scrollController: widget.scrollController,
                 child: widget.child,
                 header: CustomHeader(
                   builder: (BuildContext context, RefreshStatus? mode) {
@@ -116,7 +120,7 @@ class _RefreshWidgetState extends State<RefreshWidget>
                     } else if (mode == LoadStatus.noMore) {
                       footer = Text("没有更多数据啦", style: fontStyle);
                     } else if (mode == LoadStatus.canLoading) {
-                      footer = Text("下滑取消加载", style: fontStyle);
+                      footer = Text("松手加载更多", style: fontStyle);
                     } else {
                       footer = Text("", style: fontStyle);
                     }

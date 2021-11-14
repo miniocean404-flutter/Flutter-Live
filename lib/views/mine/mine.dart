@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 import 'package:my_app/components/business/dialog-share-application.dart';
-import 'package:my_app/config/assets.dart';
 import 'package:my_app/config/color.dart';
 import 'package:my_app/route/routers.dart';
-import 'package:share_plus/share_plus.dart';
 
 class Mine extends StatefulWidget {
   const Mine({Key? key}) : super(key: key);
