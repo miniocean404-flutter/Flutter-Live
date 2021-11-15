@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_app/views/home/recommend-title.dart';
 import 'package:my_app/views/home/tab-page/click-add.dart';
 import 'package:my_app/views/home/tab-page/recommend.dart';
@@ -60,8 +61,18 @@ class HomeAppbar {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 0.03.sw),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(2, 1), //x,y轴
+                    color: Colors.white, //投影颜色
+                    blurRadius: 20, //模糊半径
+                    spreadRadius: 0.03.sw, // 阴影距离
+                  )
+                ],
+              ),
               child: Icon(Icons.menu),
             )
           ],
@@ -79,9 +90,11 @@ class HomeBody extends StatefulWidget {
   _HomeBodyState createState() => _HomeBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody> with WidgetsBindingObserver {
+class _HomeBodyState extends State<HomeBody>
+    with WidgetsBindingObserver, AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return TabBarView(
       children: [
         Recommend(),
@@ -93,4 +106,7 @@ class _HomeBodyState extends State<HomeBody> with WidgetsBindingObserver {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

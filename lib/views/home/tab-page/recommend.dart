@@ -16,8 +16,7 @@ class Recommend extends StatefulWidget {
   _RecommendState createState() => _RecommendState();
 }
 
-class _RecommendState extends State<Recommend>
-    with AutomaticKeepAliveClientMixin {
+class _RecommendState extends State<Recommend> {
   ScrollController _controller = new ScrollController();
   late List recommendList = [];
   late List<String> swiperList = [];
@@ -71,7 +70,6 @@ class _RecommendState extends State<Recommend>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return BackToTop(
       _controller,
       child: RefreshWidget(
@@ -124,10 +122,6 @@ class _RecommendState extends State<Recommend>
       ),
     );
   }
-
-  // AutomaticKeepAliveClientMixin 抽象类的实现
-  @override
-  bool get wantKeepAlive => true;
 
   @override
   void initState() {
