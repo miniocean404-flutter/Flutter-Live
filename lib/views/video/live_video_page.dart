@@ -14,7 +14,8 @@ class LiveVideoPage extends StatefulWidget {
   _LiveVideoPageState createState() => _LiveVideoPageState();
 }
 
-class _LiveVideoPageState extends State<LiveVideoPage> {
+class _LiveVideoPageState extends State<LiveVideoPage>
+    with WidgetsBindingObserver {
   final FijkPlayer player = FijkPlayer();
   final double aspectRatio = 16 / 9;
   late final String url;
@@ -31,6 +32,25 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
         });
 
     super.initState();
+  }
+
+  // WidgetsBindingObserver 实现
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("--" + state.toString());
+    switch (state) {
+      //切换前后台时,inactive会调用
+      case AppLifecycleState.inactive: // 处在不活动状态，无法处理用户响应
+        break;
+      case AppLifecycleState.resumed: // 恢复-应用程序是可见的
+        player.start();
+        break;
+      case AppLifecycleState.paused: //不可见且不能响应用户的输入，但在后台继续活动中
+        player.pause();
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 
   @override

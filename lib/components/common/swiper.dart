@@ -1,16 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Swiper extends StatefulWidget {
   final double height;
   final int druation;
   final List<String> pageList;
+  final GestureTapCallback? onTap;
+
   const Swiper({
     Key? key,
     required this.pageList,
     this.height = 230,
     this.druation = 2000,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -71,12 +75,13 @@ class _SwiperState extends State<Swiper> {
               itemBuilder: (context, index) {
                 return SwiperItem(
                   url: pageList[index % (pageList.length)],
-                  onPointerUp: (PointerUpEvent upEvent) {
+                  onPointerUp: (TapUpDetails tapUpDetails) {
                     startTimer();
                   },
-                  onPointerDown: (PointerDownEvent pointerDownEvent) {
+                  onPointerDown: (TapDownDetails tapUpDetails) {
                     _timer.cancel();
                   },
+                  onTap: widget.onTap,
                 );
               },
               onPageChanged: (int index) {
@@ -101,28 +106,34 @@ class _SwiperState extends State<Swiper> {
 class SwiperItem extends StatelessWidget {
   final Color backgroundColor = Colors.white;
   final String url;
-  final PointerUpEventListener onPointerUp;
-  final PointerDownEventListener onPointerDown;
+  final GestureTapUpCallback onPointerUp;
+  final GestureTapDownCallback onPointerDown;
+  final GestureTapCallback? onTap;
 
   const SwiperItem({
     Key? key,
     required this.url,
     required this.onPointerUp,
     required this.onPointerDown,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
+    return GestureDetector(
       child: Container(
-        color: backgroundColor,
-        child: Image.network(
-          url,
-          fit: BoxFit.fill,
+        margin: EdgeInsets.all(10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+            url,
+            fit: BoxFit.fill,
+          ),
         ),
       ),
-      onPointerDown: onPointerDown,
-      onPointerUp: onPointerUp,
+      onTapDown: onPointerDown,
+      onTapUp: onPointerUp,
+      onTap: onTap,
     );
   }
 }
@@ -140,21 +151,21 @@ class Indicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 10,
-      left: 0,
-      right: 0,
+      bottom: 0.05.sw,
+      right: 0.05.sw,
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(length, (i) {
+            final bool isCurrentIndex = currentIndex % (length) == i;
+
             return Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
-              width: 10,
-              height: 10,
+              width: isCurrentIndex ? 13 : 6.5,
+              height: 6.5,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color:
-                    currentIndex % (length) == i ? Colors.white : Colors.grey,
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+                color: isCurrentIndex ? Colors.orange[600] : Colors.white,
               ),
             );
           }).toList(),

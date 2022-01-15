@@ -12,6 +12,7 @@ class ColorSchemeConfig {
       primary: AppColor.primary,
       // 黑暗主题的主色调
       primaryVariant: AppColor.dark,
+
       // 一种强调色，，有选定行时PaginatedDataTable标题的颜色（水波纹、浮动按钮）
       secondary: AppColor.info,
       secondaryVariant: AppColor.info,
@@ -125,15 +126,6 @@ ThemeData themeColor() {
       elevation: 0, //虚线阴影
       selectedItemColor: AppColor.info,
       unselectedItemColor: AppColor.unactive,
-      // selectedIconTheme:,
-      // unselectedIconTheme:,
-      // selectedLabelStyle:,
-      // unselectedLabelStyle:,
-      // showSelectedLabels:,
-      // showUnselectedLabels:,
-      // type:,
-      // enableFeedback:,
-      // landscapeLayout:,
     ),
   );
 }

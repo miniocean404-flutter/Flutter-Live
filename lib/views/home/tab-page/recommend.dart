@@ -6,7 +6,6 @@ import 'package:my_app/components/common/swiper.dart';
 import 'package:my_app/config/assets.dart';
 import 'package:my_app/http/platform.dart';
 import 'package:my_app/route/routers.dart';
-import 'package:my_app/utils/logger.dart';
 import 'package:my_app/utils/util.dart';
 
 class Recommend extends StatefulWidget {
@@ -82,8 +81,17 @@ class _RecommendState extends State<Recommend> {
         child: CustomScrollView(
           controller: _controller,
           slivers: [
-            SliverToBoxAdapter(child: Swiper(pageList: swiperList)),
-            SliverList(
+            SliverToBoxAdapter(
+                child: Swiper(
+              pageList: swiperList,
+              onTap: () {},
+            )),
+            SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 3,
+              ),
               delegate: SliverChildBuilderDelegate(
                 (content, index) {
                   final Map currentObj = listDataHandle(index);
@@ -149,7 +157,7 @@ class _RecommendState extends State<Recommend> {
           ? recommendList[index]['avatar']
           : 'https:${recommendList[index]['avatar']}',
       'personNum': length >= 3
-          ? '${recommendList[index]['online'].toString().substring(0, length - 3)}万'
+          ? '${recommendList[index]['online'].toString().substring(0, length - 4)}万'
           : '${recommendList[index]['online'].toString()}万',
       'platformAndOwner':
           '${recommendList[index]['com']} · ${recommendList[index]['ownerName']}',

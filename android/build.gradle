@@ -1,16 +1,36 @@
+/**
+ * buildscript {} 是配置构建工具Gradle本身所需要的依赖和仓库的代码区块，
+ * 也就是说不能把APP模块所需要的依赖放到这里。
+ * 如：这个区块里包含gradle-plugin的依赖，因为这个插件包含了Gradle构建APP模块所需要的附加命令。 
+ */
 buildscript {
     ext.kotlin_version = '1.3.50'
+    /**
+     * repositories {} 区域配置Gradle用来下载依赖的仓库地址。
+     * Gradle内置支持的远程仓库有JCenter、Maven Central 和 Ivy，4.1版本开始内置支持google()。 
+     * 也可以使用本地仓库或者配置我们自己的远程仓库地址。
+     * 下面代码示例Gradle使用JCenter作为查找依赖库的代码仓库。
+     */
     repositories {
         google()
         jcenter()
     }
 
+    /**
+     * dependencies {} 区域配置了Gradle编译APP工程所需要的依赖。
+     * 下面代码展示路径依赖4.1.0版本gradle-plugin
+     */
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
+/**
+ * allprojects {} 区域可以配置工程中所有模块都是到的代码仓库和依赖，如，三方插件或者库。
+ * 如果依赖不是被所有模块都需要，那应该将依赖配到需要它的模块级的build.gradle文件中。
+ * 在Android Studio新建的工程里，顶级的build.gradle中只配置JCenter为所有模块的默认仓库，但不配置任何依赖。
+ */
 allprojects {
     repositories {
         google()

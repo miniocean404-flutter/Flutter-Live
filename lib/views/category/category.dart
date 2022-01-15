@@ -34,68 +34,82 @@ class _CategoryState extends State<Category>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: TabBar(
-        controller: tabController,
-        tabs: [
-          Tab(text: '推荐'),
-          Tab(text: '最新'),
-        ],
-      ),
-      body: TabBarView(
-        controller: tabController,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromRGBO(84, 51, 255, 1),
-                  Color.fromRGBO(32, 189, 255, 1),
-                  Color.fromRGBO(165, 254, 203, 1),
-                ],
-                stops: [0.0, 0.5, 1.0],
-              ),
-            ),
-            child: GridView(
-              scrollDirection: Axis.vertical,
-              reverse: false,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 0.1,
-              ),
-              children: [
-                TextButton(
-                  child: Text('选择图片'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.imagePick)},
-                ),
-                TextButton(
-                  child: Text('文件操作'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.fileOperate)},
-                ),
-                TextButton(
-                  child: Text('设备信息'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.deviceInfo)},
-                ),
-                TextButton(
-                  child: Text('内嵌浏览器'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.builtInBrowser)},
-                ),
-                TextButton(
-                  child: Text('下拉刷新'),
-                  onPressed: () =>
-                      {Routers.navigateTo(context, Routers.easyRefresh)},
-                ),
-              ],
-            ),
+    return SafeArea(
+      top: true,
+      child: Scaffold(
+        appBar: TabBar(
+          controller: tabController,
+          isScrollable: true,
+          indicatorColor: Colors.transparent,
+          labelStyle: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
           ),
-          Center(child: Text("页面B")),
-        ],
+          unselectedLabelStyle: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            color: Colors.grey,
+          ),
+          tabs: [
+            Tab(text: '案例'),
+            Tab(text: '最新'),
+          ],
+        ),
+        body: TabBarView(
+          controller: tabController,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromRGBO(84, 51, 255, 1),
+                    Color.fromRGBO(32, 189, 255, 1),
+                    Color.fromRGBO(165, 254, 203, 1),
+                  ],
+                  stops: [0.0, 0.5, 1.0],
+                ),
+              ),
+              child: GridView(
+                scrollDirection: Axis.vertical,
+                reverse: false,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 0.1,
+                ),
+                children: [
+                  TextButton(
+                    child: Text('选择图片'),
+                    onPressed: () =>
+                        {Routers.navigateTo(context, Routers.imagePick)},
+                  ),
+                  TextButton(
+                    child: Text('文件操作'),
+                    onPressed: () =>
+                        {Routers.navigateTo(context, Routers.fileOperate)},
+                  ),
+                  TextButton(
+                    child: Text('设备信息'),
+                    onPressed: () =>
+                        {Routers.navigateTo(context, Routers.deviceInfo)},
+                  ),
+                  TextButton(
+                    child: Text('内嵌浏览器'),
+                    onPressed: () =>
+                        {Routers.navigateTo(context, Routers.builtInBrowser)},
+                  ),
+                  TextButton(
+                    child: Text('下拉刷新'),
+                    onPressed: () =>
+                        {Routers.navigateTo(context, Routers.easyRefresh)},
+                  ),
+                ],
+              ),
+            ),
+            Center(child: Text("页面B")),
+          ],
+        ),
       ),
     );
   }

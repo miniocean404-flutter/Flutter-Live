@@ -58,7 +58,7 @@ class _BottomBarPageState extends State<BottomBarPage>
     return WillPopScope(
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
-          elevation: 30,
+          elevation: 0,
           type: BottomNavigationBarType.fixed, // 导航条过长是否进行隐藏
           onTap: (int index) {
             setState(() {
