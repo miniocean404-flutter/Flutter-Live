@@ -1,5 +1,6 @@
 // 模块级构建文件
-// 模块级 build.gradle 文件位于每个 <project>/<module>/ 目录，用于配置适用于其所在模块的构建设置。通过配置这些构建设置来提供自定义打包选项（例如附加构建类型和产品风味），以及替换 main/ 应用清单或顶级 build.gradle 文件中的设置
+// 模块级 build.gradle 文件位于每个 <project>/<module>/ 目录，用于配置适用于其所在模块的构建设置。
+// 通过配置这些构建设置来提供自定义打包选项（例如附加构建类型和产品风味），以及替换 main/ 应用清单或顶级 build.gradle 文件中的设置
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -36,30 +37,24 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
  * android {} 中配置构建Android APP所需的特定编译选项。
  */
 android {
-    /**
-    * compileSdkVersion：指定Gradle编译APP时所使用的Android API的版本。
-    * 这意味着我们的APP只能使用该版本及其以下版本中的API。
-    *
-    * buildToolsVersion：指定Gradle编译APP时所使用的SDK编译工具、命令行工具和编译器的版本。
-    * 我们需要通过SDK Manager去下载使用到的编译工具。
-    */
+    // buildToolsVersion：指定Gradle编译APP时所使用的SDK编译工具、命令行工具和编译器的版本、我们需要通过SDK Manager去下载使用到的编译工具。
+
+    // compileSdkVersion：指定Gradle编译APP时所使用的Android API的版本，这意味着我们的APP只能使用该版本及其以下版本中的API。
     compileSdkVersion 30
- 
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
     /**
-    * defaultConfig{}默认配置和配置编译变体的入口, 
-    * 还可以在这里动态的覆盖main/AndroidManifest.xml的属性。
-    * 在这个区块还可以设置产品风味，给不同的风味版本配置不同的属性值。
-    */
+     * defaultConfig默认配置和配置编译变体的入口,
+     * 还可以在这里动态的覆盖main/AndroidManifest.xml的属性。
+     * 在这个区块还可以设置产品风味，给不同的风味版本配置不同的属性值。
+     * */
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        /**
-        * applicationId APP发布安装时的唯一标识.
-        * 但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
-        */
+
+        // applicationId APP发布安装时的唯一标识，但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
         applicationId "com.example.my_app"
 
         // 定义APP需要支持的 Android API 最小的版本。
@@ -67,8 +62,8 @@ android {
 
         // 指定用来测试APP的 Android API 版本
         targetSdkVersion 30
-        
-         // 定义APP的版本
+
+        // 定义APP的版本
         versionCode flutterVersionCode.toInteger()
 
         // 定义APP的版本名
@@ -85,10 +80,10 @@ android {
     }
 
     /**
-    * buildTypes {} 区块中配置多个编译类型。编译系统默认定义了两个类型：debug and release.。
-    * debug类型：默认的配置文件中没有展示出来，它包含了debug工具，使用debug key签名APK。 
-    * release类型：使用Proguard设置，默认不签名APK。
-    */
+     * buildTypes区块中配置多个编译类型。编译系统默认定义了两个类型：debug and release.。
+     * debug类型：默认的配置文件中没有展示出来，它包含了debug工具，使用debug key签名APK。
+     * release类型：使用Proguard设置，默认不签名APK。
+     */
     buildTypes {
         // Android Studio默认配置release编译类型开启代码缩减和指定代码混淆文件。
         release {
@@ -101,7 +96,7 @@ flutter {
     source '../..'
 }
 
-// dependencies {} 代码块中指定本模块中所需要的依赖
+// dependencies代码块中指定本模块中所需要的依赖
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
