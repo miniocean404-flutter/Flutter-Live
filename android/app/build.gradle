@@ -1,3 +1,4 @@
+// 模块级构建文件
 // 模块级 build.gradle 文件位于每个 <project>/<module>/ 目录，用于配置适用于其所在模块的构建设置。通过配置这些构建设置来提供自定义打包选项（例如附加构建类型和产品风味），以及替换 main/ 应用清单或顶级 build.gradle 文件中的设置
 
 def localProperties = new Properties()
