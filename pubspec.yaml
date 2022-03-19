@@ -1,5 +1,5 @@
 name: my_app
-description: 一个app练习项目
+description: 一个app练习项目 
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -21,7 +21,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0" #Flutter SDK 2.12 以上版本有了空安全要求
 flutter_native_splash:
   color: "#FFFFFF"
-  image: "assets/startImg.png"
+  image: "assets/startImg.png" 
   ardroid: true
   ios: false
   android_gravity: fill # 在android闪屏页中的位置,值有 bottom, center, center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal, fill_vertical, left, right, start, top

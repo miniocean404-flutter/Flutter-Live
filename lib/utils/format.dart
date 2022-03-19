@@ -37,7 +37,7 @@ String secondsToTime(int seconds) {
   return '${formatNumber(hours)}:${formatNumber(minutes)}:${formatNumber(remainingSeconds)}';
 }
 
-// * 个数补零
+// 个数补零
 String formatNumber(int count) {
   String strCount = count.toString();
   return strCount.length > 1 ? strCount : '0$strCount';

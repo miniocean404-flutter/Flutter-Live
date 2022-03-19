@@ -11,7 +11,7 @@ import 'color.dart';
 class Global {
   static Future init() async {
     // 获取当前环境、identical 检查是否是同一个对象
-    var env = String.fromEnvironment('APP_CHANNEL');
+    // var env = String.fromEnvironment('APP_CHANNEL');
     barColor(color: 'white');
 
     GestureBinding.instance?.resamplingEnabled = true; // 当输入和显示频率不同导致的性能下降处理
