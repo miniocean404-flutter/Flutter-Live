@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 void toast(String msg) {
   Fluttertoast.showToast(
@@ -24,14 +24,14 @@ int getRandomRangeInt(int min, int max) {
 
 // * 权限申请
 checkPermission(Function(bool) res) async {
-  final status = await Permission.camera.status;
-  if (status.isGranted) {
-    res(true);
-  } else {
-    // 如果以前已授予它，则什么也不会发生，如果没有授权，则提示用户去授权
-    final v = await Permission.storage.request();
-    res(v.isGranted);
-  }
+  // final status = await Permission.camera.status;
+  // if (status.isGranted) {
+  //   res(true);
+  // } else {
+  //   // 如果以前已授予它，则什么也不会发生，如果没有授权，则提示用户去授权
+  //   final v = await Permission.storage.request();
+  //   res(v.isGranted);
+  // }
 
   // if (status.isGranted) {
   //     //权限通过
