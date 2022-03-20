@@ -47,7 +47,7 @@ dependencies:
   dio: ^4.0.0 # http请求（中国封装）
   provider: ^6.0.1 # 状态管理 
   fluttertoast: ^8.0.8 # toast
-  permission_handler: 8.1.0 # 提供一个跨平台(iOS, Android) API来请求和检查权限
+  # permission_handler: 8.1.0 # 提供一个跨平台(iOS, Android) API来请求和检查权限
   image_gallery_saver: '^1.7.1' # 保存图片到图库
   flutter_staggered_grid_view: ^0.4.1 # 瀑布流
 

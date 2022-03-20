@@ -40,7 +40,7 @@ android {
     // buildToolsVersion：指定Gradle编译APP时所使用的SDK编译工具、命令行工具和编译器的版本、我们需要通过SDK Manager去下载使用到的编译工具。
 
     // compileSdkVersion：指定Gradle编译APP时所使用的Android API的版本，这意味着我们的APP只能使用该版本及其以下版本中的API。
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -52,7 +52,7 @@ android {
      * 在这个区块还可以设置产品风味，给不同的风味版本配置不同的属性值。
      * */
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html). 
 
         // applicationId APP发布安装时的唯一标识，但是在代码中引用的包名依然是在main/AndroidManifest.xml文件中属性package设置的名称。
         applicationId "com.example.my_app"
@@ -61,7 +61,7 @@ android {
         minSdkVersion 19
 
         // 指定用来测试APP的 Android API 版本
-        targetSdkVersion 30
+        targetSdkVersion 31
 
         // 定义APP的版本
         versionCode flutterVersionCode.toInteger()
