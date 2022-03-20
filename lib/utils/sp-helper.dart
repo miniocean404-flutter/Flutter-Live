@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,12 +45,11 @@ class SpHelper {
   // 获取持久化数据
   static T getLocalStorage<T>(String key) {
     dynamic value = prefs.get(key);
-    if (value.runtimeType.toString() == "String") {
-      if (_isJson(value)) {
-        return json.decode(value);
-      }
+    if (value.runtimeType.toString() == "String" && _isJson(value)) {
+      return json.decode(value);
     }
-    return value;
+    log('11111111111111111111111$value');
+    return value == null ? '' : value;
   }
 
   // 获取任意值的key
