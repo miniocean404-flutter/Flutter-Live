@@ -51,6 +51,7 @@ class _BottomBarPageState extends State<BottomBarPage>
         maxWidth: MediaQuery.of(context).size.width,
         maxHeight: MediaQuery.of(context).size.height,
       ),
+       context: context,
       designSize: Size(1080, 2356),
       orientation: Orientation.portrait,
     );
