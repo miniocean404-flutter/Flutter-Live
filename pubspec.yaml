@@ -55,7 +55,7 @@ dependencies:
   pull_to_refresh: ^2.0.0 # 拉刷新或者上拉加载插件
   cached_network_image: ^3.1.0 # 缓存图片
   wakelock: ^0.5.6 # 控制屏幕常亮
-  fijkplayer: ^0.10.0 # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter 
+  fijkplayer: ^0.10.1 # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter 
   lottie: ^1.2.1 # 加载AE制作的炫酷动画
   flutter:
     sdk: flutter 
