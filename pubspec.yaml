@@ -1,9 +1,9 @@
 name: my_app
-description: 一个app练习项目 
+description: 一个app练习项目
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -16,20 +16,20 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
- 
+
 environment:
   sdk: ">=2.12.0 <3.0.0" #Flutter SDK 2.12 以上版本有了空安全要求
 flutter_native_splash:
   color: "#FFFFFF"
-  image: "assets/startImg.png" 
+  image: "assets/startImg.png"
   ardroid: true
   ios: false
   android_gravity: fill # 在android闪屏页中的位置,值有 bottom, center, center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal, fill_vertical, left, right, start, top
-  
-dependencies: 
+
+dependencies:
   path_provider: ^2.0.5 # 获取平台目录统一Api(官方)
   video_player: ^2.2.4 # video播放器 (官方)
-  webview_flutter: ^2.1.1  # 内嵌浏览器网页 (官方) 
+  webview_flutter: ^2.1.1 # 内嵌浏览器网页 (官方)
   url_launcher: ^6.0.12 # 跳转链接 和 实现原生电话的拨打 (官方)
   image_picker: ^0.8.4+2 # 选择图片 (官方)
   animations: ^2.0.1 # 动画 (官方)
@@ -39,30 +39,29 @@ dependencies:
   connectivity: ^3.0.6 # 网络检测（官方）
   flutter_svg: ^0.23.0+1 # SVG使用（官方）
 
-  logger: ^1.1.0 # 日志打印 
+  logger: ^1.1.0 # 日志打印
   #  logger_flutter: ^0.7.1 # app日志控制台
-  
+
   sqflite: ^2.0.0+4 # 数据持久化
   fluro: ^2.0.3 # 路由
   dio: ^4.0.0 # http请求（中国封装）
-  provider: ^6.0.1 # 状态管理 
+  provider: ^6.0.1 # 状态管理
   fluttertoast: ^8.0.8 # toast
   # permission_handler: 8.1.0 # 提供一个跨平台(iOS, Android) API来请求和检查权限
-  image_gallery_saver: '^1.7.1' # 保存图片到图库
+  image_gallery_saver: "^1.7.1" # 保存图片到图库
   flutter_staggered_grid_view: ^0.4.1 # 瀑布流
 
   flutter_screenutil: ^5.0.0+2 # 屏幕自适应及适配不同屏幕
   pull_to_refresh: ^2.0.0 # 拉刷新或者上拉加载插件
   cached_network_image: ^3.1.0 # 缓存图片
   wakelock: ^0.5.6 # 控制屏幕常亮
-  fijkplayer: ^0.10.1 # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter 
+  fijkplayer: ^0.10.1 # 哔哩哔哩开源的原生视频播放器 ijkplayer 被封装到flutter
   lottie: ^1.2.1 # 加载AE制作的炫酷动画
   flutter:
-    sdk: flutter 
- 
+    sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  # 添加Cupertino图标字体到你的应用程序。
+  # 使用CupertinoIcons类的iOS风格图标
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -88,18 +87,15 @@ dev_dependencies:
   # json_serializable: ^6.0.0 # JSON序列化（官方）
   # http: ^0.13.3 # http请求 (官方)
 
-  
- 
-flutter_icons: 
-  android: "ic_launcher" 
+flutter_icons:
+  android: "ic_launcher"
   ios: false
-  image_path: "assets/icon/icon.png" 
+  image_path: "assets/icon/icon.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -118,7 +114,6 @@ flutter:
     - assets/lottie/refresh_empty_page.json
     - assets/lottie/refresh_error.json
     - assets/lottie/collect_success.json
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
