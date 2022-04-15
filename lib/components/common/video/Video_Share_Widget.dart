@@ -5,6 +5,7 @@ class VideoShareWidget extends InheritedWidget {
   final VideoPlayerController videoPlayController;
   final bool? isFullscreen;
   final Size? size;
+  final Widget child;
 
   VideoShareWidget({
     Key? key,
@@ -13,8 +14,6 @@ class VideoShareWidget extends InheritedWidget {
     this.isFullscreen,
     this.size,
   }) : super(key: key, child: child);
-
-  final Widget child;
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static VideoShareWidget? of(BuildContext context) {
